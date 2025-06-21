@@ -81,42 +81,7 @@ translateBtn.addEventListener("click", () => {
     })
     .catch(err => {
         console.error("Error during translation:", err);
-        toText.value = "Translation failed. Please try again.";
-    });
-
-    translateFrom = selectTag[0].value.split("-")[0].toLowerCase(); // getting fromSelect tag value
-     translateTo = selectTag[1].value.split("-")[0].toLowerCase(); // getting toSelect tag value
-    if (!text) return; // if input box is empty then return
-    toText.setAttribute("placeholder", "Translating..."); // setting placeholder to Translating...
-    fetch("https://deep-translate1.p.rapidapi.com/language/translate/v2", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-rapidapi-key": "fe19a8b71bmsh65e0cc5e6ac1f85p10a5d0jsnfd01fa9484af",
-      "x-rapidapi-host": "deep-translate1.p.rapidapi.com"
-    },
-    body: JSON.stringify({
-      q: text,
-      source: translateFrom,
-      target: translateTo
-    })
-  })
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    return res.json();
-  })
-  .then(data => {
-  console.log("API response:", data);
-  const translatedText = data?.data?.translations?.translatedText;
-    if (translatedText) {
-        toText.value = translatedText; // displaying translated text in toText input box
-    } else {
-        console.error("Translation not found in API response");
-    }
-    })
-    .catch(err => {
-        console.error("Error during translation:", err);
-        toText.value = "Translation failed. Please try again.";
+        toText.value = "Translating...";
     });
 });
 
