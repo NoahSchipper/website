@@ -18,7 +18,7 @@ const countries = {
     "de-DE": "German",
     "dv-MV": "Maldivian",
     "el-GR": "Greek",
-    "en-GB": "English",
+    "en-US": "English",
     "es-ES": "Spanish",
     "et-EE": "Estonian",
     "eu-ES": "Basque",
