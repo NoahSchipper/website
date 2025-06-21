@@ -22,7 +22,7 @@ function isSafe(input) {
 selectTag.forEach((tag, id) => {
     for (const country_code in countries) {
         let selected = "";
-        if(id == 0 && country_code == "en-GB") {
+        if(id == 0 && country_code == "en-US") {
             selected = "selected"; // default selected language
         }
         else if (id == 1 && country_code == "es-ES") {
