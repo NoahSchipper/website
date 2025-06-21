@@ -6,7 +6,7 @@ export async function onRequestPost({ request }) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-rapidapi-key": RAPIDAPI_KEY,
+      "x-rapidapi-key": env.RAPIDAPI_KEY,
       "x-rapidapi-host": "deep-translate1.p.rapidapi.com"
     },
     body: JSON.stringify({ q, source, target })
