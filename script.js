@@ -11,7 +11,7 @@ const blockedWords = [
   "onkeypress=", "oncontextmenu=", "onmouseout=", "onmouseleave=", "iframe", "img", "<object",
   "<embed", "srcdoc=", "data:text/html", "src=", "<svg", "<math", "<link", "<style",
   "base64,", "<body", "<meta", "expression(", "document.cookie", "window.location", "eval(",
-  "setTimeout(", "setInterval(", "Function(", "alert(", "prompt(", "confirm("
+  "setTimeout(", "setInterval(", "Function(", "alert(", "prompt(", "confirm(", "<", ">", "$", "{","}"
 ];
 
 function isSafe(input) {
