@@ -5,7 +5,19 @@ exchangeIcon = document.querySelector('.exchange');
 translateBtn = document.querySelector("button");
 icons = document.querySelectorAll(".row i");
 
+const blockedWords = [
+  "<script", "javascript:", "onerror=", "onload=", "onmouseover=", "onfocus=", "onmouseenter=",
+  "onclick=", "onblur=", "onchange=", "onsubmit=", "onreset=", "onkeydown=", "onkeyup=",
+  "onkeypress=", "oncontextmenu=", "onmouseout=", "onmouseleave=", "iframe", "img", "<object",
+  "<embed", "srcdoc=", "data:text/html", "src=", "<svg", "<math", "<link", "<style",
+  "base64,", "<body", "<meta", "expression(", "document.cookie", "window.location", "eval(",
+  "setTimeout(", "setInterval(", "Function(", "alert(", "prompt(", "confirm("
+];
 
+function isSafe(input) {
+    const lowerInput = input.toLowerCase();
+    return !blockedWords.some(word => lowerInput.includes(word));
+}
 
 selectTag.forEach((tag, id) => {
     for (const country_code in countries) {
@@ -32,9 +44,48 @@ exchangeIcon.addEventListener("click", () => {
 
 
 translateBtn.addEventListener("click", () => {
-    let text = fromText.value;
+    const text = fromText.value.trim();
+
+    if (!text) return;
+
+    if (!isSafe(text)) {
+        alert("Input contains potentially unsafe content and will not be translated.");
+        return;
+    }
+
+    toText.setAttribute("placeholder", "Translating...");
+    toText.value = ""
+    const translateFrom = selectTag[0].value.split("-")[0].toLowerCase();
+    const translateTo = selectTag[1].value.split("-")[0].toLowerCase();
+
+    fetch("/translate", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            q: text,
+            source: translateFrom,
+            target: translateTo
+        })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        return res.json();
+    })
+    .then(data => {
+        const translatedText = data?.data?.translations?.translatedText;
+        if (translatedText) {
+            toText.value = translatedText;
+        } else {
+            toText.value = "Translation failed.";
+        }
+    })
+    .catch(err => {
+        console.error("Error during translation:", err);
+        toText.value = "Translation failed. Please try again.";
+    });
+
     translateFrom = selectTag[0].value.split("-")[0].toLowerCase(); // getting fromSelect tag value
-    translateTo = selectTag[1].value.split("-")[0].toLowerCase(); // getting toSelect tag value
+     translateTo = selectTag[1].value.split("-")[0].toLowerCase(); // getting toSelect tag value
     if (!text) return; // if input box is empty then return
     toText.setAttribute("placeholder", "Translating..."); // setting placeholder to Translating...
     fetch("https://deep-translate1.p.rapidapi.com/language/translate/v2", {
