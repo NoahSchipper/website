@@ -55,8 +55,8 @@ translateBtn.addEventListener("click", () => {
 
     toText.setAttribute("placeholder", "Translating...");
     toText.value = ""
-    const translateFrom = selectTag[0].value.split("-")[0].toLowerCase();
-    const translateTo = selectTag[1].value.split("-")[0].toLowerCase();
+    let translateFrom = selectTag[0].value.split("-")[0].toLowerCase();
+    let translateTo = selectTag[1].value.split("-")[0].toLowerCase();
 
     fetch("/translate", {
         method: "POST",
