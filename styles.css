@@ -101,12 +101,4 @@ body{
     background: rgb(193, 59, 203);
 }
 
-@media (max-width: 640px) {
-    .zoom-wrapper {
-        transform: scale(0.65);
-        transform-origin: top center;
-        width: 153.85%; /* 100% / 0.75 */
-        height: auto;
-        overflow-x: hidden;
-    }
-}
+
