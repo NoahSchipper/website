@@ -101,4 +101,41 @@ body{
     background: rgb(193, 59, 203);
 }
 
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .text-input textarea {
+        height: 200px;
+        font-size: 16px;
+    }
+
+    .controls .icons {
+        width: 100%;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .controls .row {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .text-input {
+        flex-direction: column;
+    }
+
+    .text-input textarea {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
 
