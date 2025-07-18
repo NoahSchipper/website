@@ -1,3 +1,30 @@
+.navigationBar nav ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    background-color: #333;
+    overflow: hidden;
+}
+
+.navigationBar nav a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    display: block;
+    text-align: center;
+}
+
+
+.navigationBar nav a:hover {
+    background-color: #ddd;
+}
+
+
+.navigationBar nav ul li {
+    float: left;
+}
+/*
 * {
     
     margin: 0;
@@ -5,7 +32,7 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-body{
+.translator {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,14 +83,8 @@ body{
     list-style: none;
     padding: 12px 15px;
 }
-.controls .row.from .icons{
-    padding-right: 15px;
-    border-right: 1px solid #bbb;
-}
-.controls .row.to .icons{
-    padding-left: 15px;
-    border-left: 1px solid #bbb;
-}
+
+
 .controls .icons {
     width: 38%
 }
@@ -80,6 +101,8 @@ body{
     outline: none;
     font-size: 18px;
     background: none;
+    text-align: center;
+
 }
 
 .controls .exchange{
@@ -100,7 +123,56 @@ body{
     border-radius: 5px;
     background: rgb(193, 59, 203);
 }
+*/
 
+.navigationBar {
+    background-color: #333;
+}
+
+.navigationBar nav ul {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.navigationBar nav ul a:hover {
+    background-color: #383838;
+}
+
+.SchipperTranslate {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.SchipperTranslate p {
+    margin-left: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.SchipperTranslate button {
+    padding: 10px 20px;
+    background-color: #4c53cb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.SchipperTranslate img {
+    max-width: 100px;
+}
+
+/*
 @media (max-width: 768px) {
     .container {
         width: 90%;
@@ -137,5 +209,4 @@ body{
         margin-bottom: 10px;
     }
 }
-
-
+*/
