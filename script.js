@@ -1,3 +1,4 @@
+/* 
 const fromText = document.querySelector('.from-text');
 const toText = document.querySelector('.to-text');
 selectTag = document.querySelectorAll('select');
@@ -22,7 +23,7 @@ function isSafe(input) {
 selectTag.forEach((tag, id) => {
     for (const country_code in countries) {
         let selected = "";
-        if(id == 0 && country_code == "en-US") {
+        if(id == 0 && country_code == "en-GB") {
             selected = "selected"; // default selected language
         }
         else if (id == 1 && country_code == "es-ES") {
@@ -108,3 +109,4 @@ icons.forEach(icon => {
         };
     });
 });
+*/
