@@ -14,6 +14,11 @@
     overflow: hidden;
 }
 
+.navigationBar nav ul img {
+    height: 50px;
+    width: 100px;
+}
+
 .navigationBar nav a {
     color: white;
     text-decoration: none;
