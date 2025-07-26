@@ -309,12 +309,7 @@ body {
         padding: 10px 15px;
     }
 
-    /* Translator section - textarea */
-    .text-input textarea {
-        width: 100%;
-        font-size: 16px;
-        padding: 10px;
-    }
+    
 
     /* Footer Icons */
     .footer-container a {
@@ -357,18 +352,7 @@ body {
         padding: 12px 18px;
     }
 
-    /* Adjusting width of the input section */
-    .text-input textarea {
-        width: 60%;
-    }
-
-    .controls .icons i {
-        font-size: 16px;
-    }
-
-    .controls .row select {
-        font-size: 16px;
-    }
+    
 }
 
 /* Desktop (1024px and up) */
@@ -399,19 +383,7 @@ body {
         padding: 14px 22px;
     }
 
-    /* Increase width of input section */
-    .text-input textarea {
-        width: 65%;
-    }
-
-    /* Adjust icons and select dropdowns */
-    .controls .icons i {
-        font-size: 18px;
-    }
-
-    .controls .row select {
-        font-size: 18px;
-    }
+    
 }
 
 
