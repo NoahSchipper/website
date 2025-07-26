@@ -264,7 +264,7 @@ body {
 }
 
 /* Mobile devices */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     /* General Layout Adjustments */
     body {
         font-size: 14px; /* Make text slightly smaller on small screens */
@@ -319,7 +319,7 @@ body {
 }
 
 /* Tablet and Small Laptops (768px to 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 640px) and (max-width: 1024px) {
     .navigationBar nav a {
         font-size: 16px; /* Increase font size slightly for tablet */
     }
