@@ -5,6 +5,265 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    background-color: #333;
+} 
+
+/* custom scrollbar */
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2b2b2b;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #4c53cb, #3366ff);
+    border-radius: 10px;
+    border: 3px solid #2b2b2b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5c63db, #4da6ff);
+}
+.nav-container .logo {
+    display: flex;
+    padding-left: 5px;
+    align-items: center;
+}
+
+.nav-container .logo img {
+    height: 50px;
+    width: 100px;
+}
+
+.navigationBar nav a {
+    display: inline-block;
+    color: white;
+    position: relative;
+    padding: 10px 20px;
+    margin-right: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+.navigationBar nav a:hover {
+    transform: scale(1.05);
+    background-color: #4c53cb;
+    border-radius: 4px;
+}
+
+.navigationBar {
+    position: sticky;
+    top: 0;
+    background-color: #4c53cb;
+    width: 100%;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style-type: none;
+}
+
+
+.nav-links a:hover {
+    background-color: #383838;
+}
+
+.SchipperTranslate {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.SchipperTranslate p {
+    margin-left: 20px;
+    font-size: 14px;
+    background-color: #ffffff;
+}
+
+.SchipperTranslate button {
+    padding: 10px 20px;
+    background-color: #4c53cb;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.SchipperTranslate img {
+    background-color: #ffffff;
+    max-width: 100px;
+}
+
+.Header {
+    display: inline;
+    text-align: center;
+    padding: 20px;
+    color: #f4f4f4;
+    border-radius: 8px;
+    margin: 20px;
+    max-width: 600px;
+}
+
+.Header p {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #f4f4f4;
+}
+
+.footer-container {
+    display: inline-block;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    align-items: center;
+    bottom: 0%;
+    width: 100%;
+
+}
+
+.footer-container p {
+    margin-bottom: 5px;
+}
+
+.footer-container a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+}
+
+.footer-container img {
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    padding: 0px;
+    transition: transform 0.3s ease;
+}
+
+.footer-container img:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+
+.Resume {
+    color: white;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+}
+
+.Resume p {
+    margin: 10px;
+    font-size: 16px;
+    color: white;
+}
+
+.Resume button {
+    background-color: #4c53cb;
+    padding: 10px 20px;
+    margin-left: 5px;
+    font-size: 24px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transitions for smooth animation */
+}
+
+.Resume button:hover {
+    transform: translateY(-2px); /* Lifts the button slightly */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+}
+
+.Resume button:active {
+    transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
+}
+
+.Github {
+    color: white;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+}
+
+.Github p {
+    margin: 10px 10px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+}
+
+.Github button {
+    font-size: 24px;
+    padding: 10px 20px;
+    margin-left: 5px;
+    background-color: #4c53cb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-out, box-shadow 
+    0.2s ease-out; /* Add transitions for smooth animation */
+}
+
+.Github button:hover {
+    transform: translateY(-2px); /* Lifts the button slightly */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+}
+
+.Github button:active {
+    transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
+}
+
+.aboutParagraph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    background-color: #333;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.aboutParagraph p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #f4f4f4;
+}
+
+
 
 /*
 * {
@@ -106,81 +365,7 @@
     background: rgb(193, 59, 203);
 }
 */
-.nav-container .logo {
-    display: flex;
-    padding-left: 5px;
-    align-items: center;
-}
 
-.nav-container .logo img {
-    height: 50px;
-    width: 100px;
-}
-
-.navigationBar nav a {
-    color: white;
-    text-decoration: none;
-    padding-right: 20px;
-    padding-left: 20px;
-    display: block;
-    text-align: center;
-}
-
-
-.navigationBar {
-    background-color: #333;
-    width: 100%;
-}
-
-.nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-    list-style-type: none;
-}
-
-
-.nav-links a:hover {
-    background-color: #383838;
-}
-
-.SchipperTranslate {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    margin: 20px auto;
-    max-width: 600px;
-}
-
-.SchipperTranslate p {
-    margin-left: 20px;
-    font-size: 14px;
-    color: #333;
-}
-
-.SchipperTranslate button {
-    padding: 10px 20px;
-    background-color: #4c53cb;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.SchipperTranslate img {
-    max-width: 100px;
-}
 
 /*
 @media (max-width: 768px) {
