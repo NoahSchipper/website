@@ -263,6 +263,156 @@ body {
     color: #f4f4f4;
 }
 
+/* Mobile devices */
+@media (max-width: 768px) {
+    /* General Layout Adjustments */
+    body {
+        font-size: 14px; /* Make text slightly smaller on small screens */
+    }
+
+    /* Navigation Bar */
+    .navigationBar nav a {
+        padding: 8px 15px; /* Reduced padding for mobile */
+        font-size: 14px;
+    }
+    
+    /* Navigation Links */
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    .SchipperTranslate {
+        flex-direction: column;
+        max-width: 90%; /* Makes it more responsive */
+        padding: 15px;
+    }
+
+    .Header {
+        font-size: 18px;
+        padding: 15px;
+    }
+
+    .footer-container {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .Resume, .Github {
+        padding: 50px 10px;
+        font-size: 18px;
+    }
+
+    .Resume button, .Github button {
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+
+    /* Translator section - textarea */
+    .text-input textarea {
+        width: 100%;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    /* Footer Icons */
+    .footer-container a {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Tablet and Small Laptops (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .navigationBar nav a {
+        font-size: 16px; /* Increase font size slightly for tablet */
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .SchipperTranslate {
+        flex-direction: row;
+        max-width: 80%;
+        padding: 20px;
+    }
+
+    .Header {
+        font-size: 20px;
+        padding: 20px;
+    }
+
+    .footer-container {
+        font-size: 16px;
+    }
+
+    .Resume, .Github {
+        padding: 80px 20px;
+    }
+
+    .Resume button, .Github button {
+        font-size: 20px;
+        padding: 12px 18px;
+    }
+
+    /* Adjusting width of the input section */
+    .text-input textarea {
+        width: 60%;
+    }
+
+    .controls .icons i {
+        font-size: 16px;
+    }
+
+    .controls .row select {
+        font-size: 16px;
+    }
+}
+
+/* Desktop (1024px and up) */
+@media (min-width: 1024px) {
+    .navigationBar nav a {
+        font-size: 18px; /* Larger font size for desktop */
+    }
+
+    .SchipperTranslate {
+        max-width: 70%; /* Larger container */
+    }
+
+    .Header {
+        font-size: 22px;
+        padding: 25px;
+    }
+
+    .footer-container {
+        font-size: 18px;
+    }
+
+    .Resume, .Github {
+        padding: 120px 30px;
+    }
+
+    .Resume button, .Github button {
+        font-size: 24px;
+        padding: 14px 22px;
+    }
+
+    /* Increase width of input section */
+    .text-input textarea {
+        width: 65%;
+    }
+
+    /* Adjust icons and select dropdowns */
+    .controls .icons i {
+        font-size: 18px;
+    }
+
+    .controls .row select {
+        font-size: 18px;
+    }
+}
 
 
 /*
