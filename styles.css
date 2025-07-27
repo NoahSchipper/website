@@ -486,23 +486,26 @@ main {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
 
     }
     .scrollDownContainer p {
         text-align: center;
         width: 100%;
-        margin: 0 auto 10px auto;
         font-size: 14px;
     }
 
+    /*
     .scrollDown {
+       
+        
         position: relative;
         margin: 0;
         bottom: auto;
         transform: none;
         display: block;
     }
+        */
 
     .footer-container {
         font-size: 14px;
@@ -554,9 +557,14 @@ main {
         padding: 20px;
     }
 
+    .Header p {
+        font-size: 16px;
+    }
+
     .scrollDownContainer{
-        padding-top: 10px;
-        padding-bottom: 10px;
+
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .footer-container {
