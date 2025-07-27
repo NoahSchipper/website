@@ -485,6 +485,7 @@ main {
     }
 
     .scrollDown {
+        position: relative;
         bottom: auto;
         transform: none;
         display: block;
