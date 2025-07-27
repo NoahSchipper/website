@@ -6,6 +6,8 @@
 
 }
 
+/* enables the footer to stay at the bottom of the page
+   also sets background color */
 body {
     background-color: #333;
     display: flex;
@@ -14,6 +16,7 @@ body {
 
 }
 
+/* enables the footer to stay at the bottom of the page */
 main {
     flex-grow: 1;
 }
@@ -39,17 +42,23 @@ main {
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #5c63db, #4da6ff);
 }
+
+/* Navigation Bar */
+
+/* places logo in the top left corner */
 .nav-container .logo {
     display: flex;
     padding-left: 5px;
     align-items: center;
 }
 
+/* sets the logo image size */
 .nav-container .logo img {
     height: 50px;
     width: 100px;
 }
 
+/* styles the navigation bar */
 .navigationBar nav a {
     display: inline-block;
     color: white;
@@ -61,19 +70,23 @@ main {
     transition: background 0.3s ease;
 }
 
+/* Styles the navigation links */
 .navigationBar nav a:hover {
     transform: scale(1.05);
     background-color: #4c53cb;
     border-radius: 4px;
 }
 
+/* makes the navigation bar sticky */
 .navigationBar {
     position: sticky;
     top: 0;
     background-color: #4c53cb;
     width: 100%;
+    z-index: 1000;
 }
 
+/* styles the container for the navigation bar */
 .nav-container {
     display: flex;
     align-items: center;
@@ -83,116 +96,196 @@ main {
     margin: 0;
 }
 
+/* Sets spacing between navigation links */
 .nav-links {
     display: flex;
     gap: 20px;
     list-style-type: none;
 }
 
-
+/* adds hover effect to navigation links */
 .nav-links a:hover {
     background-color: #383838;
 }
 
-.SchipperTranslate {
+
+/* Header Section */
+
+/* styles the header section */
+.Header {
+    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 20px;
-    background-color: #ffffff;
+    color: #f4f4f4;
     border-radius: 8px;
-    margin: 20px auto;
-    max-width: 600px;
+    height: 100vh;
+    margin: 0 auto;
 }
 
-.SchipperTranslate p {
-    margin-left: 20px;
-    font-size: 14px;
-    background-color: #ffffff;
+.Header h1 {
+    font-size: 36px;
+    margin-top: 20px;
+    color: #f4f4f4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+/* styles the header paragraph */
+.Header p {
+    margin: 20px;
+    font-size: 24px;
+    color: #f4f4f4;
 }
 
-.SchipperTranslate button {
-    padding: 10px 20px;
+/* sets the position of the 
+   buttons in the header section */
+.button-row{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+/* styles the buttons in the header section */
+.button-row button {
     background-color: #4c53cb;
+    padding: 10px 20px;
+    font-size: 18px;
     color: white;
     border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transitions for smooth animation */
+}
+
+/* adds hover effect to buttons in the header section */
+.button-row button:hover {
+    transform: translateY(-2px); /* Lifts the button slightly */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+}
+
+/* adds active effect to buttons in the header section */
+.button-row button:active {
+    transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
+}
+
+/* ensures the header buttons don't exceed the
+    width of the header paragraph 
+.Header p, .button-row {
+    max-width: 100%;
+    width: 100%
+}
+*/
+.Header button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #4c53cb;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transitions for smooth animation */
+}
+
+.Header button:hover {
+    transform: translateY(-2px); /* Lifts the button slightly */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+}
+
+.Header button:active {
+    transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
+}
+
+.scrollDownContainer {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+}
+
+.scrollDownContainer p {
+    margin-bottom: 100px;
+    font-size: 20px;
+    color: white;
+}
+/* Scroll down button */
+.scrollDown {
+    height: 50px;
+    width: 30px;
+    border: 2px solid white;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: 20px;
+    border-radius: 50px;
     cursor: pointer;
 }
 
-.SchipperTranslate img {
-    background-color: #ffffff;
-    max-width: 100px;
+.scrollDown::before,
+.scrollDown::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -100%) rotate(45deg);
+    border: 2px solid white;
+    height: 10px;
+    width: 10px;
+    border-top: transparent;
+    border-left: transparent;
+    animation: scrollDown 1s ease-in-out infinite;
 }
 
-.Header {
-    display: inline;
-    text-align: center;
-    padding: 20px;
-    color: #f4f4f4;
-    border-radius: 8px;
-    margin: 20px;
-    max-width: 600px;
+.scrollDown::after {
+    top: 20%;
+    animation-delay: .3s;
 }
 
-.Header p {
-    margin-top: 5px;
-    font-size: 16px;
-    color: #f4f4f4;
+@keyframes scrollDown {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        top: 90%;
+    }
 }
+/* Resume Section */
 
-.footer-container {
-    margin-top: auto;
-    text-align: center;
-    background-color: #333;
-    color: white;
-    align-items: center;
-    width: 100%;
-    padding: 10px 0px;
-
-}
-
-.footer-container p {
-    margin-bottom: 5px;
-}
-
-.footer-container a {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    
-}
-
-.footer-container img {
-    width: 30px;
-    height: 30px;
-    margin: 0px;
-    padding: 0px;
-    transition: transform 0.3s ease;
-}
-
-.footer-container img:hover {
-    transform: scale(1.2);
-    filter: brightness(1.2);
-}
-
-
-.Resume {
+.Resume,
+.Github {
     color: white;
     font-size: 24px;
     display: flex;
     flex-direction: column; 
     align-items: center;
     justify-content: center;
-    padding: 100px;
+    padding: 40px 20px;
 }
 
+/* styles the resume paragraph */
 .Resume p {
     margin: 10px;
-    font-size: 16px;
+    text-align: center;
+    font-size: 18px;
     color: white;
 }
 
-.Resume button {
+/* styles the resume button */
+.Resume button,
+.Github button {
     background-color: #4c53cb;
     padding: 10px 20px;
     margin-left: 5px;
@@ -204,56 +297,86 @@ main {
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transitions for smooth animation */
 }
 
+/* adds hover effect to resume button */
 .Resume button:hover {
     transform: translateY(-2px); /* Lifts the button slightly */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
 }
 
+/* adds active effect to resume button */
 .Resume button:active {
     transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
 }
 
-.Github {
-    color: white;
-    font-size: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 100px;
-}
 
+
+/* styles the github paragraph */
 .Github p {
     margin: 10px 10px;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     color: white;
 }
 
-.Github button {
-    font-size: 24px;
-    padding: 10px 20px;
-    margin-left: 5px;
-    background-color: #4c53cb;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.2s ease-out, box-shadow 
-    0.2s ease-out; /* Add transitions for smooth animation */
-}
 
+
+/* adds same hover effect to github button */
 .Github button:hover {
     transform: translateY(-2px); /* Lifts the button slightly */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
 }
 
+/* adds same active effect to github button */
 .Github button:active {
     transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
 }
 
+/* Footer Section */
+
+/* styles the footer container */
+.footer-container {
+    margin-top: auto;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0px;
+}
+
+/* gives spacing below the footer text*/
+.footer-container p {
+    margin-bottom: 5px;
+}
+
+/* sets spacing for the footer link container */
+.footer-container a {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    
+}
+
+/* styles the footer icons */
+.footer-container img {
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    transition: transform 0.3s ease;
+}
+
+/* adds hover effect to footer icons */
+.footer-container img:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+/* About Page */
+
+/* sets layout of about page */
 .aboutParagraph {
     display: flex;
     flex-direction: column;
@@ -267,11 +390,51 @@ main {
     max-width: 600px;
 }
 
+/* styles the about paragraph */
 .aboutParagraph p {
     margin: 10px 0;
     font-size: 16px;
     color: #f4f4f4;
 }
+
+/* Projects Page */
+
+/* sets layout of the SchipperTranslate section */
+.SchipperTranslate {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+/* styles the SchipperTranslate text */
+.SchipperTranslate p {
+    margin-left: 20px;
+    font-size: 14px;
+    background-color: #ffffff;
+}
+
+/* styles the SchipperTranslate button */
+.SchipperTranslate button {
+    padding: 10px 20px;
+    background-color: #4c53cb;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* styles the SchipperTranslate logo */
+.SchipperTranslate img {
+    background-color: #ffffff;
+    max-width: 100px;
+}
+
+
+/* Media Queries */
 
 /* Mobile devices */
 @media (max-width: 640px) {
@@ -280,17 +443,23 @@ main {
         font-size: 14px; /* Make text slightly smaller on small screens */
     }
 
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
     /* Navigation Bar */
     .navigationBar nav a {
-        padding: 8px 15px; /* Reduced padding for mobile */
-        font-size: 14px;
+        width: 100%;
+        padding: 10px;
+        text-align: right;
     }
     
     /* Navigation Links */
     .nav-links {
         flex-direction: column;
         gap: 10px;
-        padding: 10px 0;
+        width: 100%;
     }
 
     .SchipperTranslate {
@@ -300,8 +469,28 @@ main {
     }
 
     .Header {
+        height: auto;
+        padding: 40px 20px;
         font-size: 18px;
         padding: 15px;
+    }
+
+    .scrollDownContainer {
+        position: relative;
+        margin-top: 40px;
+        text-align: center;
+    }
+    .scrollDownContainer p {
+        text-align: center;
+        width: 100%;
+       margin: 0 auto 10px auto
+        font-size: 16px;
+    }
+
+    .scrollDown {
+        bottom: auto;
+        transform: none;
+        display: block;
     }
 
     .footer-container {
@@ -326,9 +515,14 @@ main {
         width: 25px;
         height: 25px;
     }
+
+    .footer-container img {
+        width: 25px;
+        height: 25px;
+    }
 }
 
-/* Tablet and Small Laptops (768px to 1024px) */
+/* Tablet and Small Laptops (640px to 1024px) */
 @media (min-width: 640px) and (max-width: 1024px) {
     .navigationBar nav a {
         font-size: 16px; /* Increase font size slightly for tablet */
@@ -354,7 +548,7 @@ main {
     }
 
     .Resume, .Github {
-        padding: 80px 20px;
+        padding: 40px 10px;
     }
 
     .Resume button, .Github button {
@@ -385,7 +579,7 @@ main {
     }
 
     .Resume, .Github {
-        padding: 120px 30px;
+        padding: 60px 20px;
     }
 
     .Resume button, .Github button {
