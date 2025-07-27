@@ -481,7 +481,7 @@ main {
         text-align: center;
         width: 100%;
         margin: 0 auto 10px auto;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .scrollDown {
@@ -546,6 +546,11 @@ main {
 
     .Resume, .Github {
         padding: 40px 10px;
+    }
+
+    .Resume p, .Github p {
+        font-size: 14px;
+        margin: 10px 0;
     }
 
     .Resume button, .Github button {
