@@ -455,7 +455,6 @@ main {
     
     /* Navigation Links */
     .nav-links {
-        flex-direction: column;
         gap: 10px;
         width: 100%;
     }
