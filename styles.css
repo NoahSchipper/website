@@ -472,6 +472,10 @@ main {
         padding: 15px;
     }
 
+    .Header p {
+        font-size: 14px;
+    }
+
     .scrollDownContainer {
         position: relative;
         margin-top: 40px;
