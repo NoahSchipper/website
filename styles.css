@@ -485,7 +485,7 @@ main {
     }
 
     .scrollDown {
-        bottom: 0;
+        bottom: auto;
         transform: none;
         display: block;
     }
