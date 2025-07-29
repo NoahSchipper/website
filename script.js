@@ -1,112 +1,210 @@
-/* 
-const fromText = document.querySelector('.from-text');
-const toText = document.querySelector('.to-text');
-selectTag = document.querySelectorAll('select');
-exchangeIcon = document.querySelector('.exchange');
-translateBtn = document.querySelector("button");
-icons = document.querySelectorAll(".row i");
-
-const blockedWords = [
-  "<script", "javascript:", "onerror=", "onload=", "onmouseover=", "onfocus=", "onmouseenter=",
-  "onclick=", "onblur=", "onchange=", "onsubmit=", "onreset=", "onkeydown=", "onkeyup=",
-  "onkeypress=", "oncontextmenu=", "onmouseout=", "onmouseleave=", "iframe", "img", "<object",
-  "<embed", "srcdoc=", "data:text/html", "src=", "<svg", "<math", "<link", "<style",
-  "base64,", "<body", "<meta", "expression(", "document.cookie", "window.location", "eval(",
-  "setTimeout(", "setInterval(", "Function(", "alert(", "prompt(", "confirm(", "<", ">", "$", "{","}"
+const skills = [
+  {
+    title: "JavaScript",
+    type: "Language",
+    use: "Schipper Translate backend, website work (like this display)",
+    icon: "⚡",
+  },
+  {
+    title: "HTML/CSS",
+    type: "Languages",
+    use: "Schipper Translate frontend, website styling",
+    icon: "🎨",
+  },
+  {
+    title: "Java",
+    type: "Language",
+    use: "Blackjack game, educational programs and GUI applications",
+    icon: "☕",
+  },
+  {
+    title: "Python",
+    type: "Language",
+    use: "basic programs and explorations",
+    icon: "🐍",
+  },
+  {
+    title: "C/Assembly",
+    type: "Languages",
+    use: "Low-level programming, learning about computer architecture",
+    icon: "⚙️",
+  },
+  {
+    title: "C++",
+    type: "Language",
+    use: "Learning about object-oriented programming, data structures, and algorithms",
+    icon: "➕",
+  },
+  {
+    title: "SQL",
+    type: "Language",
+    use: "Database management, data retrieval, and manipulation",
+    icon: "🗄️🔍",
+  },
+  {
+    title: "VS Code",
+    type: "IDE",
+    use: "Code editing, debugging, and project development",
+    icon: "🟦♾️",
+  },
+  {
+    title: "BlueJ",
+    type: "IDE",
+    use: "Java development, educational projects",
+    icon: "🐦🔵",
+  },
+  {
+    title: "Git & GitHub",
+    type: "Version Control",
+    use: "Team collaboration, project tracking, and versioning",
+    icon: "🛠️",
+  },
+  {
+    title: "API Integration",
+    type: "API",
+    use: "Schipper Translate uses API calls to translate text between languages",
+    icon: "🧩",
+  },
+  {
+    title: "Excel",
+    type: "Spreadsheet Software",
+    use: "Educational projects, data analysis, and calculations",
+    icon: "📊",
+  },
 ];
 
-function isSafe(input) {
-    const lowerInput = input.toLowerCase();
-    return !blockedWords.some(word => lowerInput.includes(word));
-}
+let dealt = false;
 
-selectTag.forEach((tag, id) => {
-    for (const country_code in countries) {
-        let selected = "";
-        if(id == 0 && country_code == "en-GB") {
-            selected = "selected"; // default selected language
-        }
-        else if (id == 1 && country_code == "es-ES") {
-            selected = "selected"; // default selected language
-        }
-        let option = `<option value="${country_code}" ${selected}>${countries[country_code]}</option>`;
-        tag.insertAdjacentHTML("beforeend", option); // adding options tag inside select tag
-    }
-});
+window.dealCards = function () {
+  if (dealt) return;
+  dealt = true;
 
-exchangeIcon.addEventListener("click", () => {
-    let tempText = fromText.value; // storing fromText value in tempText variable
-    tempLang = selectTag[0].value; // storing fromSelect tag value in tempLang variable
-    fromText.value = toText.value; // assigning toText value to fromText
-    selectTag[0].value = selectTag[1].value; // assigning toSelect tag value to fromSelect
-    toText.value = tempText; // assigning tempText value to toText
-    selectTag[1].value = tempLang; // assigning tempText value to toText
+  const deck = document.querySelector(".deck-stack");
+  if (deck) deck.style.display = "none";
+
+  const container = document.getElementById("cardContainer");
+
+  setTimeout(() => {
+    const containerWidth = container.offsetWidth;
+    const idealSpacing = 200;
+    const minSpacing = 100;
+
+    const spacing =
+      (skills.length - 1) * idealSpacing > containerWidth
+        ? Math.max(minSpacing, containerWidth / (skills.length - 1))
+        : idealSpacing;
+
+    const centerOffset = ((skills.length - 1) / 2) * spacing;
+    const midpoint = (skills.length - 1) / 2;
+
+    // STEP 1: Create card data with z-index calculations
+    const cardData = skills.map((skill, index) => {
+      const direction = index < midpoint ? -1 : 1;
+      const distanceFromCenter = Math.abs(index - midpoint);
+      const baseRotation = direction * distanceFromCenter * 5;
+
+      let zIndex;
+      if (index < midpoint) {
+        // Left side: further from center = lower z-index
+        zIndex = skills.length - distanceFromCenter;
+      } else if (index > midpoint) {
+        // Right side: further from center = lower z-index (same as left side)
+        zIndex = skills.length - distanceFromCenter;
+      } else {
+        // Center card
+        zIndex = skills.length + 1;
+      }
+
+      return {
+        skill,
+        index,
+        zIndex,
+        baseRotation,
+        distanceFromCenter
+      };
     });
 
+    // STEP 2: Sort by z-index (lowest first) so DOM order matches z-index order
+    const sortedCards = [...cardData].sort((a, b) => a.zIndex - b.zIndex);
 
-translateBtn.addEventListener("click", () => {
-    const text = fromText.value.trim();
+    // STEP 3: Create and add cards to DOM in sorted order
+    sortedCards.forEach(({ skill, index, zIndex, baseRotation }, sortedIndex) => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = `
+      <h3>${skill.icon} ${skill.title}</h3>
+      <p><strong>Type:</strong> ${skill.type}</p>
+      <p><strong>Use:</strong> ${skill.use}</p>
+    `;
 
-    if (!text) return;
+      card.style.setProperty('z-index', zIndex.toString(), 'important');
+      card.setAttribute('data-original-zindex', zIndex); // Store original z-index
+      card.setAttribute('data-original-index', index); // Store original position
+      container.appendChild(card);
 
-    if (!isSafe(text)) {
-        alert("Input contains potentially unsafe content and will not be translated.");
-        return;
-    }
+      // Use the original index for timing, but ensure all cards get the reveal class
+      setTimeout(() => {
+        card.classList.add("revealed");
+        card.style.transform = `
+        translateX(${index * spacing - centerOffset}px)
+        translateX(-50%)
+        rotate(${baseRotation}deg)
+      `;
+      }, index * 300);
 
-    toText.setAttribute("placeholder", "Translating...");
-    toText.value = ""
-    let translateFrom = selectTag[0].value.split("-")[0].toLowerCase();
-    let translateTo = selectTag[1].value.split("-")[0].toLowerCase();
+      // Reset tilt on hover
+      card.addEventListener("mouseenter", () => {
+        // Move card to end of container (brings it to front)
+        container.appendChild(card);
+        card.style.transform = `
+        translateX(${index * spacing - centerOffset}px)
+        translateX(-50%)
+        rotate(0deg)
+      `;
+      });
 
-    fetch("/translate", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            q: text,
-            source: translateFrom,
-            target: translateTo
-        })
-    })
-    .then(res => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.json();
-    })
-    .then(data => {
-        const translatedText = data?.data?.translations?.translatedText;
-        if (translatedText) {
-            toText.value = translatedText;
+      card.addEventListener("mouseleave", () => {
+       
+        // Find where this card should be positioned in DOM based on its z-index (not array index)
+        const allCards = Array.from(container.children);
+        const cardZIndex = parseInt(card.getAttribute('data-original-zindex'));
+        
+        // Find the correct position by looking at other cards' z-index values
+        let insertBeforeCard = null;
+        for (let otherCard of allCards) {
+          const otherZIndex = parseInt(otherCard.getAttribute('data-original-zindex'));
+          if (otherZIndex > cardZIndex) {
+            insertBeforeCard = otherCard;
+            break;
+          }
+        }
+        
+        // Insert the card back in its correct z-index position
+        if (insertBeforeCard) {
+          container.insertBefore(card, insertBeforeCard);
         } else {
-            toText.value = "Translation failed.";
+          container.appendChild(card); // If no card found, it goes at the end (highest z-index)
         }
-    })
-    .catch(err => {
-        console.error("Error during translation:", err);
-        toText.value = "Translating...";
+        
+        card.style.transform = `
+        translateX(${index * spacing - centerOffset}px)
+        translateX(-50%)
+        rotate(${baseRotation}deg)
+      `;
+      });
     });
-});
 
-icons.forEach(icon => {
-    icon.addEventListener("click", ({target}) => {
-        if(target.classList.contains("fa-copy")) {
-            if(target.id === "copy-from") {
-                navigator.clipboard.writeText(fromText.value); // copying fromText value
-            }
-            else {
-                navigator.clipboard.writeText(toText.value); // copying toText value
-            }
-            
-        } else {
-            let utterance;
-            if(target.id === "from") {
-                utterance = new SpeechSynthesisUtterance(fromText.value); // creating a new speech synthesis utterance for fromText
-                utterance.lang = selectTag[0].value; // setting language for fromText
-            } else {
-                utterance = new SpeechSynthesisUtterance(toText.value); // creating a new speech synthesis utterance for toText
-                utterance.lang = selectTag[1].value; // setting language for toText
-            }
-            speechSynthesis.speak(utterance);
-        };
-    });
-});
-*/
+    // Fallback: ensure all cards are revealed after max delay
+    setTimeout(() => {
+      const allCards = container.querySelectorAll('.card');
+      allCards.forEach(card => {
+        if (!card.classList.contains('revealed')) {
+          card.classList.add('revealed');
+        }
+      });
+    }, (skills.length * 300) + 500);
+  });
+};
+
+
+

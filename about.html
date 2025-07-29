@@ -1,59 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noah Schipper's Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
     <div class="navigationBar">
-        <nav>
-            <div class="nav-container">
-                <a href="index.html" class="logo">
-                    <img src="assets/Logo.png" alt="Logo" />
-                </a>
-                <ul class="nav-links">
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </div>
-        </nav>
+      <nav>
+        <div class="nav-container">
+          <a href="index.html" class="logo">
+            <img src="assets/Logo.png" alt="Logo" />
+          </a>
+          <ul class="nav-links">
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
     <main>
-    <div class="aboutParagraph">
-        <p> Hello all! I am a computer science student at the University of Northern Iowa. </p>
-        <p> NoahSchipper.net serves as a place for me to upload some of the projects I have been working on in my free time. It also helps me to fine-tune my web-development skills! </p>
+      <div class="aboutParagraph">
+        <h1>About Me</h1>
+        <h2>
+          I am a computer science student at the University of
+          Northern Iowa. NoahSchipper.net serves as a place for me to upload some of the
+          projects I have been working on in my free time. It also helps me to
+          fine-tune my web-development skills!
+        </p>
+      </div>
+      <div class="deck-stack" onclick="dealCards()">
+  <div class="card-back" style="top: -12px; left: -12px"></div>
+  <div class="card-back" style="top: -8px; left: -8px"></div>
+  <div class="card-back" style="top: -4px; left: -4px"></div>
+
+  <!-- Top card with label inside -->
+  <div class="card-back top-card">
+    <div class="card-label">
+      <div class="card-title">My Tech Stack</div>
+      <div class="card-subtitle">Click to Deal</div>
     </div>
+  </div>
+</div>
+<div class="card-container" id="cardContainer">  </div>
+
     </main>
     <div class="Footer">
-        <foot>
-            <div class="footer-container">
-                <p>Follow my socials!</p>
-                <a href="https://www.linkedin.com/in/noah-schipper-55671a305/"
-                target="_blank" class="linkedinLogo">
-                <img src="assets/linkedin.png" alt="LL" />
-                </a>
+      <foot>
+        <div class="footer-container">
+          <p>Follow my socials!</p>
+          <a
+            href="https://www.linkedin.com/in/noah-schipper-55671a305/"
+            target="_blank"
+            class="linkedinLogo"
+          >
+            <img src="assets/linkedin.png" alt="LL" />
+          </a>
 
-                <a href="https://www.instagram.com/_noahschipper/"
-                target="_blank" class = "instagramLogo">
-                <img src="assets/Instagram.png" alt="IL" />
-                </a>
+          <a
+            href="https://www.instagram.com/_noahschipper/"
+            target="_blank"
+            class="instagramLogo"
+          >
+            <img src="assets/Instagram.png" alt="IL" />
+          </a>
 
-                <a href="https://www.snapchat.com/add/noah.schipper89"
-                target="_blank" class = "snapchatLogo">
-                <img src="assets/SnapchatLogo.png" alt="SL" />
-                </a>
+          <a
+            href="https://www.snapchat.com/add/noah.schipper89"
+            target="_blank"
+            class="snapchatLogo"
+          >
+            <img src="assets/SnapchatLogo.png" alt="SL" />
+          </a>
 
-                <a href="https://x.com/Noah__Schipper"
-                target="_blank" class = "xLogo">
-                <img src="assets/X Logo.jpg" alt="XL" />
-                </a>
-            </div>
-        </foot>
+          <a href="https://x.com/Noah__Schipper" target="_blank" class="xLogo">
+            <img src="assets/X Logo.jpg" alt="XL" />
+          </a>
+        </div>
+      </foot>
     </div>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
