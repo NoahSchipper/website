@@ -1,3 +1,6 @@
+console.log("JavaScript file loaded successfully");
+
+
 const skills = [
   {
     title: "JavaScript",
