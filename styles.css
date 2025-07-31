@@ -403,16 +403,6 @@ main {
 
 /* Contact Page */
 
-.socialMedia {
-  display: block !important;
-  visibility: visible !important;
-}
-
-.socialMedia h1,
-.socialMedia h2 {
-  display: block !important;
-  visibility: visible !important;
-}
 
 .fa {
   cursor: pointer;
@@ -1038,3 +1028,28 @@ main {
     padding: 14px 22px;
   }
 }
+
+/* Add this at the very end of your CSS file to override media queries */
+
+.socialMedia {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.socialMedia h1,
+.socialMedia h2 {
+  display: block !important;
+  visibility: visible !important;
+  color: #ffffff !important;
+  text-align: center !important;
+}
+
+.socialMedia i {
+  display: flex !important;
+  visibility: visible !important;
+  color: #ffffff !important;
+  font-size: 24px !important;
+  justify-content: center !important;
+}
+
+/* If this fixes it, then we know it's a media query conflict */
