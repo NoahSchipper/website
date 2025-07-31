@@ -403,6 +403,17 @@ main {
 
 /* Contact Page */
 
+.socialMedia {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.socialMedia h1,
+.socialMedia h2 {
+  display: block !important;
+  visibility: visible !important;
+}
+
 .fa {
   cursor: pointer;
 }
