@@ -473,51 +473,76 @@ main {
 
 
 
-/* Social Media Section - Simplified Fix */
+/* DEBUGGING VERSION - Add this temporarily to test */
+
+/* Force visibility with bright colors to see what's happening */
 .socialMedia {
   display: block !important;
   visibility: visible !important;
-  padding: 40px 20px;
-  width: 100%;
-  box-sizing: border-box;
+  background-color: red !important; /* Temporary - so you can see the container */
+  border: 3px solid yellow !important; /* Temporary border */
+  min-height: 200px !important; /* Force minimum height */
+  padding: 40px 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 9999 !important; /* Force to top */
 }
 
 .socialMedia h1 {
-  color: #ffffff !important;
+  color: lime !important; /* Bright green to see if it shows */
   text-align: center !important;
-  margin: 20px 0 10px 0;
+  margin: 20px 0 10px 0 !important;
   display: block !important;
-  font-size: 2rem;
+  font-size: 2rem !important;
+  background-color: blue !important; /* Temporary background */
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .socialMedia h2 {
-  color: #ffffff !important;
+  color: cyan !important; /* Bright cyan to see if it shows */
   text-align: center !important;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 20px 0 !important;
   display: block !important;
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
+  background-color: purple !important; /* Temporary background */
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .socialMedia i {
   display: flex !important;
-  color: #ffffff !important;
-  font-size: 24px !important;
+  color: yellow !important; /* Bright yellow arrow */
+  font-size: 48px !important; /* Much larger to see */
   justify-content: center !important;
   align-items: center !important;
-  margin: 20px auto;
-  width: 50px;
-  height: 50px;
-  /* Remove animation temporarily to test if that's causing the issue */
-  /* animation: socialFloat 2s ease-in-out infinite; */
+  margin: 20px auto !important;
+  width: 100px !important;
+  height: 100px !important;
+  background-color: orange !important; /* Bright background */
+  visibility: visible !important;
+  opacity: 1 !important;
+  border: 2px solid white !important;
 }
 
-/* Commented out animation - uncomment once visibility is working */
-/*
-@keyframes socialFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* Remove ALL animations temporarily */
+.socialMedia * {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
 }
-*/
+
+/* Force show everything in social media */
+.socialMedia, .socialMedia * {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.socialMedia i {
+  display: flex !important; /* Override the block for the icon */
+}
 
 .toast {
   position: fixed;
