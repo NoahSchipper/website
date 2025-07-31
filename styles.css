@@ -470,39 +470,54 @@ main {
   color: #ffffff;
   line-height: 1;
 }
-/* Replace your existing .socialMedia CSS with this: */
+
+
+
+/* Social Media Section - Simplified Fix */
+.socialMedia {
+  display: block !important;
+  visibility: visible !important;
+  padding: 40px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
 .socialMedia h1 {
-  color: #ffffff;
-  text-align: center;
-  margin-top: 20px;
+  color: #ffffff !important;
+  text-align: center !important;
+  margin: 20px 0 10px 0;
+  display: block !important;
+  font-size: 2rem;
 }
 
 .socialMedia h2 {
-  color: #ffffff;
-  text-align: center;
-  margin-top: 10px;
+  color: #ffffff !important;
+  text-align: center !important;
+  margin: 10px 0 20px 0;
+  display: block !important;
+  font-size: 1.5rem;
 }
 
 .socialMedia i {
-  display: flex;
-  color: #ffffff;
-  font-size: 24px;
-  justify-content: center;
-  margin: 20px 10px; /* Added more top margin instead of animation */
-  /* Removed the animation temporarily to test */
-    animation: move 1s ease-in-out infinite;
+  display: flex !important;
+  color: #ffffff !important;
+  font-size: 24px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 20px auto;
+  width: 50px;
+  height: 50px;
+  /* Remove animation temporarily to test if that's causing the issue */
+  /* animation: socialFloat 2s ease-in-out infinite; */
 }
 
-/* If you want to keep the animation, try this safer version: */
-
-
-
-@keyframes move {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(20px); } /* Much smaller movement */
-  100% { transform: translateY(0); }
+/* Commented out animation - uncomment once visibility is working */
+/*
+@keyframes socialFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
+*/
 
 .toast {
   position: fixed;
@@ -657,126 +672,99 @@ main {
 
 
 
-/* Media Queries */
 
-/* Phones: Very Small Devices (<480px) */
+
+/* Media Query Overrides - Mobile and Desktop with all original styles */
+
+/* Mobile devices (640px and below) */
 @media (max-width: 640px) {
-  .deck-stack {
-    width: 120px;
-    height: 180px;
-  }
-
-  .card {
-    max-width: 120px;
-    min-width: 100px;
-    height: 180px;
-    font-size: 13px;
-    padding: 0.75rem;
-    left: 50%;
-  }
-
-  .card-title {
-    font-size: 1rem;
-  }
-
-  .card-subtitle {
-    font-size: 0.85rem;
-  }
-
-  .card-container {
-    padding: 0 30px;
-    flex-wrap: wrap;
-    height: auto;
-  }
-}
-
-/* Small Tablets (481px - 767px) */
-@media (min-width: 481px) and (max-width: 767px) {
-  .deck-stack {
-    width: 140px;
-    height: 210px;
-  }
-
-  .card {
-    max-width: 140px;
-    height: 210px;
+  /* General Layout Adjustments */
+  body {
     font-size: 14px;
   }
 
-  .card-container {
-    padding: 0 50px;
-    flex-wrap: wrap;
+  .nav-container {
+    padding: 10px;
   }
-}
 
-/* Medium Screens/Tablets (768px - 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .card-container {
-    padding: 0 70px;
+  /* Navigation Bar */
+  .navigationBar nav a {
+    width: 100%;
+    padding: 10px;
+    text-align: right;
+  }
+
+  /* Navigation Links */
+  .nav-links {
+    gap: 10px;
+    width: 100%;
+  }
+
+  .SchipperTranslate {
+    flex-direction: column;
     max-width: 90%;
-  }
-}
-
-/* Large Desktops (≥1280px) */
-@media (min-width: 1280px) {
-  .deck-stack {
-    transform: scale(1.1);
+    padding: 15px;
   }
 
-  .card {
-    max-width: 180px;
-    height: 260px;
-    font-size: 16px;
-  }
-
-  .card-container {
-    max-width: 1000px;
-    padding: 0 120px;
-  }
-}
-
-/* Ultra-Wide Displays (≥1600px) */
-@media (min-width: 1600px) {
-  .card-container {
-    justify-content: space-evenly;
-    max-width: 1200px;
-    padding: 0 160px;
-  }
-}
-
-/* Landscape Mode: Short Screens (≤500px height) */
-@media (max-height: 500px) and (orientation: landscape) {
-  .deck-stack {
-    display: none;
-  }
-
-  .card-container {
-    flex-direction: row;
+  .Header {
     height: auto;
-    flex-wrap: wrap;
-    padding: 20px;
+    padding: 40px 20px;
+    font-size: 18px;
+    padding: 15px;
   }
 
-  .card {
+  .Header p {
+    font-size: 14px;
+  }
+
+  .scrollDownContainer {
     position: relative;
-    opacity: 1;
-    margin: 10px;
-    transform: none;
-    left: auto;
-    top: auto;
+    margin-top: 40px;
+    padding: 0 20px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
   }
-}
 
-/* Accessibility: Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
+  .scrollDownContainer p {
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
   }
-}
 
-@media (max-width: 640px) {
+  .footer-container {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .Resume,
+  .Github {
+    padding: 50px 10px;
+    font-size: 14px;
+  }
+
+  .Resume button,
+  .Github button {
+    font-size: 18px;
+    padding: 10px 15px;
+  }
+
+  /* Footer Icons */
+  .footer-container a {
+    width: 25px;
+    height: 25px;
+  }
+
+  .footer-container img {
+    width: 25px;
+    height: 25px;
+  }
+
+  /* Card/Deck Stack Mobile Styles */
   .deck-stack {
     width: 120px;
     height: 180px;
@@ -786,7 +774,7 @@ main {
   }
 
   .deck-stack:hover {
-    transform: none; /* remove hover scaling on mobile */
+    transform: none;
   }
 
   .card-back {
@@ -828,128 +816,45 @@ main {
     font-size: 13px;
     transition: none;
     box-sizing: border-box;
-  }
-  @media (max-width: 640px) {
-  /* Disable hover scaling effect */
-  .deck-stack:hover {
-    transform: none;
+    max-width: 120px;
+    min-width: 100px;
+    height: 180px;
   }
 
-  /* If you have hover-related styles for cards */
   .card:hover {
     transform: none;
     box-shadow: none;
-    background: #1f1f1f; /* fallback to base background */
+    background: #1f1f1f;
+  }
+
+  /* Social Media Mobile Styles */
+  .socialMedia {
+    padding: 30px 15px !important;
+  }
+  
+  .socialMedia h1 {
+    font-size: 1.5rem !important;
+    margin: 15px 0 8px 0 !important;
+  }
+  
+  .socialMedia h2 {
+    font-size: 1.2rem !important;
+    margin: 8px 0 15px 0 !important;
+  }
+  
+  .socialMedia i {
+    font-size: 20px !important;
+    margin: 15px auto !important;
+    width: 40px;
+    height: 40px;
   }
 }
 
-}
-
-
-
-/* Mobile devices */
-@media (max-width: 640px) {
-  /* General Layout Adjustments */
-  body {
-    font-size: 14px; /* Make text slightly smaller on small screens */
-  }
-
-  .nav-container {
-    padding: 10px;
-  }
-  /* Navigation Bar */
+/* Laptops and Desktop (641px and above) */
+@media (min-width: 641px) {
+  /* Navigation */
   .navigationBar nav a {
-    width: 100%;
-    padding: 10px;
-    text-align: right;
-  }
-
-  /* Navigation Links */
-  .nav-links {
-    gap: 10px;
-    width: 100%;
-  }
-
-  .SchipperTranslate {
-    flex-direction: column;
-    max-width: 90%; /* Makes it more responsive */
-    padding: 15px;
-  }
-
-  .Header {
-    height: auto;
-    padding: 40px 20px;
     font-size: 18px;
-    padding: 15px;
-  }
-
-  .Header p {
-    font-size: 14px;
-  }
-
-  .scrollDownContainer {
-    position: relative;
-    margin-top: 40px;
-    padding: 0 20px;
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
-  }
-  .scrollDownContainer p {
-    text-align: center;
-    width: 100%;
-    font-size: 14px;
-  }
-
-  /*
-    .scrollDown {
-       
-        
-        position: relative;
-        margin: 0;
-        bottom: auto;
-        transform: none;
-        display: block;
-    }
-        */
-
-  .footer-container {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .Resume,
-  .Github {
-    padding: 50px 10px;
-    font-size: 14px;
-  }
-
-  .Resume button,
-  .Github button {
-    font-size: 18px;
-    padding: 10px 15px;
-  }
-
-  /* Footer Icons */
-  .footer-container a {
-    width: 25px;
-    height: 25px;
-  }
-
-  .footer-container img {
-    width: 25px;
-    height: 25px;
-  }
-}
-
-/* Tablet and Small Laptops (640px to 1024px) */
-@media (min-width: 640px) and (max-width: 1024px) {
-  .navigationBar nav a {
-    font-size: 16px; /* Increase font size slightly for tablet */
   }
 
   .nav-links {
@@ -958,13 +863,13 @@ main {
 
   .SchipperTranslate {
     flex-direction: row;
-    max-width: 80%;
+    max-width: 70%;
     padding: 20px;
   }
 
   .Header {
-    font-size: 20px;
-    padding: 20px;
+    font-size: 22px;
+    padding: 25px;
   }
 
   .Header p {
@@ -974,43 +879,6 @@ main {
   .scrollDownContainer {
     margin-top: 20px;
     margin-bottom: 20px;
-  }
-
-  .footer-container {
-    font-size: 16px;
-  }
-
-  .Resume,
-  .Github {
-    padding: 40px 10px;
-  }
-
-  .Resume p,
-  .Github p {
-    font-size: 14px;
-    margin: 10px 0;
-  }
-
-  .Resume button,
-  .Github button {
-    font-size: 20px;
-    padding: 12px 18px;
-  }
-}
-
-/* Desktop (1024px and up) */
-@media (min-width: 1024px) {
-  .navigationBar nav a {
-    font-size: 18px; /* Larger font size for desktop */
-  }
-
-  .SchipperTranslate {
-    max-width: 70%; /* Larger container */
-  }
-
-  .Header {
-    font-size: 22px;
-    padding: 25px;
   }
 
   .footer-container {
@@ -1027,29 +895,78 @@ main {
     font-size: 24px;
     padding: 14px 22px;
   }
+
+  /* Card/Deck Stack Desktop Styles */
+  .deck-stack {
+    transform: scale(1.1);
+  }
+
+  .card {
+    max-width: 180px;
+    height: 260px;
+    font-size: 16px;
+  }
+
+  .card-container {
+    max-width: 1000px;
+    padding: 0 120px;
+  }
+
+  /* Social Media Desktop Styles */
+  .socialMedia {
+    padding: 40px 20px !important;
+  }
+  
+  .socialMedia h1 {
+    font-size: 2rem !important;
+  }
+  
+  .socialMedia h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .socialMedia i {
+    font-size: 24px !important;
+  }
 }
 
-/* Add this at the very end of your CSS file to override media queries */
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .socialMedia i {
+    animation: none !important;
+  }
+}
 
-.socialMedia {
+/* Additional fixes for potential conflicts */
+
+/* Make sure card animations don't affect social media */
+.card-container ~ .socialMedia,
+.deck-stack ~ .socialMedia {
+  position: relative !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure toast notifications don't interfere */
+.toast ~ .socialMedia {
   display: block !important;
   visibility: visible !important;
 }
 
-.socialMedia h1,
-.socialMedia h2 {
+/* Fix any potential flex container issues */
+.socialMedia * {
+  box-sizing: border-box;
+}
+
+/* Remove any transforms that might be inherited */
+.socialMedia, .socialMedia * {
+  transform-origin: center center;
+}
+
+/* Force visibility on all child elements */
+.socialMedia > * {
   display: block !important;
   visibility: visible !important;
-  color: #ffffff !important;
-  text-align: center !important;
+  opacity: 1 !important;
 }
-
-.socialMedia i {
-  display: flex !important;
-  visibility: visible !important;
-  color: #ffffff !important;
-  font-size: 24px !important;
-  justify-content: center !important;
-}
-
-/* If this fixes it, then we know it's a media query conflict */
