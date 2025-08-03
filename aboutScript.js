@@ -156,46 +156,50 @@ window.dealCards = function () {
       }, index * 300);
 
       // Reset tilt on hover
-      card.addEventListener("mouseenter", () => {
-        // Move card to end of container (brings it to front)
-        container.appendChild(card);
-        card.style.transform = `
-        translateX(${index * spacing - centerOffset}px)
-        translateX(-50%)
-        rotate(0deg)
-      `;
-      });
+const isDesktop = window.innerWidth > 640;
 
-      card.addEventListener("mouseleave", () => {
-       
-        // Find where this card should be positioned in DOM based on its z-index (not array index)
-        const allCards = Array.from(container.children);
-        const cardZIndex = parseInt(card.getAttribute('data-original-zindex'));
-        
-        // Find the correct position by looking at other cards' z-index values
-        let insertBeforeCard = null;
-        for (let otherCard of allCards) {
-          const otherZIndex = parseInt(otherCard.getAttribute('data-original-zindex'));
-          if (otherZIndex > cardZIndex) {
-            insertBeforeCard = otherCard;
-            break;
-          }
-        }
-        
-        // Insert the card back in its correct z-index position
-        if (insertBeforeCard) {
-          container.insertBefore(card, insertBeforeCard);
-        } else {
-          container.appendChild(card); // If no card found, it goes at the end (highest z-index)
-        }
-        
-        card.style.transform = `
-        translateX(${index * spacing - centerOffset}px)
-        translateX(-50%)
-        rotate(${baseRotation}deg)
-      `;
-      });
-    });
+if (isDesktop) {
+  card.addEventListener("mouseenter", () => {
+    container.appendChild(card);
+    card.style.transform = `
+      translateX(${index * spacing - centerOffset}px)
+      translateX(-50%)
+      rotate(0deg)
+    `;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    // Find where this card should be positioned in DOM based on its z-index (not array index)
+    const allCards = Array.from(container.children);
+    const cardZIndex = parseInt(card.getAttribute('data-original-zindex'));
+
+    // Find the correct position by looking at other cards' z-index values
+    let insertBeforeCard = null;
+    for (let otherCard of allCards) {
+      const otherZIndex = parseInt(otherCard.getAttribute('data-original-zindex'));
+      if (otherZIndex > cardZIndex) {
+        insertBeforeCard = otherCard;
+        break;
+      }
+    }
+
+    // Insert the card back in its correct z-index position
+    if (insertBeforeCard) {
+      container.insertBefore(card, insertBeforeCard);
+    } else {
+      container.appendChild(card); // If no card found, it goes at the end (highest z-index)
+    }
+
+    card.style.transform = `
+      translateX(${index * spacing - centerOffset}px)
+      translateX(-50%)
+      rotate(${baseRotation}deg)
+    `;
+  });
+}
+
+
+  
 
     // Fallback: ensure all cards are revealed after max delay
     setTimeout(() => {
@@ -207,7 +211,8 @@ window.dealCards = function () {
       });
     }, (skills.length * 300) + 500);
   });
-};
+});
+}
 
 
 
