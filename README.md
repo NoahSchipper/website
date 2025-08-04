@@ -46,7 +46,7 @@ JavaScript for the About page is in aboutScript.js.
 JavaScript for the Contact page is in toast.js.
 Assets like logos and documents (e.g. resume) are in the assets/ folder.
 
-##Notes
+## Notes
 I’ve included a copy of my resume in the assets folder. The site is still evolving, and I regularly update it as I learn new things or build new projects.
 
 Thanks for taking a look!
