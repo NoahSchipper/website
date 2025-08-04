@@ -199,7 +199,7 @@ main {
 
 .scrollDownContainer {
   position: absolute;
-  bottom: 24px;
+  bottom: 70px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -726,7 +726,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 110px;
   }
 
   .scrollDownContainer p {
