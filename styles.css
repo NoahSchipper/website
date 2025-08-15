@@ -118,6 +118,7 @@ main {
   border-radius: 8px;
   height: 100vh;
   margin: 0 auto;
+  padding: 0px;
 }
 
 .Header h1 {
@@ -176,7 +177,7 @@ main {
 */
 .Header button {
   margin: 10px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-size: 18px;
   color: white;
   background-color: #4c53cb;
@@ -198,7 +199,7 @@ main {
 
 .scrollDownContainer {
   position: absolute;
-  bottom: 24px;
+  bottom: 70px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -407,7 +408,7 @@ main {
 /* styles the SchipperTranslate button */
 .SchipperTranslate button {
   padding: 10px 20px;
-  margin-left: 10px;
+  margin: 20px auto;
   background-color: #4c53cb;
   color: white;
   border: none;
@@ -421,7 +422,6 @@ main {
 }
 
 /* Contact Page */
-
 
 .fa {
   cursor: pointer;
@@ -481,87 +481,66 @@ main {
   color: #ffffff;
   text-align: center;
   line-height: 1;
-  margin: 0;
 }
 
 .phone-number i {
   font-size: 24px;
   color: #ffffff;
   line-height: 1;
+  margin: 0;
 }
 
-
-
-/* DEBUGGING VERSION - Add this temporarily to test */
-
-/* Force visibility with bright colors to see what's happening */
 .socialMedia {
-  display: block !important;
-  visibility: visible !important;
-  background-color: red !important; /* Temporary - so you can see the container */
-  border: 3px solid yellow !important; /* Temporary border */
-  min-height: 200px !important; /* Force minimum height */
-  padding: 40px 20px !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-  z-index: 9999 !important; /* Force to top */
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+  justify-content: center;
+  color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .socialMedia h1 {
-  color: lime !important; /* Bright green to see if it shows */
-  text-align: center !important;
-  margin: 20px 0 10px 0 !important;
-  display: block !important;
-  font-size: 2rem !important;
-  background-color: blue !important; /* Temporary background */
-  visibility: visible !important;
-  opacity: 1 !important;
+  padding-top: 20px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 24px;
 }
 
 .socialMedia h2 {
-  color: cyan !important; /* Bright cyan to see if it shows */
-  text-align: center !important;
-  margin: 10px 0 20px 0 !important;
-  display: block !important;
-  font-size: 1.5rem !important;
-  background-color: purple !important; /* Temporary background */
-  visibility: visible !important;
-  opacity: 1 !important;
+  padding-top: 20px;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  font-size: 24px;
+  line-height: 1;
 }
 
 .socialMedia i {
-  display: flex !important;
-  color: yellow !important; /* Bright yellow arrow */
-  font-size: 48px !important; /* Much larger to see */
-  justify-content: center !important;
-  align-items: center !important;
-  margin: 20px auto !important;
-  width: 100px !important;
-  height: 100px !important;
-  background-color: orange !important; /* Bright background */
-  visibility: visible !important;
-  opacity: 1 !important;
-  border: 2px solid white !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* same as .email-address and .phone-number */
+  margin-top: 20px;
+  font-size: 24px;
+  color: #ffffff;
+  line-height: 1;
+  animation: scrollDown2 3s ease-in-out infinite;
+  pointer-events: none;
 }
 
-/* Remove ALL animations temporarily */
-.socialMedia * {
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
+@keyframes scrollDown2 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(200px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-/* Force show everything in social media */
-.socialMedia, .socialMedia * {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-.socialMedia i {
-  display: flex !important; /* Override the block for the icon */
-}
 
 .toast {
   position: fixed;
@@ -646,9 +625,8 @@ main {
   text-align: center;
   padding: 1rem;
   color: #fff;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-
 
 .card-title {
   font-size: 1.2rem;
@@ -662,11 +640,11 @@ main {
 }
 
 .top-card {
-    /*z-index: 5; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  /*z-index: 5; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .card-container {
@@ -680,10 +658,8 @@ main {
   height: 300px;
   margin-top: 20px;
   padding: 0 100px;
-    transform-style: preserve-3d;
-
+  transform-style: preserve-3d;
 }
-
 
 .card {
   max-width: 160px;
@@ -702,23 +678,20 @@ main {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
   text-align: left;
   color: #fff;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 15px;
   transform-style: preserve-3d;
-
 }
 
- 
 .card.revealed {
   opacity: 1;
 }
 
+.card-spacer {
+  display: none;
+}
 
-
-
-
-
-* Media Query Overrides - Mobile and Desktop with all original styles */
+/* Media Query Overrides - Mobile and Desktop with all original styles */
 
 /* Mobile devices (640px and below) */
 @media (max-width: 640px) {
@@ -775,7 +748,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 110px;
   }
 
   .scrollDownContainer p {
@@ -784,14 +757,10 @@ main {
     font-size: 14px;
   }
 
-  .footer-container {
-    font-size: 14px;
-    padding: 10px;
-  }
 
   .Resume,
   .Github {
-    padding: 50px 10px;
+    padding: 100px 10px;
     font-size: 14px;
   }
 
@@ -802,14 +771,19 @@ main {
   }
 
   /* Footer Icons */
+
+  .footer-container {
+    font-size: 14px;
+    padding: 10px;
+  }
   .footer-container a {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
   }
 
   .footer-container img {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
   }
 
   /* Card/Deck Stack Mobile Styles */
@@ -859,44 +833,73 @@ main {
     transform: none !important;
     width: 100%;
     max-width: 100%;
-    height: auto;
     padding: 1rem;
     font-size: 13px;
-    transition: none;
+    transition: none !important;
     box-sizing: border-box;
     max-width: 120px;
     min-width: 100px;
-    height: 180px;
+    min-height: 180px;
+    height: auto;
   }
 
   .card:hover {
     transform: none;
     box-shadow: none;
     background: #1f1f1f;
+    cursor: default;
   }
 
   /* Social Media Mobile Styles */
-  .socialMedia {
-    padding: 30px 15px !important;
-    margin: 30px auto 60px auto !important; /* Extra bottom margin for mobile */
-  }
   
+
   .socialMedia h1 {
     font-size: 1.5rem !important;
     margin: 15px 0 8px 0 !important;
   }
-  
+
   .socialMedia h2 {
     font-size: 1.2rem !important;
     margin: 8px 0 15px 0 !important;
   }
-  
+
   .socialMedia i {
     font-size: 20px !important;
     margin: 15px auto !important;
     width: 40px;
     height: 40px;
   }
+}
+@media (min-width: 641px) and (max-width: 1023px) {
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .card {
+    flex: 1 1 calc(33.333% - 40px); /* 3 cards per row, accounting for gap */
+    max-width: calc(33.333% - 40px);
+    transform: none !important;
+    rotate: none !important;
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+
+  .card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: #1f1f1f;
+  }
+}
+
+.card-spacer {
+  display: block;
+  height: 800px;
+  width: 100%;
 }
 
 /* Laptops and Desktop (641px and above) */
@@ -922,7 +925,6 @@ main {
 
   .Header {
     font-size: 22px;
-    padding: 25px;
   }
 
   .Header p {
@@ -966,61 +968,19 @@ main {
   }
 
   /* Social Media Desktop Styles */
-  .socialMedia {
-    padding: 40px 20px !important;
-    margin: 40px auto 80px auto !important; /* Extra bottom margin for desktop */
-  }
   
+
   .socialMedia h1 {
     font-size: 2rem !important;
   }
-  
+
   .socialMedia h2 {
     font-size: 1.5rem !important;
   }
-  
+
   .socialMedia i {
     font-size: 24px !important;
   }
 }
 
-/* Accessibility: Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  .socialMedia i {
-    animation: none !important;
-  }
-}
 
-/* Additional fixes for potential conflicts */
-
-/* Make sure card animations don't affect social media */
-.card-container ~ .socialMedia,
-.deck-stack ~ .socialMedia {
-  position: relative !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Ensure toast notifications don't interfere */
-.toast ~ .socialMedia {
-  display: block !important;
-  visibility: visible !important;
-}
-
-/* Fix any potential flex container issues */
-.socialMedia * {
-  box-sizing: border-box;
-}
-
-/* Remove any transforms that might be inherited */
-.socialMedia, .socialMedia * {
-  transform-origin: center center;
-}
-
-/* Force visibility on all child elements */
-.socialMedia > * {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}

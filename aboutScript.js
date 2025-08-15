@@ -75,9 +75,7 @@ const skills = [
     icon: "📊",
   },
 ];
-
 let dealt = false;
-
 window.dealCards = function () {
   if (dealt) return;
   dealt = true;
@@ -86,6 +84,8 @@ window.dealCards = function () {
   if (deck) deck.style.display = "none";
 
   const container = document.getElementById("cardContainer");
+  const isTabletView = window.innerWidth >= 641 && window.innerWidth <= 1024;
+  const isDesktopView = window.innerWidth > 1024;
 
   setTimeout(() => {
     const containerWidth = container.offsetWidth;
@@ -100,7 +100,6 @@ window.dealCards = function () {
     const centerOffset = ((skills.length - 1) / 2) * spacing;
     const midpoint = (skills.length - 1) / 2;
 
-    // STEP 1: Create card data with z-index calculations
     const cardData = skills.map((skill, index) => {
       const direction = index < midpoint ? -1 : 1;
       const distanceFromCenter = Math.abs(index - midpoint);
@@ -108,13 +107,10 @@ window.dealCards = function () {
 
       let zIndex;
       if (index < midpoint) {
-        // Left side: further from center = lower z-index
         zIndex = skills.length - distanceFromCenter;
       } else if (index > midpoint) {
-        // Right side: further from center = lower z-index (same as left side)
         zIndex = skills.length - distanceFromCenter;
       } else {
-        // Center card
         zIndex = skills.length + 1;
       }
 
@@ -127,77 +123,76 @@ window.dealCards = function () {
       };
     });
 
-    // STEP 2: Sort by z-index (lowest first) so DOM order matches z-index order
     const sortedCards = [...cardData].sort((a, b) => a.zIndex - b.zIndex);
 
-    // STEP 3: Create and add cards to DOM in sorted order
-    sortedCards.forEach(({ skill, index, zIndex, baseRotation }, sortedIndex) => {
+    sortedCards.forEach(({ skill, index, zIndex, baseRotation }) => {
       const card = document.createElement("div");
       card.classList.add("card");
       card.innerHTML = `
-      <h3>${skill.icon} ${skill.title}</h3>
-      <p><strong>Type:</strong> ${skill.type}</p>
-      <p><strong>Use:</strong> ${skill.use}</p>
-    `;
+        <h3>${skill.icon} ${skill.title}</h3>
+        <p><strong>Type:</strong> ${skill.type}</p>
+        <p><strong>Use:</strong> ${skill.use}</p>
+      `;
 
       card.style.setProperty('z-index', zIndex.toString(), 'important');
-      card.setAttribute('data-original-zindex', zIndex); // Store original z-index
-      card.setAttribute('data-original-index', index); // Store original position
+      card.setAttribute('data-original-zindex', zIndex);
+      card.setAttribute('data-original-index', index);
       container.appendChild(card);
 
-      // Use the original index for timing, but ensure all cards get the reveal class
+      // Animate in unless tablet view
       setTimeout(() => {
         card.classList.add("revealed");
-        card.style.transform = `
-        translateX(${index * spacing - centerOffset}px)
-        translateX(-50%)
-        rotate(${baseRotation}deg)
-      `;
+
+        if (isDesktopView) {
+          card.style.transform = `
+            translateX(${index * spacing - centerOffset}px)
+            translateX(-50%)
+            rotate(${baseRotation}deg)
+          `;
+        } else {
+          card.style.transform = "none";
+        }
       }, index * 300);
 
-      // Reset tilt on hover
-      card.addEventListener("mouseenter", () => {
-        // Move card to end of container (brings it to front)
-        container.appendChild(card);
-        card.style.transform = `
-        translateX(${index * spacing - centerOffset}px)
-        translateX(-50%)
-        rotate(0deg)
-      `;
-      });
+      // Hover animation — only on desktop
+      if (isDesktopView) {
+        card.addEventListener("mouseenter", () => {
+          container.appendChild(card);
+          card.style.transform = `
+            translateX(${index * spacing - centerOffset}px)
+            translateX(-50%)
+            rotate(0deg)
+          `;
+        });
 
-      card.addEventListener("mouseleave", () => {
-       
-        // Find where this card should be positioned in DOM based on its z-index (not array index)
-        const allCards = Array.from(container.children);
-        const cardZIndex = parseInt(card.getAttribute('data-original-zindex'));
-        
-        // Find the correct position by looking at other cards' z-index values
-        let insertBeforeCard = null;
-        for (let otherCard of allCards) {
-          const otherZIndex = parseInt(otherCard.getAttribute('data-original-zindex'));
-          if (otherZIndex > cardZIndex) {
-            insertBeforeCard = otherCard;
-            break;
+        card.addEventListener("mouseleave", () => {
+          const allCards = Array.from(container.children);
+          const cardZIndex = parseInt(card.getAttribute('data-original-zindex'));
+
+          let insertBeforeCard = null;
+          for (let otherCard of allCards) {
+            const otherZIndex = parseInt(otherCard.getAttribute('data-original-zindex'));
+            if (otherZIndex > cardZIndex) {
+              insertBeforeCard = otherCard;
+              break;
+            }
           }
-        }
-        
-        // Insert the card back in its correct z-index position
-        if (insertBeforeCard) {
-          container.insertBefore(card, insertBeforeCard);
-        } else {
-          container.appendChild(card); // If no card found, it goes at the end (highest z-index)
-        }
-        
-        card.style.transform = `
-        translateX(${index * spacing - centerOffset}px)
-        translateX(-50%)
-        rotate(${baseRotation}deg)
-      `;
-      });
+
+          if (insertBeforeCard) {
+            container.insertBefore(card, insertBeforeCard);
+          } else {
+            container.appendChild(card);
+          }
+
+          card.style.transform = `
+            translateX(${index * spacing - centerOffset}px)
+            translateX(-50%)
+            rotate(${baseRotation}deg)
+          `;
+        });
+      }
     });
 
-    // Fallback: ensure all cards are revealed after max delay
     setTimeout(() => {
       const allCards = container.querySelectorAll('.card');
       allCards.forEach(card => {
@@ -208,6 +203,3 @@ window.dealCards = function () {
     }, (skills.length * 300) + 500);
   });
 };
-
-
-
