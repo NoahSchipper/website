@@ -391,7 +391,7 @@ main {
   display: flex;
   align-items: center;
   text-align: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
@@ -409,7 +409,7 @@ main {
 /* styles the SchipperTranslate button */
 .SchipperTranslate button {
   padding: 10px 20px;
-  margin: 0;
+  margin: 10px;
   background-color: #4c53cb;
   color: white;
   border: none;
@@ -981,11 +981,5 @@ main {
 
   .socialMedia i {
     font-size: 24px !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .SchipperTranslate button {
-    padding: auto;
   }
 }
