@@ -395,7 +395,7 @@ main {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  margin: 20px 10px;
+  margin: 20px auto;
   max-width: 600px;
 }
 
