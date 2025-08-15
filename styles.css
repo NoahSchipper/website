@@ -985,6 +985,6 @@ main {
 
 @media (min-width: 1024px) {
   .SchipperTranslate button {
-    margin: auto;
+    margin-left: auto;
   }
 }
