@@ -391,6 +391,7 @@ main {
   display: flex;
   align-items: center;
   text-align: center;
+  justify-content: space-between;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
@@ -408,7 +409,7 @@ main {
 /* styles the SchipperTranslate button */
 .SchipperTranslate button {
   padding: 10px 20px;
-  margin: 20px auto;
+  margin: 0;
   background-color: #4c53cb;
   color: white;
   border: none;
