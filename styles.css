@@ -325,22 +325,26 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
 }
 
-/* Footer Section */
+/* Footer Section - Updated to prevent overlap issues */
 
 /* styles the footer container */
 .footer-container {
-  margin-top: auto;
+  /* REMOVED: margin-top: auto; - This can cause layout issues */
   text-align: center;
   background-color: #333;
   color: white;
   align-items: center;
   width: 100%;
-  padding: 10px 0px;
+  max-width: 1200px; /* ADDED: Prevent super wide footers */
+  margin: 0 auto; /* ADDED: Center the footer */
+  padding: 20px 0; /* INCREASED: More padding for better spacing */
+  box-sizing: border-box; /* ADDED: Proper box model */
 }
 
 /* gives spacing below the footer text*/
 .footer-container p {
-  margin-bottom: 5px;
+  margin-bottom: 15px; /* INCREASED: More space below text */
+  font-size: 16px; /* ADDED: Explicit font size */
 }
 
 /* sets spacing for the footer link container */
@@ -348,6 +352,7 @@ main {
   display: inline-block;
   width: 50px;
   height: 50px;
+  margin: 0 10px; /* ADDED: Space between icons */
 }
 
 /* styles the footer icons */
@@ -363,6 +368,19 @@ main {
 .footer-container img:hover {
   transform: scale(1.2);
   filter: brightness(1.2);
+}
+
+/* ADDED: Ensure Footer wrapper has proper positioning */
+.Footer {
+  position: relative; /* Not fixed or absolute */
+  bottom: auto;
+  left: auto;
+  right: auto;
+  width: 100%;
+  margin-top: 50px; /* Space between main content and footer */
+  z-index: 0; /* Lower than main content */
+  clear: both; /* Clear any floated elements */
+  background-color: #333; /* Match footer background */
 }
 
 /* Projects Page */
@@ -389,6 +407,7 @@ main {
 /* styles the SchipperTranslate button */
 .SchipperTranslate button {
   padding: 10px 20px;
+  margin-left: 10px;
   background-color: #4c53cb;
   color: white;
   border: none;
@@ -699,10 +718,14 @@ main {
 
 
 
-/* Media Query Overrides - Mobile and Desktop with all original styles */
+* Media Query Overrides - Mobile and Desktop with all original styles */
 
 /* Mobile devices (640px and below) */
 @media (max-width: 640px) {
+  /* Footer and main spacing for mobile */
+  main {
+    padding-bottom: 120px; /* Less padding on mobile */
+  }
   /* General Layout Adjustments */
   body {
     font-size: 14px;
@@ -855,6 +878,7 @@ main {
   /* Social Media Mobile Styles */
   .socialMedia {
     padding: 30px 15px !important;
+    margin: 30px auto 60px auto !important; /* Extra bottom margin for mobile */
   }
   
   .socialMedia h1 {
@@ -877,6 +901,10 @@ main {
 
 /* Laptops and Desktop (641px and above) */
 @media (min-width: 641px) {
+  /* Footer and main spacing for desktop */
+  main {
+    padding-bottom: 150px;
+  }
   /* Navigation */
   .navigationBar nav a {
     font-size: 18px;
@@ -940,6 +968,7 @@ main {
   /* Social Media Desktop Styles */
   .socialMedia {
     padding: 40px 20px !important;
+    margin: 40px auto 80px auto !important; /* Extra bottom margin for desktop */
   }
   
   .socialMedia h1 {
