@@ -422,6 +422,52 @@ main {
   max-width: 100px;
 }
 
+/* sets layout of the SchipperStatlines section */
+.SchipperStatlines {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+/* styles the SchipperStatlines text */
+.SchipperStatlines p {
+  margin-left: 20px;
+  font-size: 14px;
+  background-color: #ffffff;
+}
+
+/* styles the SchipperStatlines button */
+.SchipperStatlines button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #4c53cb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+
+}
+
+/* Button container for stacking buttons vertically */
+.SchipperStatlines .button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: 20px;
+}
+
+/* styles the SchipperStatlines logo */
+.SchipperStatlines img {
+  background-color: #ffffff;
+  max-width: 100px;
+}
+
 /* Contact Page */
 
 .fa {
@@ -541,7 +587,6 @@ main {
     transform: translateY(0);
   }
 }
-
 
 .toast {
   position: fixed;
@@ -728,6 +773,12 @@ main {
     padding: 15px;
   }
 
+  .SchipperStatlines {
+    flex-direction: column;
+    max-width: 90%;
+    padding: 15px;
+  }
+
   .Header {
     height: auto;
     padding: 40px 20px;
@@ -757,7 +808,6 @@ main {
     width: 100%;
     font-size: 14px;
   }
-
 
   .Resume,
   .Github {
@@ -852,7 +902,6 @@ main {
   }
 
   /* Social Media Mobile Styles */
-  
 
   .socialMedia h1 {
     font-size: 1.5rem !important;
@@ -924,6 +973,12 @@ main {
     padding: 20px;
   }
 
+  .SchipperStatlines {
+    flex-direction: row;
+    max-width: 70%;
+    padding: 20px;
+  }
+
   .Header {
     font-size: 22px;
   }
@@ -969,7 +1024,6 @@ main {
   }
 
   /* Social Media Desktop Styles */
-  
 
   .socialMedia h1 {
     font-size: 2rem !important;

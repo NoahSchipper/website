@@ -1612,7 +1612,7 @@ async function fetchStatsInitial(name, mode) {
   }
 }
 
-document.getElementById("viewMode").addEventListener("change", comparePlayers);
+//document.getElementById("viewMode").addEventListener("change", comparePlayers);
 
 // CUSTOM DROPDOWN FUNCTIONALITY
 let searchTimeout;
@@ -2418,10 +2418,6 @@ function setupTeamAutofill() {
 // Initialize everything when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   // Set default values
-  document.getElementById("playerA").value = "Kyle Schwarber";
-  document.getElementById("playerB").value = "Kyle Tucker";
-  document.getElementById("viewMode").value = "career";
-
   document.getElementById("teamA").value = "Cubs";
   document.getElementById("teamB").value = "Dodgers";
 
