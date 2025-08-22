@@ -65,7 +65,7 @@ const pitcherSeasonLabelMap = {
   whip: "WHIP",
 };
 
-const backendBaseUrl = "https://schipperstatlines.onrender.com";
+const backendBaseUrl = 'https://schipperstatlines.onrender.com';
 
 // Common father/son player mappings for quick reference
 const COMMON_FATHER_SON_PLAYERS = {
@@ -2420,7 +2420,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set default values
   document.getElementById("playerA").value = "Kyle Schwarber";
   document.getElementById("playerB").value = "Kyle Tucker";
-  document.getElementById("viewMode").value = "combined";
+  document.getElementById("viewMode").value = "career";
 
   document.getElementById("teamA").value = "Cubs";
   document.getElementById("teamB").value = "Dodgers";
