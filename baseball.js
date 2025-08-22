@@ -65,6 +65,8 @@ const pitcherSeasonLabelMap = {
   whip: "WHIP",
 };
 
+const backendBaseUrl = "https://schipperstatlines.onrender.com";
+
 // Common father/son player mappings for quick reference
 const COMMON_FATHER_SON_PLAYERS = {
   "ken griffey": ["Ken Griffey Sr.", "Ken Griffey Jr."],
@@ -607,7 +609,7 @@ async function fetchStats(name, mode, playerType = null) {
     }
 
     // Build URL with player_type parameter if specified
-    let url = `/player-two-way?name=${encodeURIComponent(
+    let url = `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
       name
     )}&mode=${backendMode}`;
     if (playerType) {
@@ -634,7 +636,7 @@ async function fetchStats(name, mode, playerType = null) {
     }
 
     // If 404 or other error, try the disambiguate endpoint
-    const fallbackUrl = `/player-disambiguate?name=${encodeURIComponent(
+    const fallbackUrl = `${backendBaseUrl}/player-disambiguate?name=${encodeURIComponent(
       name
     )}&mode=${backendMode}`;
     const fallbackResponse = await fetch(fallbackUrl);
@@ -650,7 +652,7 @@ async function fetchStats(name, mode, playerType = null) {
 
     // Final fallback to original endpoint
     const originalResponse = await fetch(
-      `/player?name=${encodeURIComponent(name)}&mode=${backendMode}`
+      `${backendBaseUrl}/player?name=${encodeURIComponent(name)}&mode=${backendMode}`
     );
     return await originalResponse.json();
   } catch (e) {
@@ -988,7 +990,7 @@ function showTwoWaySelectionModal(options, originalName, callback, mode) {
       // Fetch stats for selected player type using the two-way endpoint
       try {
         const response = await fetch(
-          `/player-two-way?name=${encodeURIComponent(
+          `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
             originalName
           )}&mode=${mode}&player_type=${selectedType}`
         );
@@ -1346,7 +1348,7 @@ function showDisambiguationModal(suggestions, originalName, callback, mode) {
       try {
         // console.log(`Fetching stats for selected player: ${selectedName}`);
         const response = await fetch(
-          `/player-two-way?name=${encodeURIComponent(
+          `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
             selectedName
           )}&mode=${mode}`
         );
@@ -1488,7 +1490,7 @@ async function comparePlayers() {
 
   // Show loading indicator
   const tbody = document.getElementById("comparisonBody");
-  tbody.innerHTML = `<tr><td colspan='4' style='text-align: center; padding: 20px;'>Loading player data...</td></tr>`;
+  tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>Loading player data...</td></tr>`;
 
   console.log(`=== COMPARING PLAYERS ===`);
   console.log(`Player A: ${nameA}`);
@@ -1530,7 +1532,7 @@ async function comparePlayers() {
       resB.options
     );
     if (selectedTypes.error) {
-      tbody.innerHTML = `<tr><td colspan='4' style='text-align: center; padding: 20px;'>${selectedTypes.error}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>${selectedTypes.error}</td></tr>`;
       return;
     }
 
@@ -1545,7 +1547,7 @@ async function comparePlayers() {
       mode
     );
     if (selectedType.error) {
-      tbody.innerHTML = `<tr><td colspan='4' style='text-align: center; padding: 20px;'>${selectedType.error}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>${selectedType.error}</td></tr>`;
       return;
     }
     resA = selectedType;
@@ -1557,7 +1559,7 @@ async function comparePlayers() {
       mode
     );
     if (selectedType.error) {
-      tbody.innerHTML = `<tr><td colspan='4' style='text-align: center; padding: 20px;'>${selectedType.error}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>${selectedType.error}</td></tr>`;
       return;
     }
     resB = selectedType;
@@ -1578,7 +1580,7 @@ async function fetchStatsInitial(name, mode) {
       backendMode = "season";
     }
 
-    const url = `/player-two-way?name=${encodeURIComponent(
+    const url = `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
       name
     )}&mode=${backendMode}`;
     const response = await fetch(url);
@@ -1601,7 +1603,7 @@ async function fetchStatsInitial(name, mode) {
 
     // Fallback to original endpoint
     const fallbackResponse = await fetch(
-      `/player?name=${encodeURIComponent(name)}&mode=${backendMode}`
+      `${backendBaseUrl}/player?name=${encodeURIComponent(name)}&mode=${backendMode}`
     );
     return await fallbackResponse.json();
   } catch (e) {
@@ -1713,7 +1715,7 @@ async function loadPopularPlayers(inputId) {
   }
 
   try {
-    const response = await fetch("/popular-players");
+    const response = await fetch(`${backendBaseUrl}/popular-players`);
     if (response.ok) {
       const players = await response.json();
       popularPlayersCache = players;
@@ -1758,7 +1760,7 @@ async function loadPopularPlayers(inputId) {
 async function searchPlayersEnhanced(query, inputId) {
   try {
     const response = await fetch(
-      `/search-players?q=${encodeURIComponent(query)}`
+      `${backendBaseUrl}/search-players?q=${encodeURIComponent(query)}`
     );
     if (response.ok) {
       const players = await response.json();
@@ -1878,7 +1880,7 @@ const teamStatsLabelMap = {
 async function fetchTeamStats(team, mode) {
   try {
     const response = await fetch(
-      `/team?team=${encodeURIComponent(team)}&mode=${mode}`
+      `${backendBaseUrl}/team?team=${encodeURIComponent(team)}&mode=${mode}`
     );
     return await response.json();
   } catch (e) {
@@ -1890,7 +1892,7 @@ async function fetchTeamStats(team, mode) {
 // Fetch head-to-head record between two teams
 async function fetchHeadToHeadRecord(teamA, teamB, mode) {
   try {
-    let url = `/team/h2h?team_a=${encodeURIComponent(
+    let url = `${backendBaseUrl}/team/h2h?team_a=${encodeURIComponent(
       teamA
     )}&team_b=${encodeURIComponent(teamB)}`;
 
