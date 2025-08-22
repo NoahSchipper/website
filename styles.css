@@ -81,6 +81,7 @@ main {
   background-color: #4c53cb;
   width: 100%;
   z-index: 1000;
+  padding: 5px 0; 
 }
 
 /* styles the container for the navigation bar */
@@ -269,7 +270,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 10px 20px;
 }
 
 /* styles the resume paragraph */
@@ -378,7 +379,7 @@ main {
   left: auto;
   right: auto;
   width: 100%;
-  margin-top: 50px; /* Space between main content and footer */
+  /*margin-top: 50px; /* Space between main content and footer */
   z-index: 0; /* Lower than main content */
   clear: both; /* Clear any floated elements */
   background-color: #333; /* Match footer background */
@@ -572,7 +573,7 @@ main {
   font-size: 24px;
   color: #ffffff;
   line-height: 1;
-  animation: scrollDown2 3s ease-in-out infinite;
+  animation: scrollDown2 2s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -581,7 +582,7 @@ main {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(200px);
+    transform: translateY(45px)
   }
   100% {
     transform: translateY(0);
@@ -743,7 +744,7 @@ main {
 @media (max-width: 640px) {
   /* Footer and main spacing for mobile */
   main {
-    padding-bottom: 120px; /* Less padding on mobile */
+    padding-bottom: 20px; /* Less padding on mobile */
   }
   /* General Layout Adjustments */
   body {
@@ -793,14 +794,14 @@ main {
   .scrollDownContainer {
     position: relative;
     margin-top: 40px;
-    padding: 0 20px;
+    padding: 20px 20px;
     text-align: center;
     width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 110px;
+    margin-bottom: 30px;
   }
 
   .scrollDownContainer p {
@@ -811,7 +812,7 @@ main {
 
   .Resume,
   .Github {
-    padding: 100px 10px;
+    padding: 20px 10px;
     font-size: 14px;
   }
 
@@ -901,6 +902,10 @@ main {
     cursor: default;
   }
 
+  .card-spacer {
+    display: none !important
+  }
+
   /* Social Media Mobile Styles */
 
   .socialMedia h1 {
@@ -956,7 +961,7 @@ main {
 @media (min-width: 641px) {
   /* Footer and main spacing for desktop */
   main {
-    padding-bottom: 150px;
+    padding-bottom: 30px;
   }
   /* Navigation */
   .navigationBar nav a {
@@ -998,7 +1003,7 @@ main {
 
   .Resume,
   .Github {
-    padding: 60px 20px;
+    padding: 20px 20px;
   }
 
   .Resume button,
@@ -1021,6 +1026,10 @@ main {
   .card-container {
     max-width: 1000px;
     padding: 0 120px;
+  }
+
+  .card-spacer {
+    display: none;
   }
 
   /* Social Media Desktop Styles */
