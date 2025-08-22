@@ -2059,7 +2059,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
       }
 
       // Add Overall Stats section after H2H
-      addSectionToTable(tbody, "Overall Stats (Through 2024)");
+      addSectionToTable(tbody, "Overall Stats");
 
       // Stats in exact StatHead order from the screenshot
       const statsOrder = [
