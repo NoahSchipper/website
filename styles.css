@@ -636,8 +636,8 @@ main {
 
 .deck-stack {
   position: relative;
-  width: 160px;
-  height: 240px;
+  width: 180px;
+  height: 260px;
   margin: 40px auto;
   cursor: pointer;
   transition: transform 0.3s;
@@ -710,13 +710,13 @@ main {
 }
 
 .card {
-  max-width: 160px;
-  min-width: 140px;
-  height: 240px;
+  max-width: 180px;
+  min-width: 160px;
+  height: 260px;
   background: #1f1f1f;
   border: 1px solid #555;
   border-radius: 16px;
-  padding: 1rem;
+  padding: 1.2rem;
   position: absolute;
   top: 0;
   left: 50%;
@@ -966,7 +966,11 @@ main {
 
   .card {
     flex: 1 1 calc(33.333% - 40px); /* 3 cards per row, accounting for gap */
-    max-width: calc(33.333% - 40px);
+    /* max-width: calc(33.333% - 40px); */
+    max-width: 180px;
+    min-width: 180px;
+    height: 260px;
+    font-size: 14px;
     transform: none !important;
     rotate: none !important;
     position: relative;
@@ -1058,12 +1062,14 @@ main {
   /* Card/Deck Stack Desktop Styles */
   .deck-stack {
     transform: scale(1.1);
+    width: 200px;
+    height: 280px;
   }
 
   .card {
     max-width: 180px;
-    height: 260px;
-    font-size: 16px;
+    height: 280px;
+    font-size: 15px;
   }
 
   .card-container {
