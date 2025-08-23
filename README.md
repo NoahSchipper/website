@@ -8,6 +8,8 @@ Home (index.html) – The landing page with animated elements to grab attention.
 
 Projects (projects.html) – A place to show off the work I’m proud of.
 
+  Baseball (baseball.html) - The user interface for SchipperStatlines, accessible from Projects page.
+
 Contact (contact.html) – Easy ways to reach out, with linked icons and my email.
 
 About (about.html) – A deeper look into who I am, what I do, and the technologies I work with.
@@ -28,7 +30,11 @@ website/
 
 ├── projects.html
 
-├── styles.css # Main CSS file for all pages
+  ├── baseball.html # SchipperStatlines user interface
+  ├── baseball.js   # JavaScript for interface
+  ├── baseball.css  # Styling for interface
+
+├── styles.css # Main CSS file for all non-baseball pages
 
 └── README.md # This file
 
@@ -44,6 +50,8 @@ The HTML files are straightforward and organized by section.
 Most of the visual styling is handled in styles.css.
 JavaScript for the About page is in aboutScript.js.
 JavaScript for the Contact page is in toast.js.
+JavaScript for the baseball interface is in baseball.js
+Visual styling for the baseball interface is in baseball.css
 Assets like logos and documents (e.g. resume) are in the assets/ folder.
 
 ## Notes
