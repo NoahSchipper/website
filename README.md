@@ -31,7 +31,9 @@ website/
 ├── projects.html
 
   ├── baseball.html # SchipperStatlines user interface
+  
   ├── baseball.js   # JavaScript for interface
+  
   ├── baseball.css  # Styling for interface
 
 ├── styles.css # Main CSS file for all non-baseball pages
