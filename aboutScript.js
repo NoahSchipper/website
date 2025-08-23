@@ -1,17 +1,16 @@
 console.log("JavaScript file loaded successfully");
 
-
 const skills = [
   {
     title: "JavaScript",
     type: "Language",
-    use: "Schipper Translate backend, website work (like this display)",
+    use: "Schipper Translate backend, frontend for Schipper Statlines, website work (like this display)",
     icon: "⚡",
   },
   {
     title: "HTML/CSS",
     type: "Languages",
-    use: "Schipper Translate frontend, website styling",
+    use: "Schipper Translate frontend, Schipper Statlines frontend, website styling",
     icon: "🎨",
   },
   {
@@ -23,7 +22,7 @@ const skills = [
   {
     title: "Python",
     type: "Language",
-    use: "basic programs and explorations",
+    use: "basic programs and explorations. Used with Flask in order to make backend for Schipper Statlines",
     icon: "🐍",
   },
   {
@@ -39,10 +38,16 @@ const skills = [
     icon: "➕",
   },
   {
-    title: "SQL",
+    title: "SQL/SQLite",
     type: "Language",
-    use: "Database management, data retrieval, and manipulation",
+    use: "Database management, data retrieval, and manipulation. Used in Schipper Statlines",
     icon: "🗄️🔍",
+  },
+  {
+    title: "Flask",
+    type: "Framework",
+    use: "Database retrieval, URL routing, request handling. Used in the backend of Schipper Statlines",
+    icon: "🧪"
   },
   {
     title: "VS Code",
@@ -75,7 +80,9 @@ const skills = [
     icon: "📊",
   },
 ];
+
 let dealt = false;
+
 window.dealCards = function () {
   if (dealt) return;
   dealt = true;
@@ -105,13 +112,14 @@ window.dealCards = function () {
       const distanceFromCenter = Math.abs(index - midpoint);
       const baseRotation = direction * distanceFromCenter * 5;
 
+      // Fixed z-index calculation - ensure center cards have highest z-index
       let zIndex;
-      if (index < midpoint) {
-        zIndex = skills.length - distanceFromCenter;
-      } else if (index > midpoint) {
-        zIndex = skills.length - distanceFromCenter;
+      if (index === Math.floor(midpoint) || index === Math.ceil(midpoint)) {
+        // Center card(s) get highest z-index
+        zIndex = skills.length + 10;
       } else {
-        zIndex = skills.length + 1;
+        // Other cards get z-index based on distance from center (closer = higher)
+        zIndex = skills.length - distanceFromCenter;
       }
 
       return {
@@ -123,9 +131,8 @@ window.dealCards = function () {
       };
     });
 
-    const sortedCards = [...cardData].sort((a, b) => a.zIndex - b.zIndex);
-
-    sortedCards.forEach(({ skill, index, zIndex, baseRotation }) => {
+    // Create cards in original order but set z-index properly
+    cardData.forEach(({ skill, index, zIndex, baseRotation }) => {
       const card = document.createElement("div");
       card.classList.add("card");
       card.innerHTML = `
@@ -157,7 +164,8 @@ window.dealCards = function () {
       // Hover animation — only on desktop
       if (isDesktopView) {
         card.addEventListener("mouseenter", () => {
-          container.appendChild(card);
+          // Set the hovered card to highest z-index
+          card.style.setProperty('z-index', (skills.length + 20).toString(), 'important');
           card.style.transform = `
             translateX(${index * spacing - centerOffset}px)
             translateX(-50%)
@@ -166,24 +174,10 @@ window.dealCards = function () {
         });
 
         card.addEventListener("mouseleave", () => {
-          const allCards = Array.from(container.children);
-          const cardZIndex = parseInt(card.getAttribute('data-original-zindex'));
-
-          let insertBeforeCard = null;
-          for (let otherCard of allCards) {
-            const otherZIndex = parseInt(otherCard.getAttribute('data-original-zindex'));
-            if (otherZIndex > cardZIndex) {
-              insertBeforeCard = otherCard;
-              break;
-            }
-          }
-
-          if (insertBeforeCard) {
-            container.insertBefore(card, insertBeforeCard);
-          } else {
-            container.appendChild(card);
-          }
-
+          // Reset to original z-index
+          const originalZIndex = card.getAttribute('data-original-zindex');
+          card.style.setProperty('z-index', originalZIndex, 'important');
+          
           card.style.transform = `
             translateX(${index * spacing - centerOffset}px)
             translateX(-50%)
