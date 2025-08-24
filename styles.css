@@ -1021,7 +1021,7 @@ main {
 
   .scrollDownContainer {
     position: absolute;
-    bottom: 350px; /* Move it much higher */
+    bottom: 170px; /* Move it much higher */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -1031,7 +1031,7 @@ main {
   }
 
   .scrollDownContainer p {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     font-size: 24px;
     color: white;
   }
@@ -1066,7 +1066,7 @@ main {
 
   .Resume,
   .Github {
-    padding: 100px 20px;
+    padding: 50px 20px;
   }
 
   .Resume button,
@@ -1109,5 +1109,18 @@ main {
 
   .socialMedia i {
     font-size: 24px !important;
+  }
+}
+
+@media(max-width: 1500px) {
+  .scrollDownContainer {
+    position: absolute;
+    bottom: 300px; /* Move it much higher */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    margin: 0px;
+    padding: 0px;
   }
 }
