@@ -1936,7 +1936,7 @@ async function compareTeams() {
   }
 
   const tbody = document.getElementById("teamComparisonBody");
-  tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>Loading team data. This may take a moment</td></tr>`;
+  tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>Loading team data. This may take a moment.</td></tr>`;
 
   const [resA, resB] = await Promise.all([
     fetchTeamStats(teamA, mode),

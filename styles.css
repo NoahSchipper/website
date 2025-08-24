@@ -390,6 +390,18 @@ main {
 /* Projects Page */
 
 /* sets layout of the SchipperTranslate section */
+.projectHeader {
+  margin-top: 20px
+}
+
+.projectHeader h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+
+}
+
 .SchipperTranslate {
   display: flex;
   align-items: center;
@@ -1112,7 +1124,7 @@ main {
   }
 }
 
-@media(min-width: 1500px) {
+@media(min-width: 1600px) {
   .scrollDownContainer {
     position: absolute;
     bottom: 400px; /* Move it much higher */
