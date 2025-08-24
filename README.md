@@ -59,7 +59,7 @@ Assets like logos and documents (e.g. resume) are in the assets/ folder.
 ## Notes
 I’ve included a copy of my resume in the assets folder. The site is still evolving, and I regularly update it as I learn new things or build new projects.
 
-The code for the player version of SchipperStatlines is still present in all baseball files despite it not being interactable so that viewers here can still look at that code.
+The code for the player version of Schipper Statlines is still present in all baseball files despite it not being interactable so that viewers here can still look at that code.
 
 The code in the baseball files isn't the cleanest due to a time crunch before the fall semester starts. I will organize it if/when I find the time.
 
