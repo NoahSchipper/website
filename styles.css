@@ -614,6 +614,17 @@ main {
 /* About Page */
 
 /* sets layout of about page */
+.headshot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.headshot img{
+  max-width: 400px;
+  align-items: center;
+}
+
 .aboutParagraph {
   display: flex;
   flex-direction: column;
@@ -840,6 +851,11 @@ main {
     width: 35px;
     height: 35px;
   }
+
+.headshot img{
+  max-width: 300px;
+  align-items: center;
+}
 
   /* Card/Deck Stack Mobile Styles */
   .deck-stack {

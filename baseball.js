@@ -1642,7 +1642,7 @@ function showDropdown(inputId, players) {
 
   if (!players || players.length === 0) {
     dropdown.innerHTML =
-      '<div class="dropdown-item" style="color: #999; cursor: default;">No players found</div>';
+      '<div class="dropdown-item" style="color: #999; cursor: default;">No teams found</div>';
   } else {
     players.forEach((player) => {
       const item = document.createElement("div");
@@ -1889,26 +1889,37 @@ async function fetchTeamStats(team, mode) {
   }
 }
 
-// Fetch head-to-head record between two teams
+// Fixed fetchHeadToHeadRecord function
 async function fetchHeadToHeadRecord(teamA, teamB, mode) {
   try {
     let url = `${backendBaseUrl}/team/h2h?team_a=${encodeURIComponent(
       teamA
     )}&team_b=${encodeURIComponent(teamB)}`;
 
-    // If in season mode, try to extract year for filtered H2H
+    // Handle year logic based on mode
     if (mode === "season") {
+      // Try to extract year from team names
       const yearMatch =
         teamA.match(/\b(19|20)\d{2}\b/) || teamB.match(/\b(19|20)\d{2}\b/);
+      
       if (yearMatch) {
+        // Use the year found in team name
         url += `&year=${yearMatch[0]}`;
+      } else {
+        // Default to 2024 if no year specified (matching your single team behavior)
+        url += `&year=2024`;
       }
     }
+    // For career/combined mode, don't add year parameter to get all-time H2H
 
+    console.log(`Fetching H2H data from: ${url}`); // Debug log
     const response = await fetch(url);
-    return await response.json();
+    const data = await response.json();
+    console.log(`H2H response:`, data); // Debug log
+    
+    return data;
   } catch (e) {
-    console.error(e);
+    console.error("H2H fetch error:", e);
     return { error: "Failed to fetch H2H data" };
   }
 }
@@ -1925,7 +1936,7 @@ async function compareTeams() {
   }
 
   const tbody = document.getElementById("teamComparisonBody");
-  tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>Loading team data...</td></tr>`;
+  tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>Loading team data. This may take a moment</td></tr>`;
 
   const [resA, resB] = await Promise.all([
     fetchTeamStats(teamA, mode),
@@ -2270,72 +2281,59 @@ let teamSearchTimeout;
 let popularTeamsCache = null;
 
 // Load popular teams
-async function loadPopularTeams(inputId) {
-  const fallback = [
-    "Yankees",
-    "Dodgers",
-    "Cardinals",
-    "Red Sox",
-    "Giants",
-    "Cubs",
-    "Phillies",
-    "Braves",
-    "Tigers",
-    "Pirates",
-    "Astros",
-    "Mets",
-    "Angels",
-    "Padres",
-    "Brewers",
-    "Guardians",
-    "Twins",
-    "Royals",
-    "Orioles",
-    "Blue Jays",
-    "2016 Cubs",
-    "2020 Dodgers",
-    "1998 Yankees",
-    "2004 Red Sox",
-    "2019 Nationals",
-    "2017 Astros",
-    "2018 Red Sox",
+function loadPopularTeams(inputId) {
+  const popularTeams = [
+    // Current MLB teams
+    "Angels", "Astros", "Athletics", "Blue Jays", "Braves",
+    "Brewers", "Cardinals", "Cubs", "Diamondbacks", "Dodgers",
+    "Giants", "Guardians", "Mariners", "Marlins", "Mets",
+    "Nationals", "Orioles", "Padres", "Phillies", "Pirates",
+    "Rangers", "Rays", "Red Sox", "Reds", "Rockies",
+    "Royals", "Tigers", "Twins", "White Sox", "Yankees",
+    
+    // Popular historical teams
+    "2016 Cubs", "2020 Dodgers", "1998 Yankees", "2004 Red Sox",
+    "2019 Nationals", "2017 Astros", "2018 Red Sox", "2001 Mariners",
+    "1995 Braves", "1975 Reds", "2024 Dodgers", "2023 Rangers"
   ];
-  showDropdown(inputId, fallback);
+  
+  showDropdown(inputId, popularTeams);
 }
 
 // Search teams
-async function searchTeams(query, inputId) {
+function searchTeams(query, inputId) {
   const allTeams = [
-    "Yankees",
-    "Dodgers",
-    "Cardinals",
-    "Red Sox",
-    "Giants",
-    "Cubs",
-    "Phillies",
-    "Braves",
-    "Tigers",
-    "Pirates",
-    "Astros",
-    "Mets",
-    "Angels",
-    "Padres",
-    "Brewers",
-    "Guardians",
-    "Twins",
-    "Royals",
-    "Orioles",
-    "Blue Jays",
-    "2016 Cubs",
-    "2020 Dodgers",
-    "1998 Yankees",
-    "2004 Red Sox",
-    // Add more teams as needed
+    // Current MLB teams
+    "Angels", "Astros", "Athletics", "Blue Jays", "Braves",
+    "Brewers", "Cardinals", "Cubs", "Diamondbacks", "Dodgers",
+    "Giants", "Guardians", "Mariners", "Marlins", "Mets",
+    "Nationals", "Orioles", "Padres", "Phillies", "Pirates",
+    "Rangers", "Rays", "Red Sox", "Reds", "Rockies",
+    "Royals", "Tigers", "Twins", "White Sox", "Yankees",
+    
+    // Popular year-specific teams
+    "1998 Yankees", "2001 Mariners", "2016 Cubs", "2020 Dodgers",
+    "2004 Red Sox", "2019 Nationals", "2017 Astros", "2018 Red Sox",
+    "1995 Braves", "1975 Reds", "1986 Mets", "1984 Tigers",
+    "2002 Angels", "2008 Phillies", "2010 Giants", "2011 Cardinals",
+    "2012 Giants", "2013 Red Sox", "2014 Giants", "2015 Royals",
+    "2021 Braves", "2022 Astros", "2023 Rangers", "2024 Dodgers",
+    
+    // Classic teams
+    "1927 Yankees", "1955 Dodgers", "1969 Mets", "1976 Reds",
+    "1988 Dodgers", "1989 Athletics", "1990 Reds", "1991 Twins",
+    "1992 Blue Jays", "1993 Blue Jays", "1996 Yankees", "1997 Marlins",
+    "1999 Yankees", "2000 Yankees", "2003 Marlins", "2005 White Sox",
+    "2006 Cardinals", "2007 Red Sox", "2009 Yankees",
+    
+    // Historical teams (defunct)
+    "Expos", "Senators", "Browns", "Pilots", "Colt .45s"
   ];
 
   const filtered = allTeams.filter((team) =>
     team.toLowerCase().includes(query.toLowerCase())
   );
+  
   showDropdown(inputId, filtered);
 }
 

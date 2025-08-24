@@ -251,17 +251,19 @@ td {
   overflow: hidden;
 }
 
-.logo-cell img {
-  max-width: 550px;
-  height: 350px;
-}
-
+.logo-cell img,
 #logo {
   max-width: 550px;
   height: 350px;
+  max-width: 100%;
+  max-height: 100%;
   display: block;
   object-fit: contain;
+  box-sizing: border-box;
 }
+
+
+
 
 
 
@@ -500,17 +502,21 @@ td.better-stat {
   text-align: center;
 }
 
-#teamAName img,
-#teamBName img {
+.team-logo,
+#teamLogoA,
+#teamLogoB {
   display: block;
   margin: 0 auto 10px auto;
   border-radius: 6px;
   box-shadow: 0 0 8px #aaa;
   height: 400px;
   width: 300px;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain; /* This ensures logos don't get distorted */
   background: white; /* White background for logos that need it */
   padding: 10px; /* Some padding around the logo */
+  box-sizing: border-box;
 }
 
 .team-name {
@@ -555,10 +561,28 @@ td.better-stat {
   .modal-content h3 {
     font-size: 18px;
   }
+
+  /* Team logos responsive sizing for tablets */
+  .team-logo,
+  #teamLogoA,
+  #teamLogoB {
+    height: 300px;
+    width: 225px;
+    max-width: 100%;
+  }
+
+  /* Main logo responsive sizing for tablets */
+  .logo-cell img,
+  #logo {
+    max-width: 400px;
+    height: 250px;
+    max-width: 100%;
+  }
+
 }
 
 /* Mobile table layout */
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   table,
   thead,
   tbody,
@@ -615,5 +639,23 @@ td.better-stat {
   tbody td.better-stat::before {
     color: #155724 !important;
     font-weight: bold;
+  }
+
+  /* Team logos responsive sizing for mobile */
+  .team-logo,
+  #teamLogoA,
+  #teamLogoB {
+    height: 200px;
+    width: 150px;
+    margin: 0 auto 5px auto;
+    max-width: 100%;
+  }
+
+  /* Main logo responsive sizing for mobile */
+  .logo-cell img,
+  #logo {
+    max-width: 280px;
+    height: 180px;
+    max-width: 100%;
   }
 }
