@@ -1021,7 +1021,7 @@ main {
 
   .scrollDownContainer {
     position: absolute;
-    bottom: 350px; /* Move it much higher */
+    bottom: 170px; /* Move it much higher */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -1066,7 +1066,7 @@ main {
 
   .Resume,
   .Github {
-    padding: 100px 20px;
+    padding: 10px 20px;
   }
 
   .Resume button,
