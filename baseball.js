@@ -1915,15 +1915,38 @@ async function fetchHeadToHeadRecord(teamA, teamB, mode) {
 
     // Handle year logic based on mode
     if (mode === "season") {
-      // Try to extract year from team names
-      const yearMatch =
-        teamA.match(/\b(19|20)\d{2}\b/) || teamB.match(/\b(19|20)\d{2}\b/);
+      // Extract years from both team names
+      const yearMatchA = teamA.match(/\b(19|20)\d{2}\b/);
+      const yearMatchB = teamB.match(/\b(19|20)\d{2}\b/);
       
-      if (yearMatch) {
-        // Use the year found in team name
-        url += `&year=${yearMatch[0]}`;
+      if (yearMatchA && yearMatchB) {
+        const yearA = yearMatchA[0];
+        const yearB = yearMatchB[0];
+        
+        // Only proceed if both teams have the same year
+        if (yearA === yearB) {
+          url += `&year=${yearA}`;
+        } else {
+          // Years don't match - return empty H2H data
+          console.log(`Years don't match: Team A (${yearA}) vs Team B (${yearB})`);
+          return {
+            head_to_head: {
+              regular_season: { team_a_wins: 0, team_b_wins: 0 },
+              playoffs: { game_wins: { team_a: 0, team_b: 0 } }
+            }
+          };
+        }
+      } else if (yearMatchA || yearMatchB) {
+        // One team has a year, the other doesn't - return empty H2H data
+        console.log(`Only one team has a year specified: ${teamA} vs ${teamB}`);
+        return {
+          head_to_head: {
+            regular_season: { team_a_wins: 0, team_b_wins: 0 },
+            playoffs: { game_wins: { team_a: 0, team_b: 0 } }
+          }
+        };
       } else {
-        // Default to 2024 if no year specified (matching your single team behavior)
+        // Neither team has a year - default to 2024 (matching your single team behavior)
         url += `&year=2024`;
       }
     }
