@@ -1,3 +1,4 @@
+// maps hitter stats
 const hitterLabelMap = {
   war: "WAR",
   games: "G",
@@ -13,6 +14,7 @@ const hitterLabelMap = {
   ops_plus: "OPS+",
 };
 
+// maps pitcher stats 
 const pitcherLabelMap = {
   war: "WAR",
   wins: "W",
@@ -32,6 +34,7 @@ const pitcherLabelMap = {
   whip: "WHIP",
 };
 
+// maps hitter stats for season mode
 const hitterSeasonLabelMap = {
   war: "WAR",
   games: "G",
@@ -46,6 +49,7 @@ const hitterSeasonLabelMap = {
   ops: "OPS",
 };
 
+// maps pitcher stats for season
 const pitcherSeasonLabelMap = {
   war: "WAR",
   wins: "W",
@@ -90,6 +94,7 @@ function extractStats(res) {
   return null;
 }
 
+// formats player awards
 function formatAwardsForStructuredDisplay(awards) {
   //console.log("formatAwardsForStructuredDisplay called with:", awards);
 
@@ -202,6 +207,7 @@ function formatAwardsForStructuredDisplay(awards) {
   return result;
 }
 
+// gets other major awards 
 function getOtherMajorAwards(summary) {
   const majorAwardTypes = [
     "ALCS MVP",
@@ -263,6 +269,7 @@ function getOtherMajorAwards(summary) {
   return other;
 }
 
+// calls various functions to update the player comparison table
 function updateComparisonTable(resA, resB, nameA, nameB) {
   const tbody = document.getElementById("comparisonBody");
   const thA = document.getElementById("playerAName");
@@ -527,7 +534,7 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
       // console.log("resB.awards:", resB.awards);
     }
   }
-  // SEASON MODE HANDLING (unchanged)
+  // SEASON MODE HANDLING 
   if (mode === "season") {
     const statsA = extractStats(resA);
     const statsB = extractStats(resB);
@@ -742,6 +749,7 @@ const statConfigurations = {
   SHO: { higherIsBetter: true }, // Shutouts
 };
 
+// highlights better stats
 function highlightBetterStats(tableId = "comparisonTable") {
   const table = document.getElementById(tableId);
   if (!table) return;
@@ -835,6 +843,7 @@ function highlightBetterStats(tableId = "comparisonTable") {
   });
 }
 
+// defines head to head stats
 function isHeadToHeadStat(statLabel) {
   const h2hStats = [
     "Reg Season",
@@ -845,6 +854,7 @@ function isHeadToHeadStat(statLabel) {
   return h2hStats.includes(statLabel);
 }
 
+// highlights team with better head to head record
 function highlightHeadToHeadRecord(cellA, cellB, statLabel) {
   const valueA = cellA.textContent.trim();
   const valueB = cellB.textContent.trim();
@@ -872,6 +882,7 @@ function highlightHeadToHeadRecord(cellA, cellB, statLabel) {
   }
 }
 
+// formats recieved player stats
 function parseStatValue(valueStr) {
   // Handle different stat formats
   if (!valueStr || valueStr === "-" || valueStr === "N/A") return null;
@@ -889,12 +900,14 @@ function applyStatHighlighting() {
   setTimeout(highlightBetterStats, 100);
 }
 
+// handler for below function
 async function handleTwoWayPlayerSelection(originalName, options, mode) {
   return new Promise((resolve) => {
     showTwoWaySelectionModal(options, originalName, resolve, mode);
   });
 }
 
+// modal for two way player hitter/pitcher stat display
 function showTwoWaySelectionModal(options, originalName, callback, mode) {
   // Remove any existing modal
   const existingModal = document.getElementById("two-way-modal");
@@ -1239,6 +1252,7 @@ async function showTwoWayComparisonModal(nameA, nameB, optionsA, optionsB) {
   });
 }
 
+// calls below function to handle disambiguation in father/son cases
 async function handleDisambiguation(originalName, suggestions, mode) {
   return new Promise((resolve) => {
     showDisambiguationModal(suggestions, originalName, resolve, mode);
@@ -1247,6 +1261,7 @@ async function handleDisambiguation(originalName, suggestions, mode) {
 
 let currentDisambiguationPlayer = null;
 
+// modal to disambiguate father/son cases
 function showDisambiguationModal(suggestions, originalName, callback, mode) {
   // Remove any existing modal
   const existingModal = document.getElementById("disambiguation-modal");
@@ -1475,6 +1490,7 @@ function simpleCapitalize(name) {
     .join(" ");
 }
 
+// compares players
 async function comparePlayers() {
   const nameA = document.getElementById("playerA").value.trim();
   const nameB = document.getElementById("playerB").value.trim();
@@ -1573,6 +1589,7 @@ async function comparePlayers() {
   applyStatHighlighting();
 }
 
+// fetches player stats from backend
 async function fetchStatsInitial(name, mode) {
   try {
     let backendMode = mode;
@@ -1876,7 +1893,7 @@ const teamStatsLabelMap = {
   ws_championships: "WS Championships",
 };
 
-// Simplified fetch function - backend now returns combined stats
+// fetches team stats from backend
 async function fetchTeamStats(team, mode) {
   try {
     const response = await fetch(
@@ -1889,7 +1906,7 @@ async function fetchTeamStats(team, mode) {
   }
 }
 
-// Fixed fetchHeadToHeadRecord function
+// fetches head to head record from backend
 async function fetchHeadToHeadRecord(teamA, teamB, mode) {
   try {
     let url = `${backendBaseUrl}/team/h2h?team_a=${encodeURIComponent(
@@ -1958,6 +1975,7 @@ async function compareTeams() {
   }
 }
 
+// uses verious other functions to update table
 function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
   const tbody = document.getElementById("teamComparisonBody");
   const thA = document.getElementById("teamAName");
@@ -2135,6 +2153,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
     });
 }
 
+// adds section header to table
 function addSectionToTable(tbody, sectionName) {
   const row = document.createElement("tr");
   row.classList.add("section-header");
@@ -2142,6 +2161,7 @@ function addSectionToTable(tbody, sectionName) {
   tbody.appendChild(row);
 }
 
+// injects a stat row
 function addStatRow(tbody, valA, statName, valB) {
   const row = document.createElement("tr");
   row.innerHTML = `
@@ -2152,6 +2172,7 @@ function addStatRow(tbody, valA, statName, valB) {
   tbody.appendChild(row);
 }
 
+// injects stat rows after a section header
 function addStatRowAfterSection(tbody, sectionName, valA, statName, valB) {
   // Find the section header
   const rows = tbody.querySelectorAll("tr");
@@ -2184,6 +2205,7 @@ function addStatRowAfterSection(tbody, sectionName, valA, statName, valB) {
   }
 }
 
+// formats stat values recieved
 function formatStatValue(statKey, value) {
   if (value === null || value === undefined || value === "") {
     return "0";
@@ -2201,7 +2223,7 @@ function formatStatValue(statKey, value) {
   return Math.round(numValue).toString();
 }
 
-// Team logo functions (unchanged from your original code)
+// Team logo functions
 function loadTeamLogo(logoData, imgElement, teamName = "") {
   if (!logoData || !imgElement) {
     setDefaultTeamLogo(imgElement, teamName);
@@ -2217,6 +2239,7 @@ function loadTeamLogo(logoData, imgElement, teamName = "") {
   tryNextLogoUrl(urlsToTry, 0, imgElement, teamName);
 }
 
+// tries next url to find team logos
 function tryNextLogoUrl(urls, index, imgElement, teamName) {
   if (index >= urls.length) {
     setDefaultTeamLogo(imgElement, teamName);
@@ -2244,6 +2267,7 @@ function tryNextLogoUrl(urls, index, imgElement, teamName) {
   img.src = urls[index];
 }
 
+// sets default team logo
 function setDefaultTeamLogo(imgElement, teamName = "") {
   const initials = teamName
     .split(" ")
@@ -2356,6 +2380,7 @@ function handleTeamInput(e) {
   }, SEARCH_DELAY);
 }
 
+// team click event handler
 function handleTeamClick(e) {
   const inputId = e.target.id;
   const query = e.target.value.trim();
@@ -2367,6 +2392,7 @@ function handleTeamClick(e) {
   }
 }
 
+// team focus event handler
 function handleTeamFocus(e) {
   const inputId = e.target.id;
   const query = e.target.value.trim();

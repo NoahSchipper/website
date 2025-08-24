@@ -1,3 +1,4 @@
+// shows message on bottom of screen when phone number or email are copied to clipboard
 function showToast(message) {
         const toast = document.getElementById("toast");
         toast.textContent = message;
