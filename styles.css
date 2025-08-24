@@ -1112,15 +1112,19 @@ main {
   }
 }
 
-@media(max-width: 1500px) {
+@media(min-width: 1500px) {
   .scrollDownContainer {
     position: absolute;
-    bottom: 300px; /* Move it much higher */
+    bottom: 400px; /* Move it much higher */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     color: white;
     margin: 0px;
     padding: 0px;
+  }
+  .Resume,
+  .Github {
+    padding: 100px 20px;
   }
 }
