@@ -13,6 +13,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* Centers content vertically */
+  transform: scale(0.75); /* 75% zoom */
+  transform-origin: top center; /* Scale from top center */
 }
 
 /* Remove default cursor pointer from all elements */
