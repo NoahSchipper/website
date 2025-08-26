@@ -50,12 +50,12 @@ body {
   top: 0px;
   left: 0px;
   text-align: left;
-}  
+}
 
 /* Back button styling with hover and active effects */
 .back-button {
   padding: 10px 20px;
-  background-color: #4c53cb; /* Purple background */
+  background-color: #4c53cb;
   color: white;
   border: none;
   border-radius: 5px;
@@ -103,6 +103,7 @@ body {
 .input-row {
   display: flex;
   gap: 15px;
+  align-items: center; /* Add this line */
   flex-wrap: wrap; /* Wraps on smaller screens */
   justify-content: center;
   margin-bottom: 20px;
@@ -195,22 +196,28 @@ select:focus {
   outline: none;
 }
 
-/* Button styling with hover effects */
-button {
-  background-color: #007bff; /* Bootstrap blue */
+/* Style the compare teams button */
+#compare-button {
+  padding: 10px 20px;
+  background-color: #4c53cb;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 16px;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
   font-weight: bold;
-  transition: background-color 0.3s ease;
 }
 
-/* Button hover effect */
-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+#compare-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #3a42a3;
+}
+
+#compare-button:active {
+  transform: scale(0.95) translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Form label styling */
@@ -678,88 +685,112 @@ td.better-stat {
    ============================================================================= */
 
 /* Mobile-specific table layout (transforms table into card layout) */
+/* =============================================================================
+   RESPONSIVE DESIGN - MOBILE
+   ============================================================================= */
+
 @media (max-width: 640px) {
-  /* Convert table elements to block display for mobile cards */
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-  }
-
-  /* Hide table header on mobile */
-  thead tr {
-    display: none;
-  }
-
-  /* Style table rows as cards */
-  tbody tr {
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
+  /* Reset body scale for mobile */
+  body {
+    transform: scale(1);
     padding: 10px;
   }
 
-  /* Position table cells with labels */
-  tbody td {
-    padding-left: 50%; /* Make room for labels */
-    position: relative;
-    white-space: normal; /* Allow text wrapping */
-    text-align: left;
+  /* Container adjustments */
+  .container {
+    width: 95%;
+    padding: 15px;
   }
 
-  /* Add labels before each cell using CSS pseudo-elements */
-  tbody td::before {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 45%;
-    white-space: nowrap;
-    font-weight: bold;
+  /* Keep table as table - just make it more mobile friendly */
+  table {
+    font-size: 12px;
+    margin-top: 15px;
   }
 
-  /* Specific labels for each column */
-  tbody td:nth-of-type(1)::before {
-    content: "Player A";
+  th,
+  td {
+    padding: 8px 4px;
+    font-size: 11px;
   }
 
-  tbody td:nth-of-type(2)::before {
-    content: "Stat";
+  th {
+    padding: 10px 6px;
   }
 
-  tbody td:nth-of-type(3)::before {
-    content: "Player B";
+  /* Make stat column (middle) slightly wider */
+  th:nth-child(2),
+  td:nth-child(2) {
+    min-width: 120px;
+    font-size: 10px;
   }
 
-  /* Maintain highlighting in mobile layout */
-  tbody td.better-stat {
-    background-color: #d4edda !important;
-    color: #155724 !important;
-    font-weight: bold;
-  }
-
-  /* Style labels for highlighted cells */
-  tbody td.better-stat::before {
-    color: #155724 !important;
-    font-weight: bold;
-  }
-
-  /* Team logos responsive sizing for mobile */
+  /* Keep logos but make them tiny on mobile */
   .team-logo,
   #teamLogoA,
   #teamLogoB {
-    height: 200px;
-    width: 150px;
+    height: 80px;
+    width: 60px;
     margin: 0 auto 5px auto;
+    padding: 5px;
+  }
+
+  .logo-cell img,
+  #logo {
+    max-width: 200px;
+    height: 120px;
+    padding: 5px;
+  }
+
+  /* Adjust input elements for mobile */
+  input[type="text"],
+  select {
+    min-width: 150px;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  /* Stack input row vertically */
+  .input-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Adjust back button for mobile */
+  .back-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  /* Modal adjustments for mobile */
+  .modal-content {
+    margin: 5% auto;
+    width: 95%;
+    padding: 16px;
+  }
+
+  .modal-content h3 {
+    font-size: 16px;
+  }
+
+  .player-option {
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+
+  /* Search container mobile adjustments */
+  .search-container,
+  #player-search {
     max-width: 100%;
   }
 
-  /* Main logo responsive sizing for mobile */
-  .logo-cell img,
-  #logo {
-    max-width: 280px;
-    height: 180px;
-    max-width: 100%;
+  /* Smaller font for highlighted stats on mobile */
+  .better-stat {
+    font-size: 12px !important;
+  }
+
+  td.better-stat {
+    font-size: 12px !important;
   }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name ="viewport" content="width=device-width, initial-scale=0.75"/>
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
     <meta charset="UTF-8" />
     <title>Player Stat Comparison</title>
     <link rel="stylesheet" href="baseball.css" />
@@ -42,8 +42,13 @@
               <option value="season">Single Season</option>
             </select>
           </label>
-
-          <button onclick="compareTeams()">Compare Teams</button>
+          <label>
+            &nbsp;
+            <!-- invisible space for alignment -->
+            <button id="compare-button" onclick="compareTeams()">
+              Compare Teams
+            </button>
+          </label>
         </div>
 
         <table
