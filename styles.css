@@ -844,7 +844,8 @@ main {
 
   .Resume p,
   .Github p {
-    font-size: 14px;
+    font-size: 12px;
+    text-align: center; /* Spreads text across the width */
   }
 
   .Resume button,
