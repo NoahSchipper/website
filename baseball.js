@@ -2040,23 +2040,14 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
   const statsA = resA.stats;
   const statsB = resB.stats;
 
-  // Head-to-Head Section
-  addSectionToTable(tbody, "Head-to-Head");
-
-  // Fetch and display H2H records
+  // Fetch H2H data first, then build the entire table in the correct order
   fetchHeadToHeadRecord(teamA, teamB, mode)
     .then((h2hData) => {
-      // Clear the loading message first
-      const h2hRows = tbody.querySelectorAll("tr");
-      if (h2hRows.length > 1) {
-        // Remove any existing H2H data rows after the header
-        for (let i = h2hRows.length - 1; i > 0; i--) {
-          const row = h2hRows[i];
-          if (row.textContent.includes("Head-to-Head")) break;
-          if (row.textContent.includes("Overall Stats")) break;
-          row.remove();
-        }
-      }
+      // Clear the table and rebuild everything in order
+      tbody.innerHTML = "";
+      
+      // 1. Add Head-to-Head section FIRST
+      addSectionToTable(tbody, "Head-to-Head");
 
       if (h2hData && h2hData.head_to_head) {
         const h2h = h2hData.head_to_head;
@@ -2065,13 +2056,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
         const regRecord = h2h.regular_season;
         const teamAReg = regRecord.team_a_wins || 0;
         const teamBReg = regRecord.team_b_wins || 0;
-        addStatRowAfterSection(
-          tbody,
-          "Head-to-Head",
-          `${teamAReg}-${teamBReg}`,
-          "Reg Season",
-          `${teamBReg}-${teamAReg}`
-        );
+        addStatRow(tbody, `${teamAReg}-${teamBReg}`, "Reg Season", `${teamBReg}-${teamAReg}`);
 
         // Playoff record - use the correct data structure
         const playoffRecord = h2h.playoffs;
@@ -2082,39 +2067,24 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
         if (playoffRecord.game_wins) {
           teamAPlayoff = playoffRecord.game_wins.team_a || 0;
           teamBPlayoff = playoffRecord.game_wins.team_b || 0;
-          addStatRowAfterSection(
-            tbody,
-            "Head-to-Head",
-            `${teamAPlayoff}-${teamBPlayoff}`,
-            "Playoff Games",
-            `${teamBPlayoff}-${teamAPlayoff}`
-          );
+          addStatRow(tbody, `${teamAPlayoff}-${teamBPlayoff}`, "Playoff Games", `${teamBPlayoff}-${teamAPlayoff}`);
         } else if (playoffRecord.series_wins) {
           // Fallback to series wins if game wins not available
           teamAPlayoff = playoffRecord.series_wins.team_a || 0;
           teamBPlayoff = playoffRecord.series_wins.team_b || 0;
-          addStatRowAfterSection(
-            tbody,
-            "Head-to-Head",
-            `${teamAPlayoff}-${teamBPlayoff}`,
-            "Playoff Series",
-            `${teamBPlayoff}-${teamAPlayoff}`
-          );
+          addStatRow(tbody, `${teamAPlayoff}-${teamBPlayoff}`, "Playoff Series", `${teamBPlayoff}-${teamAPlayoff}`);
         } else {
           // Legacy format fallback
           teamAPlayoff = playoffRecord.team_a_wins || 0;
           teamBPlayoff = playoffRecord.team_b_wins || 0;
-          addStatRowAfterSection(
-            tbody,
-            "Head-to-Head",
-            `${teamAPlayoff}-${teamBPlayoff}`,
-            "Playoffs",
-            `${teamBPlayoff}-${teamAPlayoff}`
-          );
+          addStatRow(tbody, `${teamAPlayoff}-${teamBPlayoff}`, "Playoffs", `${teamBPlayoff}-${teamAPlayoff}`);
         }
+      } else {
+        // Add fallback H2H data if no data available
+        addStatRow(tbody, "0-0", "Reg Season", "0-0");
       }
 
-      // Add Overall Stats section after H2H
+      // 2. Then add Overall Stats section
       addSectionToTable(tbody, "Overall Stats");
 
       // Stats in exact StatHead order from the screenshot
@@ -2143,16 +2113,21 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
           addStatRow(tbody, valA, statName, valB);
         }
       });
+
       setTimeout(() => highlightBetterStats("teamComparisonTable"), 100);
     })
     .catch((error) => {
       console.error("H2H fetch error:", error);
-      // Add fallback H2H data
-      addStatRowAfterSection(tbody, "Head-to-Head", "0-0", "Reg Season", "0-0");
-
-      // Still add Overall Stats section
+      // Clear and rebuild with fallback data
+      tbody.innerHTML = "";
+      
+      // Add Head-to-Head section even if fetch failed
+      addSectionToTable(tbody, "Head-to-Head");
+      addStatRow(tbody, "0-0", "Reg Season", "0-0");
+      
+      // Add Overall Stats section
       addSectionToTable(tbody, "Overall Stats");
-
+      
       const statsOrder = [
         "gp",
         "w",
@@ -2176,6 +2151,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
           addStatRow(tbody, valA, statName, valB);
         }
       });
+      
       setTimeout(() => highlightBetterStats("teamComparisonTable"), 100);
     });
 }
