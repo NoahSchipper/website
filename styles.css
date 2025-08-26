@@ -839,13 +839,16 @@ main {
   .Github {
     padding: 10px 10px;
     font-size: 14px;
-    margin: 100px;
+    margin-bottom: 85px;
   }
 
+   /* Make Resume and GitHub paragraphs shrink like Header paragraphs */
   .Resume p,
   .Github p {
-    font-size: 12px;
-    text-align: center; /* Spreads text across the width */
+    font-size: 14px; /* Same as Header paragraphs on mobile */
+    line-height: 1.4;
+    margin: 10px 0;
+    padding: 0 5px; /* Add a bit of horizontal padding */
   }
 
   .Resume button,
