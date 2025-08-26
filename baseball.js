@@ -1956,8 +1956,12 @@ async function fetchHeadToHeadRecord(teamA, teamB, mode) {
     const response = await fetch(url);
     const data = await response.json();
     console.log(`H2H response:`, data); // Debug log
+    console.log("Full H2H response structure:", JSON.stringify(data, null, 2));
     
-    return data;
+    return {
+      head_to_head: data
+    };
+    
   } catch (e) {
     console.error("H2H fetch error:", e);
     return { error: "Failed to fetch H2H data" };
