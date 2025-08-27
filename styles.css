@@ -481,16 +481,7 @@ main {
   max-width: 100px;
 }
 
-/* Contact Page */
-
-.contact-page {
-  flex-grow: 0; /* Don't expand to fill space */
-  min-height: auto;
-}
-
-.fa {
-  cursor: pointer;
-}
+/* Contact Page - Base Styles */
 .contact-header {
   color: #ffffff;
   text-align: center;
@@ -499,54 +490,67 @@ main {
 }
 
 .contact-header h1 {
-  font-style: underline;
+  font-size: 2rem;
+  margin: 20px 0;
 }
 
 .email h1 {
   color: #ffffff;
   text-align: center;
-  margin-top: 20px;
+  margin: 30px 0 15px 0;
+  font-size: 1.8rem;
 }
 
 .email-address {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* spacing between icon and text */
-  margin-top: 20px;
+  gap: 15px;
+  margin: 20px 0;
+  padding: 0 20px;
 }
 
 .email-address i {
-  font-size: 21px;
+  font-size: 28px;
   color: #ffffff;
-  line-height: 1;
+  flex-shrink: 0;
 }
 
 .email-address h2 {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #ffffff;
-  line-height: 1;
   margin: 0;
+  word-break: break-word;
 }
 
 .phone h1 {
   color: #ffffff;
   text-align: center;
-  margin-top: 20px;
+  margin: 30px 0 15px 0;
+  font-size: 1.8rem;
 }
 
 .phone-number {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* spacing between icon and text */
-  margin-top: 20px;
+  color: #ffffff !important;
+  gap: 15px;
+  margin: 20px 0;
+  padding: 0 20px;
 }
 
-/* Phone number link styling - ensure it stays white */
+.phone-number i {
+  font-size: 28px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
 .phone-number a {
   color: #ffffff !important;
   text-decoration: none;
+  font-size: 1.5rem;
+  word-break: break-word;
 }
 
 .phone-number a:visited {
@@ -561,55 +565,38 @@ main {
 .phone-number a:active {
   color: #ffffff !important;
 }
-.phone h2 {
-  color: #ffffff;
-  text-align: center;
-  line-height: 1;
-}
-
-.phone-number i {
-  font-size: 24px;
-  color: #ffffff;
-  line-height: 1;
-  margin: 0;
-}
 
 .socialMedia {
-  padding: 0px;
-  margin: 0px;
+  padding: 20px;
+  margin: 30px 0;
   text-align: center;
-  justify-content: center;
   color: #ffffff;
   width: 100%;
   box-sizing: border-box;
 }
 
 .socialMedia h1 {
-  padding-top: 20px;
   color: #ffffff;
   text-align: center;
-  font-size: 24px;
+  font-size: 1.8rem;
+  margin: 20px 0;
 }
 
 .socialMedia h2 {
-  padding-top: 20px;
   color: #ffffff;
   text-align: center;
-  margin: 0;
-  font-size: 24px;
-  line-height: 1;
+  margin: 15px 0;
+  font-size: 1.3rem;
+  line-height: 1.2;
 }
 
 .socialMedia i {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* same as .email-address and .phone-number */
-  margin-top: 20px;
-  margin-bottom: 45px;
-  font-size: 24px;
+  margin: 30px auto;
+  font-size: 32px;
   color: #ffffff;
-  line-height: 1;
   animation: scrollDown2 2s ease-in-out infinite;
   pointer-events: none;
 }
@@ -889,6 +876,81 @@ main {
     font-size: 18px;
     padding: 10px 15px;
   }
+}
+@media (max-width: 640px) {
+  .contact-header h1 {
+    font-size: 1.5rem;
+    margin: 15px 10px;
+    padding: 0 10px;
+  }
+
+  .email h1,
+  .phone h1 {
+    font-size: 1.3rem;
+    margin: 25px 10px 10px 10px;
+    padding: 0 10px;
+  }
+
+  .email-address,
+  .phone-number {
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  .email-address i,
+  .phone-number i {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .email-address h2 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .phone-number a {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .socialMedia {
+    padding: 15px 10px;
+    margin: 20px 0;
+  }
+
+  .socialMedia h1 {
+    font-size: 1.3rem;
+    margin: 15px 0 10px 0;
+  }
+
+  .socialMedia h2 {
+    font-size: 1rem;
+    margin: 10px 0 15px 0;
+    padding: 0 10px;
+  }
+
+  .socialMedia i {
+    font-size: 28px;
+    margin: 20px auto;
+  }
+
+  /* Reduce animation intensity on mobile */
+  @keyframes scrollDown2 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 
   /* Footer Icons */
 
@@ -906,24 +968,24 @@ main {
     height: 35px;
   }
 
-   .about-container {
+  .about-container {
     flex-direction: column;
     align-items: center;
     gap: 20px;
     padding: 15px;
     margin: 15px auto;
   }
-  
+
   .headshot img {
     max-width: 250px;
   }
-  
+
   .aboutParagraph {
     text-align: center;
     padding: 15px;
     max-width: 90%;
   }
-  
+
   .aboutParagraph h2 {
     font-size: 16px;
     margin: 12px 0;
@@ -1015,6 +1077,7 @@ main {
     height: 40px;
   }
 }
+
 @media (min-width: 641px) and (max-width: 1023px) {
   .scrollDownContainer {
     position: absolute !important;
@@ -1035,6 +1098,36 @@ main {
 
   .scrollDown {
     bottom: -30px !important; /* Same as desktop */
+  }
+  .contact-header h1 {
+    font-size: 1.8rem;
+    margin: 20px 0;
+  }
+
+  .email h1,
+  .phone h1 {
+    font-size: 1.6rem;
+    margin: 25px 0 15px 0;
+  }
+
+  .email-address h2 {
+    font-size: 1.3rem;
+  }
+
+  .phone-number a {
+    font-size: 1.3rem;
+  }
+
+  .socialMedia h1 {
+    font-size: 1.6rem;
+  }
+
+  .socialMedia h2 {
+    font-size: 1.2rem;
+  }
+
+  .socialMedia i {
+    font-size: 30px;
   }
 
   .about-container {
@@ -1162,7 +1255,23 @@ main {
     padding: 14px 22px;
   }
 
-  
+  .contact-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .email h1,
+  .phone h1 {
+    font-size: 2rem;
+  }
+
+  .socialMedia h1 {
+    font-size: 2rem;
+  }
+
+  .socialMedia h2 {
+    font-size: 1.5rem;
+  }
+
   /* Card/Deck Stack Desktop Styles */
   .deck-stack {
     transform: scale(1.1);
