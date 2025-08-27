@@ -38,9 +38,9 @@ const skills = [
     icon: "➕",
   },
   {
-    title: "SQL/SQLite",
+    title: "SQL",
     type: "Language",
-    use: "Database management, data retrieval, and manipulation. Used in Schipper Statlines",
+    use: "Database management, data retrieval, and manipulation. I have knowledge in both SQLite and Postgres. Used in Schipper Statlines",
     icon: "🗄️🔍",
   },
   {

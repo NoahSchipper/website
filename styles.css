@@ -391,15 +391,14 @@ main {
 
 /* sets layout of the SchipperTranslate section */
 .projectHeader {
-  margin-top: 20px
+  margin-top: 20px;
 }
 
-.projectHeader h1{
+.projectHeader h1 {
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
-
 }
 
 .SchipperTranslate {
@@ -484,6 +483,11 @@ main {
 
 /* Contact Page */
 
+.contact-page {
+  flex-grow: 0; /* Don't expand to fill space */
+  min-height: auto;
+}
+
 .fa {
   cursor: pointer;
 }
@@ -538,6 +542,25 @@ main {
   gap: 10px; /* spacing between icon and text */
   margin-top: 20px;
 }
+
+/* Phone number link styling - ensure it stays white */
+.phone-number a {
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.phone-number a:visited {
+  color: #ffffff !important;
+}
+
+.phone-number a:hover {
+  color: #ffffff !important;
+  text-decoration: underline;
+}
+
+.phone-number a:active {
+  color: #ffffff !important;
+}
 .phone h2 {
   color: #ffffff;
   text-align: center;
@@ -583,6 +606,7 @@ main {
   justify-content: center;
   gap: 10px; /* same as .email-address and .phone-number */
   margin-top: 20px;
+  margin-bottom: 45px;
   font-size: 24px;
   color: #ffffff;
   line-height: 1;
@@ -623,38 +647,47 @@ main {
   bottom: 50px;
 }
 
-/* About Page */
-
-/* sets layout of about page */
-.headshot {
+/* About Page - Base Desktop Styles */
+.about-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem 0;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  flex-direction: row;
 }
-.headshot img{
+
+.headshot {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.headshot img {
   max-width: 400px;
-  align-items: center;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .aboutParagraph {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  color: white;
-  background-color: #333;
-  border-radius: 8px;
-  margin: 20px auto;
-  max-width: 600px;
+  justify-content: center;
 }
 
-/* styles the about paragraph */
-.aboutParagraph p {
-  margin: 10px 0;
-  font-size: 16px;
+.aboutParagraph h2 {
+  margin: 15px 0;
+  font-size: 22px;
   color: #f4f4f4;
+  line-height: 1.6;
 }
 
 .deck-stack {
@@ -733,7 +766,7 @@ main {
 }
 
 .card {
-  max-width: 180px;
+  max-width: 200px;
   min-width: 160px;
   height: 260px;
   background: #1f1f1f;
@@ -842,7 +875,7 @@ main {
     margin-bottom: 85px;
   }
 
-   /* Make Resume and GitHub paragraphs shrink like Header paragraphs */
+  /* Make Resume and GitHub paragraphs shrink like Header paragraphs */
   .Resume p,
   .Github p {
     font-size: 14px; /* Same as Header paragraphs on mobile */
@@ -873,10 +906,28 @@ main {
     height: 35px;
   }
 
-.headshot img{
-  max-width: 300px;
-  align-items: center;
-}
+   .about-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    margin: 15px auto;
+  }
+  
+  .headshot img {
+    max-width: 250px;
+  }
+  
+  .aboutParagraph {
+    text-align: center;
+    padding: 15px;
+    max-width: 90%;
+  }
+  
+  .aboutParagraph h2 {
+    font-size: 16px;
+    margin: 12px 0;
+  }
 
   /* Card/Deck Stack Mobile Styles */
   .deck-stack {
@@ -929,10 +980,9 @@ main {
     font-size: 13px;
     transition: none !important;
     box-sizing: border-box;
-    max-width: 120px;
+    max-width: 150px;
     min-width: 100px;
-    min-height: 180px;
-    height: auto;
+    min-height: 160px;
   }
 
   .card:hover {
@@ -966,11 +1016,9 @@ main {
   }
 }
 @media (min-width: 641px) and (max-width: 1023px) {
-  
-
   .scrollDownContainer {
     position: absolute !important;
-    bottom: 300px !important; 
+    bottom: 300px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     text-align: center;
@@ -978,7 +1026,6 @@ main {
     margin: 0px;
     padding: 0px;
   }
-    
 
   .scrollDownContainer p {
     margin-bottom: 40px !important;
@@ -990,7 +1037,26 @@ main {
     bottom: -30px !important; /* Same as desktop */
   }
 
-  
+  .about-container {
+    flex-direction: row; /* Keep horizontal */
+    gap: 25px;
+    max-width: 800px;
+    padding: 10px;
+  }
+
+  .headshot img {
+    max-width: 270px;
+  }
+
+  .aboutParagraph {
+    text-align: center; /* Keep left aligned */
+    padding: 5px;
+  }
+
+  .aboutParagraph h2 {
+    font-size: 16px;
+    line-height: 1.4;
+  }
 
   .card-container {
     display: flex;
@@ -1096,6 +1162,7 @@ main {
     padding: 14px 22px;
   }
 
+  
   /* Card/Deck Stack Desktop Styles */
   .deck-stack {
     transform: scale(1.1);
@@ -1133,7 +1200,7 @@ main {
   }
 }
 
-@media(min-width: 1600px) {
+@media (min-width: 1600px) {
   .scrollDownContainer {
     position: absolute;
     bottom: 400px; /* Move it much higher */
