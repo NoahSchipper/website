@@ -42,7 +42,7 @@ website/
 
 ## Tools & Tech
 
-I wrote everything using HTML, CSS, and JavaScript. The styling is kept consistent throughout, and everything is mobile-friendly. Some pages use animations, hover effects, and interactivity handled by custom scripts. No frameworks or libraries—just pure front-end code.
+I wrote everything using HTML, CSS, and JavaScript. The styling is kept consistent throughout, and everything is mobile-friendly. Some pages use animations, hover effects, and interactivity handled by custom scripts.
 
 ## Making Changes
 
