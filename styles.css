@@ -596,7 +596,6 @@ main {
   align-items: center;
   justify-content: center;
   margin: 30px auto;
-  font-size: 32px;
   color: #ffffff;
   animation: scrollDown2 2s ease-in-out infinite;
   pointer-events: none;
@@ -1318,37 +1317,22 @@ main {
   }
   /* Contact Page - Following tablet pattern */
   .contact-header h1 {
-    font-size: 2rem;
-    margin: 30px 0;
+    font-size: 1.8rem;
+    margin: 15px 0;
   }
 
   .email h1,
   .phone h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin: 30px 0 15px 0;
   }
 
   .email-address h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .phone-number h2 {
-    font-size: 1.5rem;
-  }
-
-  .socialMedia h1 {
-    font-size: 1.8rem;
-    margin: 30px 0 15px 0;
-  }
-
-  .socialMedia h2 {
-    font-size: 1.3rem;
-    margin: 15px 0;
-  }
-
-  .socialMedia i {
-    font-size: 32px;
-    margin: 30px auto;
+    font-size: 1.2rem;
   }
 
   .headshot img {
@@ -1384,11 +1368,11 @@ main {
   /* Social Media Desktop Styles */
 
   .socialMedia h1 {
-    font-size: 2rem !important;
+    font-size: 1.6rem !important;
   }
 
   .socialMedia h2 {
-    font-size: 1.5rem !important;
+    font-size: 1.2rem !important;
   }
 
   .socialMedia i {
