@@ -567,8 +567,9 @@ main {
 }
 
 .socialMedia {
-  padding: 20px;
-  margin: 30px 0;
+  gap: 15px;
+  margin: 20px 0;
+  padding: 0 20px;
   text-align: center;
   color: #ffffff;
   width: 100%;
@@ -606,7 +607,7 @@ main {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(45px);
+    transform: translateY(30px);
   }
   100% {
     transform: translateY(0);
@@ -784,12 +785,13 @@ main {
 
 /* Media Query Overrides - Mobile and Desktop with all original styles */
 
-/* Mobile devices (640px and below) */
+/* Mobile devices (640px and below) - CONSOLIDATED */
 @media (max-width: 640px) {
   /* Footer and main spacing for mobile */
   main {
     padding-bottom: 20px; /* Less padding on mobile */
   }
+  
   /* General Layout Adjustments */
   body {
     font-size: 14px;
@@ -876,8 +878,8 @@ main {
     font-size: 18px;
     padding: 10px 15px;
   }
-}
-@media (max-width: 640px) {
+
+  /* Contact Page Styles */
   .contact-header h1 {
     font-size: 1.5rem;
     margin: 15px 10px;
@@ -924,19 +926,20 @@ main {
   }
 
   .socialMedia h1 {
-    font-size: 1.3rem;
-    margin: 15px 0 10px 0;
+    font-size: 1.5rem !important;
+    margin: 15px 0 8px 0 !important;
   }
 
   .socialMedia h2 {
-    font-size: 1rem;
-    margin: 10px 0 15px 0;
-    padding: 0 10px;
+    font-size: 1.2rem !important;
+    margin: 8px 0 15px 0 !important;
   }
 
   .socialMedia i {
-    font-size: 28px;
-    margin: 20px auto;
+    font-size: 20px !important;
+    margin: 15px auto !important;
+    width: 40px;
+    height: 40px;
   }
 
   /* Reduce animation intensity on mobile */
@@ -953,11 +956,11 @@ main {
   }
 
   /* Footer Icons */
-
   .footer-container {
     font-size: 14px;
     padding: 10px;
   }
+  
   .footer-container a {
     width: 35px;
     height: 35px;
@@ -968,6 +971,7 @@ main {
     height: 35px;
   }
 
+  /* About Page Styles */
   .about-container {
     flex-direction: column;
     align-items: center;
@@ -1057,31 +1061,16 @@ main {
   .card-spacer {
     display: none !important;
   }
-
-  /* Social Media Mobile Styles */
-
-  .socialMedia h1 {
-    font-size: 1.5rem !important;
-    margin: 15px 0 8px 0 !important;
-  }
-
-  .socialMedia h2 {
-    font-size: 1.2rem !important;
-    margin: 8px 0 15px 0 !important;
-  }
-
-  .socialMedia i {
-    font-size: 20px !important;
-    margin: 15px auto !important;
-    width: 40px;
-    height: 40px;
-  }
 }
 
 @media (min-width: 641px) and (max-width: 1023px) {
+  .Header p{
+    font-size: 16px;
+  }
+
   .scrollDownContainer {
     position: absolute !important;
-    bottom: 300px !important;
+    bottom: 120px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     text-align: center;
@@ -1099,6 +1088,7 @@ main {
   .scrollDown {
     bottom: -30px !important; /* Same as desktop */
   }
+
   .contact-header h1 {
     font-size: 1.8rem;
     margin: 20px 0;
@@ -1255,22 +1245,112 @@ main {
     padding: 14px 22px;
   }
 
+}
+
+@media (min-width: 1024px) {
+  /* Footer and main spacing for desktop */
+  main {
+    padding-bottom: 30px;
+  }
+  /* Navigation */
+  .navigationBar nav a {
+    font-size: 18px;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .scrollDownContainer {
+    position: absolute;
+    bottom: 170px; /* Move it much higher */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .scrollDownContainer p {
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: white;
+  }
+
+  .scrollDown {
+    bottom: -30px;
+  }
+
+  .SchipperTranslate {
+    flex-direction: row;
+    max-width: 70%;
+    padding: 20px;
+  }
+
+  .SchipperStatlines {
+    flex-direction: row;
+    max-width: 70%;
+    padding: 20px;
+  }
+
+  .Header {
+    font-size: 22px;
+  }
+
+  .Header p {
+    font-size: 16px;
+  }
+
+  .footer-container {
+    font-size: 18px;
+  }
+
+  .Resume,
+  .Github {
+    padding: 10px 20px;
+  }
+
+  .Resume button,
+  .Github button {
+    font-size: 24px;
+    padding: 14px 22px;
+  }
+  /* Contact Page - Following tablet pattern */
   .contact-header h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    margin: 30px 0;
   }
 
   .email h1,
   .phone h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin: 30px 0 15px 0;
+  }
+
+  .email-address h2 {
+    font-size: 1.5rem;
+  }
+
+  .phone-number h2 {
+    font-size: 1.5rem;
   }
 
   .socialMedia h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin: 30px 0 15px 0;
   }
 
   .socialMedia h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    margin: 15px 0;
   }
+
+  .socialMedia i {
+    font-size: 32px;
+    margin: 30px auto;
+  }
+
 
   /* Card/Deck Stack Desktop Styles */
   .deck-stack {
