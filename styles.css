@@ -1351,12 +1351,19 @@ main {
     margin: 30px auto;
   }
 
+  .headshot img {
+    max-width: 300px;
+  }
 
+  .aboutParagraph h2 {
+    font-size: 19px;
+    line-height: 1.6;
+  }
   /* Card/Deck Stack Desktop Styles */
   .deck-stack {
     transform: scale(1.1);
-    width: 200px;
-    height: 280px;
+    width: 180px;
+    height: 250px;
   }
 
   .card {
