@@ -1,0 +1,17 @@
+import random
+x = random.randint(1, 1000)
+a = 0
+count = 0
+while(a != x):
+    count += 1
+    usernum = input("Enter a number from 1 - 999: ")
+    a = int(usernum)
+    if a < x:
+        print("The number is greater than your input.")
+    elif a > x:
+        print("The number is less than your input.")
+    else:
+        print("You found the target in ", count, "guesses!")
+    
+    
+    
