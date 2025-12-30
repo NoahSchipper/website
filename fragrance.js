@@ -1,5 +1,7 @@
 const modeCards = document.querySelectorAll(".similar, .byNotes, .surpriseMe");
 
+let allNotes = [];
+
 // Function to activate a card
 function activateCard(card) {
   // Remove active from all cards
@@ -63,9 +65,14 @@ function showDisplaySection(mode) {
   }
 }
 
+// ============================================
+// MODE 1: FIND SIMILAR FRAGRANCES
+// ============================================
 async function findSimilarFragrances() {
   const input = document.getElementById("fragranceInput");
+  const genderSelect = document.getElementById("genderFilterSim");
   let perfumeName = input.value.trim();
+  const selectedGender = genderSelect.value;
 
   if (!perfumeName) {
     alert("Please enter a fragrance name");
@@ -98,6 +105,7 @@ async function findSimilarFragrances() {
         body: JSON.stringify({
           perfume_name: perfumeName,
           limit: 50,
+          gender: selectedGender || null, // Add gender filter
         }),
       }
     );
@@ -122,8 +130,141 @@ async function findSimilarFragrances() {
   }
 }
 
+// ============================================
+// MODE 2: FIND BY NOTES
+// ============================================
+async function loadAllNotes() {
+  try {
+    const response = await fetch("https://fragrance-selector-backend.onrender.com/api/accords/list");
+    const data = await response.json();
+    allNotes = data.accords || [];
+    console.log(`Loaded ${allNotes.length} notes for autocomplete`)
+  } catch (error) {
+    console.error("Error loading notes:", error);
+  }
+}
+
+const noteInput = document.getElementById("noteInput");
+const autocompleteList = document.getElementById("autocomplete-list");
+
+noteInput.addEventListener("input", function () {
+  const value = this.value.toLowerCase().trim();
+  closeAllLists();
+
+  if (!value) {
+    return;
+  }
+
+  // Filter notes that contain the search term
+  const matches = allNotes.filter((note)=> note.includes(value)).slice(0,10);
+
+  if (matches.length === 0) {
+    return;
+  }
+
+  // Create autocomplete items
+  matches.forEach((note) => {
+    const item = document.createElement("div");
+    item.classList.add("autocomplete-item");
+
+    // Highlight matching part
+    const matchStart = note.indexOf(value);
+    const beforeMatch = note.substring(0, matchStart);
+    const match = note.substring(matchStart, matchStart + value.length);
+    const afterMatch = note.substring(matchStart + value.length);
+
+    item.innerHTML = `${beforeMatch}<strong>${match}</strong>${afterMatch}`;
+    
+    item.addEventListener("click", function () {
+      noteInput.value = note;
+      closeAllLists();
+    });
+
+    autocompleteList.appendChild(item);
+  });
+});
+
+// Close autocomplete when clicking outside
+document.addEventListener("click", function (e) {
+  if (e.target !== noteInput) {
+    closeAllLists();
+  }
+});
+
+function closeAllLists() {
+  autocompleteList.innerHTML = "";
+}
+
+async function findByNotes() {
+  const noteValue = noteInput.value.trim().toLowerCase();
+  const genderSelect = document.getElementById("genderFilterAcc");
+  const selectedGender = genderSelect.value;
+
+  if (!noteValue) {
+    alert("Please enter a note");
+    return;
+  }
+
+  console.log("Searching for fragrances with note:", noteValue);
+
+  // Show loading
+  const loadingSpinner = document.querySelector(
+    "#notesDisplay .loading-spinner"
+  );
+  const resultsGrid = document.querySelector("#notesDisplay .results-grid");
+  const errorMessage = document.querySelector("#notesDisplay .error-message");
+  const noResults = document.querySelector("#notesDisplay .no-results");
+
+  loadingSpinner.style.display = "block";
+  resultsGrid.innerHTML = "";
+  errorMessage.style.display = "none";
+  noResults.style.display = "none";
+
+  try {
+    const response = await fetch(
+      "https://fragrance-selector-backend.onrender.com/api/recommend/by-notes",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          notes: [noteValue],
+          limit: 50,
+          gender: selectedGender || null, // Add gender filter
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Search failed");
+    }
+
+    const data = await response.json();
+
+    // Hide loading
+    loadingSpinner.style.display = "none";
+
+    if (data.results.length === 0) {
+      noResults.style.display = "block";
+      return;
+    }
+
+    // Display results
+    displayResults(data.results, "notes", resultsGrid);
+  } catch (error) {
+    console.error("Error:", error);
+    loadingSpinner.style.display = "none";
+    errorMessage.style.display = "block";
+    errorMessage.textContent = "Could not search for that note. Please try again.";
+  }
+}
+
+// ============================================
+// MODE 3: SURPRISE ME
+// ============================================
 async function surpriseMe() {
-  const genderSelect = document.getElementById("genderFilter");
+  const genderSelect = document.getElementById("genderFilterRan");
   const selectedGender = genderSelect.value;
 
   // Show loading
@@ -155,22 +296,25 @@ async function surpriseMe() {
     }
 
     const data = await response.json();
-     console.log('Data received:', data);
+    console.log("Data received:", data);
 
     // Hide loading
     loadingSpinner.style.display = "none";
 
     // Display single result (note: data.result not data.results)
-    displayResults([data.result], "random", resultsGrid);  // Wrap in array for displayResults
+    displayResults([data.result], "random", resultsGrid); // Wrap in array for displayResults
   } catch (error) {
     console.error("Error:", error);
     loadingSpinner.style.display = "none";
     errorMessage.style.display = "block";
     errorMessage.textContent =
-      "Could not find that fragrance. Please check the spelling.";
+      "Could not find a fragrance. Please try again.";
   }
 }
 
+// ============================================
+// DISPLAY RESULTS
+// ============================================
 function displayResults(fragrances, mode, container) {
   if (!fragrances || fragrances.length === 0) {
     container.innerHTML = '<p class="no-results">No fragrances found.</p>';
@@ -264,3 +408,5 @@ function createResultCard(fragrance, mode) {
         </div>
     `;
 }
+
+window.addEventListener('DOMContentLoaded', loadAllNotes);

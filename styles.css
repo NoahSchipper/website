@@ -445,7 +445,7 @@ main {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  margin: 20px auto;
+  margin: 100px auto;
   max-width: 600px;
 }
 
@@ -479,6 +479,39 @@ main {
 .SchipperStatlines img {
   background-color: #ffffff;
   max-width: 100px;
+}
+
+.FragranceFinder {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin: 100px auto;
+  max-width: 600px;
+}
+
+.FragranceFinder p {
+  margin-left: 20px;
+  font-size: 14px;
+  background-color: #ffffff;
+}
+
+.FragranceFinder img {
+  background-color: #ffffff;
+  max-width: 100px;
+}
+
+.FragranceFinder button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #4c53cb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 /* Contact Page - Base Styles */
@@ -820,6 +853,12 @@ main {
   }
 
   .SchipperStatlines {
+    flex-direction: column;
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .FragranceFinder {
     flex-direction: column;
     max-width: 90%;
     padding: 15px;
@@ -1216,6 +1255,12 @@ main {
   }
 
   .SchipperStatlines {
+    flex-direction: row;
+    max-width: 70%;
+    padding: 20px;
+  }
+
+  .FragranceFinder {
     flex-direction: row;
     max-width: 70%;
     padding: 20px;

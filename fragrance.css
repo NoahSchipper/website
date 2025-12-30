@@ -44,13 +44,33 @@ h2 {
   border-radius: 8px;
 }
 
+select {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background-color: #ffd700;
+  color: #030025;
+}
+
+select option {
+  display: flex;
+  color: #030025;
+  font-weight: bold;
+  text-align: left;
+}
+
 .similar {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
   background: #030025;
   width: 350px;
   height: auto;
   text-align: center;
   margin: 0 auto;
-  margin-bottom: 0px;
   padding: 20px;
   border-radius: 8px;
   border: 2px solid #ffd700;
@@ -67,9 +87,6 @@ h2 {
 
 .similar input {
   text-align: center;
-  width: 50%;
-  padding: 10px;
-  margin: 10px 0;
   border: none;
   border-radius: 4px;
   outline: none;
@@ -91,6 +108,8 @@ h2 {
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
+  width: 100%;
+  margin-top: auto;
 }
 
 .similar.dimmed {
@@ -99,6 +118,8 @@ h2 {
 }
 
 .byNotes {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   background: #030025;
   width: 350px;
@@ -117,26 +138,32 @@ h2 {
   font-family: Poppins, sans-serif;
   font-size: 14px;
 }
+#genderFilterAcc {
+  text-align: center;
+  text-align-last: center;
+}
 
 .byNotes input {
   text-align: center;
-  width: 50%;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   outline: none;
   background-color: #ffd700;
   color: #030025;
 }
+
 .byNotes button {
   background-color: #ffd700; /* Gold button */
   color: #030025; /* Dark text */
   border: none;
+  border-radius: 4px;
   padding: 10px 20px;
-  border-radius: 5px;
+  outline: none;
   cursor: pointer;
   font-weight: bold;
+  display: inline-block;
+  margin-top: 0;
 }
 
 .byNotes.dimmed {
@@ -145,10 +172,11 @@ h2 {
 }
 
 .surpriseMe {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   background: #030025;
   width: 350px;
-  margin-bottom: 0px;
   text-align: center;
   border-radius: 8px;
   margin: 0 auto;
@@ -165,27 +193,11 @@ h2 {
   font-size: 14px;
 }
 
-.surpriseMe select {
-  text-align: center;
-  font-weight: bold;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  background-color: #ffd700;
-  color: #030025;
-}
-
-.surpriseMe select option {
-  display: flex;
+#genderFilterRan {
   width: 100%;
-  color: #030025;
-  font-weight: bold;
   text-align: center;
+  text-align-last: center;
 }
-
-
-
 .surpriseMe button {
   background-color: #ffd700; /* Gold button */
   color: #030025; /* Dark text */
@@ -195,11 +207,73 @@ h2 {
   outline: none;
   cursor: pointer;
   font-weight: bold;
+  width: 100%;
+  margin-top: 0;
 }
 
 .surpriseMe.dimmed {
   opacity: 0.4;
   filter: grayscale(50%);
+}
+
+/* Make all h2 the same height */
+.similar h2,
+.byNotes h2,
+.surpriseMe h2 {
+  text-align: center;
+  color: #ffd700;
+  margin-bottom: 14px;
+  min-height: 32px; /* Fixed height for consistency */
+}
+
+/* Make all description paragraphs the same height */
+.similar p,
+.byNotes p,
+.surpriseMe p {
+  color: #ffd700;
+  font-family: Poppins, sans-serif;
+  font-size: 13.5px;
+  min-height: 40px; /* Fixed height for consistency */
+  text-align: center;
+  align-items: center;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  align-items: center;
+}
+
+/* Gender select dropdowns - consistent width */
+.similar > select,
+.byNotes > select,
+.surpriseMe > select,
+#genderFilterSim,
+#genderFilterAcc,
+#genderFilterRan {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background-color: #ffd700;
+  color: #030025;
+  flex: 1; /* Fixed width for selects */
+}
+
+/* Input fields - take remaining space */
+.similar input,
+.byNotes input {
+  text-align: center;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background-color: #ffd700;
+  color: #030025;
+  flex: 0 0 200px; /* Take remaining space */
 }
 
 .mode-card.active,
