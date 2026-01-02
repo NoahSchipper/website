@@ -85,8 +85,9 @@ select option {
   font-size: 14px;
 }
 
-.similar input {
+#genderFilterSim {
   text-align: center;
+  text-align-last: center;
   border: none;
   border-radius: 4px;
   outline: none;
@@ -109,7 +110,7 @@ select option {
   font-weight: bold;
   cursor: pointer;
   width: 100%;
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .similar.dimmed {
@@ -273,7 +274,8 @@ select option {
   outline: none;
   background-color: #ffd700;
   color: #030025;
-  flex: 0 0 200px; /* Take remaining space */
+  flex: 1; /* Take remaining space */
+  min-width: 0;
 }
 
 .mode-card.active,
@@ -379,4 +381,275 @@ select option {
 
 .result-card a:hover {
   text-decoration: underline;
+}
+
+/* Center single result for Random mode */
+#randomDisplay .results-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+#randomDisplay .result-card {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Tablet/Small Desktop - Shrink cards to fit horizontally */
+
+@media (max-width: 1280px) {
+  .similar,
+  .byNotes,
+  .surpriseMe {
+    width: 300px; /* Smaller width to fit 3 across */
+    padding: 15px;
+  }
+
+  /* Slightly smaller text */
+  .similar h2,
+  .byNotes h2,
+  .surpriseMe h2 {
+    font-size: 18px;
+  }
+
+  .similar p,
+  .byNotes p,
+  .surpriseMe p {
+    font-size: 12px;
+  }
+}
+
+/* Mobile Styles - Tablets and large phones */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 28px;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+
+  /* Stack mode cards vertically on mobile */
+  .options {
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .similar,
+  .byNotes,
+  .surpriseMe {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  /* Smaller headings */
+  .similar h2,
+  .byNotes h2,
+  .surpriseMe h2 {
+    font-size: 20px;
+    min-height: auto;
+  }
+
+  /* Smaller paragraph text */
+  .similar p,
+  .byNotes p,
+  .surpriseMe p {
+    font-size: 12px;
+    min-height: auto;
+    margin-bottom: 12px;
+  }
+
+  /* Stack input row on mobile for better usability */
+  .input-row {
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0;
+  }
+
+  /* Full width selects and inputs on mobile */
+  #genderFilterSim,
+  #genderFilterAcc,
+  #genderFilterRan {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .similar input,
+  .byNotes input {
+     width: 100%;
+    flex: none; /* Remove flex to use explicit width */
+    padding: 10px 20px; /* Changed from 12px to match selects */
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+
+  /* Buttons */
+  .similar button,
+  .byNotes button,
+  .surpriseMe button {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  /* Results grid - single column on mobile */
+  .results-grid,
+  #similarDisplay .results-grid,
+  #notesDisplay .results-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  /* Random mode result card */
+  #randomDisplay .results-grid {
+    padding: 10px;
+  }
+
+  #randomDisplay .result-card {
+    max-width: 100%;
+  }
+
+  /* Result cards */
+  .result-card {
+    padding: 15px;
+  }
+
+  .result-card h3 {
+    font-size: 18px;
+  }
+
+  .result-card .notes {
+    font-size: 12px;
+  }
+
+  /* Accord badges - smaller on mobile */
+  .accord-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  /* Loading/error messages */
+  .loading-spinner,
+  .error-message,
+  .no-results {
+    padding: 20px;
+    font-size: 16px;
+  }
+
+  .loading-spinner::after {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Small Mobile Styles - Phones */
+@media (max-width: 640px) {
+  body {
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 24px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  /* Tighter spacing on mode cards */
+  .options {
+    gap: 10px;
+    padding: 5px;
+  }
+
+  .similar,
+  .byNotes,
+  .surpriseMe {
+    padding: 12px;
+  }
+
+  /* Even smaller text */
+  .similar h2,
+  .byNotes h2,
+  .surpriseMe h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .similar p,
+  .byNotes p,
+  .surpriseMe p {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  /* Tighter input spacing */
+  .input-row {
+    gap: 6px;
+    margin: 6px 0;
+  }
+
+  #genderFilterSim,
+  #genderFilterAcc,
+  #genderFilterRan,
+  .similar input,
+  .byNotes input {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  /* Smaller buttons */
+  .similar button,
+  .byNotes button,
+  .surpriseMe button {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  /* Results */
+  .results-grid,
+  #similarDisplay .results-grid,
+  #notesDisplay .results-grid,
+  #randomDisplay .results-grid {
+    gap: 10px;
+    padding: 5px;
+  }
+
+  .result-card {
+    padding: 12px;
+  }
+
+  .result-card h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .result-card .brand-name {
+    font-size: 12px;
+  }
+
+  .result-card .notes {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .accord-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+
+  /* Compact messages */
+  .loading-spinner,
+  .error-message,
+  .no-results {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .loading-spinner::after {
+    width: 25px;
+    height: 25px;
+  }
 }

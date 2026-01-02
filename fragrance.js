@@ -4,6 +4,9 @@ let allNotes = [];
 
 // Function to activate a card
 function activateCard(card) {
+  // Check if this card is already active
+  const wasAlreadyActive = card.classList.contains("active");
+
   // Remove active from all cards
   modeCards.forEach((c) => c.classList.remove("active"));
 
@@ -18,6 +21,28 @@ function activateCard(card) {
       c.classList.remove("dimmed");
     }
   });
+
+  // Only clear inputs/results if switching to a DIFFERENT card
+  if (!wasAlreadyActive) {
+    // Clear all input fields
+    const fragranceInput = document.getElementById("fragranceInput");
+    const noteInput = document.getElementById("noteInput");
+    if (fragranceInput) fragranceInput.value = "";
+    if (noteInput) noteInput.value = "";
+
+    // Clear all result grids
+    const allResultGrids = document.querySelectorAll(".results-grid");
+    allResultGrids.forEach((grid) => (grid.innerHTML = ""));
+
+    // Hide all loading/error/no-results messages
+    const allSpinners = document.querySelectorAll(".loading-spinner");
+    const allErrors = document.querySelectorAll(".error-message");
+    const allNoResults = document.querySelectorAll(".no-results");
+    
+    allSpinners.forEach((spinner) => (spinner.style.display = "none"));
+    allErrors.forEach((error) => (error.style.display = "none"));
+    allNoResults.forEach((noResult) => (noResult.style.display = "none"));
+  }
 
   // Show display section
   const mode = card.dataset.mode;
