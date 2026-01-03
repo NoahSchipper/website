@@ -254,7 +254,6 @@ select option {
 #genderFilterAcc,
 #genderFilterRan {
   text-align: center;
-  font-weight: bold;
   padding: 10px;
   border: none;
   border-radius: 4px;
@@ -268,7 +267,7 @@ select option {
 .similar input,
 .byNotes input {
   text-align: center;
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   outline: none;
@@ -276,6 +275,17 @@ select option {
   color: #030025;
   flex: 1; /* Take remaining space */
   min-width: 0;
+}
+
+#genderFilterSim,
+#genderFilterAcc,
+#genderFilterRan,
+.similar input,
+.byNotes input {
+  box-sizing: border-box;
+  text-align: center;
+  text-align-last: center;
+  height: 35px; /* Force same line height */
 }
 
 .mode-card.active,
@@ -402,7 +412,7 @@ select option {
   .similar,
   .byNotes,
   .surpriseMe {
-    width: 300px; /* Smaller width to fit 3 across */
+    width: 250px; /* Smaller width to fit 3 across */
     padding: 15px;
   }
 
@@ -418,6 +428,11 @@ select option {
   .surpriseMe p {
     font-size: 12px;
   }
+
+  ::placeholder {
+  font-size: 12px;
+  }
+  
 }
 
 /* Mobile Styles - Tablets and large phones */
