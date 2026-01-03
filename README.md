@@ -28,6 +28,8 @@ website/
 
 ├── contact.html
 
+├── toast.js # handles toast notifications on the contact page
+
 ├── index.html
 
 ├── projects.html
@@ -38,7 +40,13 @@ website/
   
   ├── baseball.css  # Styling for interface
 
-├── styles.css # Main CSS file for all non-baseball pages
+  ├── fragrance.html # Fragrance Finder's user interface
+
+  ├── fragrance.css # Fragrance Finder's styling
+
+  ├── fragrance.js # Handles API calls and more detailed styling/effects
+
+├── styles.css # Main CSS file for all non-baseball or fragrance pages
 
 └── README.md # This file
 
