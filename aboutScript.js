@@ -44,6 +44,12 @@ const skills = [
     icon: "🗄️🔍",
   },
   {
+    title: "R/RStuido",
+    type: "Language",
+    use: "Machine learning projects and exploration",
+    icon: "🤖"
+  },
+  {
     title: "Flask",
     type: "Framework",
     use: "Database retrieval, URL routing, request handling. Used in the backend of Schipper Statlines",
@@ -72,12 +78,6 @@ const skills = [
     type: "API",
     use: "Schipper Translate uses API calls to translate text between languages",
     icon: "🧩",
-  },
-  {
-    title: "Excel",
-    type: "Spreadsheet Software",
-    use: "Educational projects, data analysis, and calculations",
-    icon: "📊",
   },
 ];
 
