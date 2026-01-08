@@ -113,7 +113,7 @@ main {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: space-between;
   text-align: center;
   color: #f4f4f4;
   border-radius: 8px;
@@ -149,12 +149,27 @@ main {
 .button-row button {
   background-color: #4c53cb;
   padding: 10px 20px;
-  font-size: 18px;
+  font-size: 30px;
   color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transitions for smooth animation */
+}
+
+#projectsButton {
+  background-color:#4c53cb;
+  font-size: 28px;
+}
+
+#aboutButton {
+  background-color:rgba(0, 0, 0, 0.2);
+  font-size: 28px;
+}
+
+#contactButton {
+  background-color:rgba(0, 0, 0, 0.2);
+  font-size: 28px;
 }
 
 /* adds hover effect to buttons in the header section */
@@ -223,7 +238,7 @@ main {
   transform: translateX(-50%);
   left: 50%;
   bottom: 20px;
-  border-radius: 50px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -262,6 +277,34 @@ main {
     top: 90%;
   }
 }
+
+.sec2Container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  text-align: center;
+  color: #f4f4f4;
+  border-radius: 8px;
+  margin-bottom: 250px;
+  padding: 20px;
+}
+
+.sec2Container h2 {
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.sec2Container p {
+  min-height: 50px;
+  text-align: center;
+  align-items: center;
+}
+
+.sec2Container button {
+  margin-top: 0;
+}
 /* Resume Section */
 
 .Resume,
@@ -273,13 +316,15 @@ main {
   align-items: center;
   justify-content: center;
   padding: 10px 20px;
+  width: 50%;
 }
 
 /* styles the resume paragraph */
-.Resume p {
+.Resume p, .Github p {
   margin: 10px;
+  padding: 10px 20px;
   text-align: center;
-  font-size: 18px;
+  font-size: 17px;
   color: white;
 }
 
@@ -288,7 +333,6 @@ main {
 .Github button {
   background-color: #4c53cb;
   padding: 10px 20px;
-  margin-left: 5px;
   font-size: 24px;
   color: white;
   border: none;
@@ -309,14 +353,6 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
 }
 
-/* styles the github paragraph */
-.Github p {
-  margin: 10px 10px;
-  text-align: center;
-  font-size: 18px;
-  color: white;
-}
-
 /* adds same hover effect to github button */
 .Github button:hover {
   transform: translateY(-2px); /* Lifts the button slightly */
@@ -328,6 +364,8 @@ main {
   transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
 }
+
+
 
 /* Footer Section - Updated to prevent overlap issues */
 
@@ -409,7 +447,7 @@ main {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  margin: 100px auto;
+  margin: 50px auto;
   max-width: 600px;
 }
 
@@ -445,7 +483,7 @@ main {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  margin: 100px auto;
+  margin: 50px auto;
   max-width: 600px;
 }
 
@@ -489,7 +527,7 @@ main {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  margin: 100px auto;
+  margin: 50px auto;
   max-width: 600px;
 }
 
@@ -870,10 +908,24 @@ main {
     padding: 15px;
   }
 
+  .Header h1 {
+    font-size: 28px;
+  }
   .Header p {
     font-size: 14px;
   }
 
+  #projectsButton {
+    font-size: 14px;
+  }
+
+  #aboutButton {
+    font-size: 14px;
+  }
+  
+  #contactButton {
+    font-size: 14px;
+  }
   .scrollDownContainer {
     position: relative;
     margin-top: 10px;
@@ -884,12 +936,12 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 200px;
+    margin-bottom: 400px;
   }
 
   .scrollDownContainer p {
     text-align: center;
-    margin: 70px;
+    margin-bottom: 70px;
     width: 100%;
     font-size: 14px;
   }
@@ -898,7 +950,29 @@ main {
   .Github {
     padding: 10px 10px;
     font-size: 14px;
-    margin-bottom: 85px;
+    margin-bottom: 20px;
+  }
+
+  .sec2Container {
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+
+  .sec2Container h2 {
+    margin-bottom: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sec2Container p {
+    min-height: 120px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .sec2Container button {
+    margin-top: 0;
+    font-size: 14px;
   }
 
   /* Make Resume and GitHub paragraphs shrink like Header paragraphs */
@@ -912,7 +986,7 @@ main {
 
   .Resume button,
   .Github button {
-    font-size: 18px;
+    font-size: 14px;
     padding: 10px 15px;
   }
 
@@ -1101,29 +1175,71 @@ main {
 }
 
 @media (min-width: 641px) and (max-width: 1023px) {
-  .Header p{
-    font-size: 16px;
+  
+
+  .Header h1 {
+    font-size: 36px;
+  }
+  .Header p {
+    font-size: 24px;
+  }
+
+  #projectsButton {
+    font-size: 24px;
+  }
+
+  #aboutButton {
+    font-size: 24px;
+  }
+  
+  #contactButton {
+    font-size: 24px;
   }
 
   .scrollDownContainer {
-    position: absolute !important;
-    bottom: 120px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
     color: white;
     margin: 0px;
     padding: 0px;
+    margin-bottom:300px;
   }
 
   .scrollDownContainer p {
-    margin-bottom: 40px !important;
-    font-size: 18px !important;
+    margin-bottom: 70px;
+    font-size: 24px;
     color: white;
   }
 
-  .scrollDown {
-    bottom: -30px !important; /* Same as desktop */
+
+  .sec2Container {
+    margin-top: 0px;
+    margin-bottom: 60px;
+  }
+
+  .sec2Container h2 {
+    margin-bottom: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sec2Container p {
+    font-size: auto;
+    height: 150px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .Resume button {
+    margin-bottom: 0;
+    font-size: 20px;
+  }
+
+  .Github button {
+    margin-bottom: 0;
+    font-size: 20px;
   }
 
   .contact-header h1 {
@@ -1228,24 +1344,21 @@ main {
 
   .scrollDownContainer {
     position: absolute;
-    bottom: 170px; /* Move it much higher */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     color: white;
-    margin: 0px;
+    bottom: 300px;
     padding: 0px;
   }
 
   .scrollDownContainer p {
-    margin-bottom: 30px;
+    margin-bottom: 70px;
     font-size: 24px;
     color: white;
   }
 
-  .scrollDown {
-    bottom: -30px;
-  }
+  
 
   .SchipperTranslate {
     flex-direction: row;
@@ -1270,7 +1383,7 @@ main {
   }
 
   .Header p {
-    font-size: 16px;
+    font-size: 24px;
   }
 
   .footer-container {
@@ -1306,7 +1419,6 @@ main {
 
   .scrollDownContainer {
     position: absolute;
-    bottom: 170px; /* Move it much higher */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -1342,7 +1454,7 @@ main {
   }
 
   .Header p {
-    font-size: 16px;
+    font-size: 24px;
   }
 
   .footer-container {
@@ -1351,7 +1463,7 @@ main {
 
   .Resume,
   .Github {
-    padding: 10px 20px;
+    padding: 50px;
   }
 
   .Resume button,
@@ -1427,16 +1539,13 @@ main {
 @media (min-width: 1600px) {
   .scrollDownContainer {
     position: absolute;
-    bottom: 400px; /* Move it much higher */
     left: 50%;
+    bottom: 400px;
     transform: translateX(-50%);
     text-align: center;
     color: white;
     margin: 0px;
     padding: 0px;
-  }
-  .Resume,
-  .Github {
-    padding: 100px 20px;
+    margin-bottom: 0px;
   }
 }
