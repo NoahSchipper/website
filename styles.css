@@ -154,6 +154,7 @@ main {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  min-width: 205px;
   transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transitions for smooth animation */
 }
 
