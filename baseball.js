@@ -47,6 +47,7 @@ const hitterSeasonLabelMap = {
   obp: "OBP",
   slg: "SLG",
   ops: "OPS",
+  ops_plus: "OPS+",
 };
 
 // maps pitcher stats for season
@@ -284,13 +285,43 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
   thA.querySelector(".player-name").textContent = capitalizedNameA;
   thB.querySelector(".player-name").textContent = capitalizedNameB;
 
-  photoA.src = resA?.photo_url || "";
-  photoB.src = resB?.photo_url || "";
+  // Set images based on player type instead of photo_url
+const playerAImage = resA?.player_type === 'pitcher' 
+  ? './assets/pitcherShadow.png' 
+  : './assets/batterShadow.png';
+  
+const playerBImage = resB?.player_type === 'pitcher' 
+  ? './assets/pitcherShadow.png' 
+  : './assets/batterShadow.png';
 
-  if (resA?.photo_url) photoA.style.display = "block";
-  else photoA.style.display = "none";
-  if (resB?.photo_url) photoB.style.display = "block";
-  else photoB.style.display = "none";
+console.log('photoA element:', photoA);
+console.log('photoB element:', photoB);
+
+if (photoA) {
+  photoA.src = playerAImage;
+  photoA.style.display = 'block';
+  photoA.onerror = () => {
+    console.error('Failed to load Player A image:', playerAImage);
+    photoA.src = resA?.player_type === 'pitcher' 
+      ? 'https://via.placeholder.com/150/0066cc/ffffff?text=Pitcher'
+      : 'https://via.placeholder.com/150/cc0000/ffffff?text=Batter';
+  };
+} else {
+  console.error('photoA element not found!');
+}
+
+if (photoB) {
+  photoB.src = playerBImage;
+  photoB.style.display = 'block';
+  photoB.onerror = () => {
+    console.error('Failed to load Player B image:', playerBImage);
+    photoB.src = resB?.player_type === 'pitcher'
+      ? 'https://via.placeholder.com/150/0066cc/ffffff?text=Pitcher'
+      : 'https://via.placeholder.com/150/cc0000/ffffff?text=Batter';
+  };
+} else {
+  console.error('photoB element not found!');
+}
 
   tbody.innerHTML = "";
 
@@ -719,6 +750,8 @@ const statConfigurations = {
   "**Gold Glove**": { higherIsBetter: true },
   "**Hank Aaron Award**": { higherIsBetter: true },
   "**Comeback Player**": { higherIsBetter: true },
+  "**NLCS MVP**": {higherIsBetter: true },
+  "**ALCS MVP**": {higherIsBetter: true },
 
   // Clean versions without asterisks (fallback)
   "All-MLB Team - First Team": { higherIsBetter: true },
@@ -1635,10 +1668,12 @@ async function fetchStatsInitial(name, mode) {
 let searchTimeout;
 let popularPlayersCache = null;
 let currentDropdown = null;
-const SEARCH_DELAY = 500;
+const SEARCH_DELAY = 0;
 
 // Show dropdown with players
 function showDropdown(inputId, players) {
+  console.log('showDropdown called with inputId:', inputId, 'players:', players);
+  
   let dropdownId;
 
   // Determine dropdown ID based on input ID
@@ -1647,10 +1682,20 @@ function showDropdown(inputId, players) {
   else if (inputId === "teamA") dropdownId = "dropdownTeamA";
   else if (inputId === "teamB") dropdownId = "dropdownTeamB";
 
-  if (!dropdownId) return;
+  console.log('Determined dropdownId:', dropdownId);
+
+  if (!dropdownId) {
+    console.error('No dropdownId determined for inputId:', inputId);
+    return;
+  }
 
   const dropdown = document.getElementById(dropdownId);
-  if (!dropdown) return;
+  console.log('Dropdown element:', dropdown);
+  
+  if (!dropdown) {
+    console.error('Dropdown element not found:', dropdownId);
+    return;
+  }
 
   // Hide other dropdowns first
   hideAllDropdowns();
@@ -1658,8 +1703,9 @@ function showDropdown(inputId, players) {
   dropdown.innerHTML = "";
 
   if (!players || players.length === 0) {
+    const message = inputId.startsWith('team') ? 'No teams found' : 'No players found';
     dropdown.innerHTML =
-      '<div class="dropdown-item" style="color: #999; cursor: default;">No teams found</div>';
+      `<div class="dropdown-item" style="color: #999; cursor: default;">${message}</div>`;
   } else {
     players.forEach((player) => {
       const item = document.createElement("div");
@@ -1702,6 +1748,7 @@ function showDropdown(inputId, players) {
 
   dropdown.classList.add("show");
   currentDropdown = dropdownId;
+  console.log('Dropdown should now be visible with class "show"');
 }
 
 // Hide specific dropdown
@@ -1774,18 +1821,29 @@ async function loadPopularPlayers(inputId) {
 }
 
 // Search players
+// Search players
 async function searchPlayersEnhanced(query, inputId) {
+  console.log('searchPlayersEnhanced called with:', query, inputId);
   try {
-    const response = await fetch(
-      `${backendBaseUrl}/search-players?q=${encodeURIComponent(query)}`
-    );
+    const url = `${backendBaseUrl}/search-players?q=${encodeURIComponent(query)}`;
+    console.log('Fetching from:', url);
+    
+    const response = await fetch(url);
+    console.log('Response status:', response.status);
+    
     if (response.ok) {
       const players = await response.json();
+      console.log('Players returned:', players);
+      
       const formattedPlayers = players.map((player) => ({
         name: player.original_name || player.name,
         display: player.display,
       }));
+      console.log('Formatted players:', formattedPlayers);
+      
       showDropdown(inputId, formattedPlayers);
+    } else {
+      console.error('Search failed with status:', response.status);
     }
   } catch (error) {
     console.error("Enhanced search error:", error);
@@ -1840,13 +1898,22 @@ function handlePlayerFocus(e) {
 
 // Handle keyboard navigation
 function handleEnterKey(e) {
+  const inputId = e.target.id;
+  const query = e.target.value.trim();
+  
   if (e.key === "Enter") {
     e.preventDefault();
-    const dropdownId = e.target.id === "playerA" ? "dropdownA" : "dropdownB";
-    hideDropdown(dropdownId);
-    comparePlayers();
+    
+    // Search if there's a query, otherwise just compare
+    if (query.length >= 2) {
+      searchPlayersEnhanced(query, inputId);
+    } else {
+      const dropdownId = inputId === "playerA" ? "dropdownA" : "dropdownB";
+      hideDropdown(dropdownId);
+      comparePlayers();
+    }
   } else if (e.key === "Escape") {
-    const dropdownId = e.target.id === "playerA" ? "dropdownA" : "dropdownB";
+    const dropdownId = inputId === "playerA" ? "dropdownA" : "dropdownB";
     hideDropdown(dropdownId);
   }
 }
@@ -2445,6 +2512,8 @@ function setupTeamAutofill() {
 // Initialize everything when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   // Set default values
+  document.getElementById("playerA").value = "Kyle Schwarber"
+  document.getElementById("playerB").value = "Kyle Tucker"
   document.getElementById("teamA").value = "Cubs";
   document.getElementById("teamB").value = "Dodgers";
 

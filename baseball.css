@@ -40,43 +40,34 @@ body {
   position: relative; /* Allows absolute positioning of child elements */
 }
 
-/* =============================================================================
-   NAVIGATION ELEMENTS
-   ============================================================================= */
-
-/* Container for the back button positioning */
-.back-button-container {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  text-align: left;
+/* Mode Selection Tabs */
+.mode-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e9ecef;
+  width: 100%;
+  justify-content: center;
 }
 
-/* Back button styling with hover and active effects */
-.back-button {
+.mode-tab {
   padding: 10px 20px;
-  background-color: #4c53cb;
-  color: white;
+  background: none;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  text-decoration: none;
-  display: inline-block;
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Smooth animations */
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  color: black;
 }
 
-/* Back button hover effect - lifts up with shadow */
-.back-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #3a42a3; /* Darker purple on hover */
+.mode-tab.active {
+  border-bottom-color: black;
+  color: black;
+  font-weight: bold;
 }
 
-/* Back button active/pressed effect */
-.back-button:active {
-  transform: scale(0.95) translateY(2px); /* Shrinks and moves down */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.mode-tab:hover {
+  background-color: #f8f9fa;
 }
 
 /* =============================================================================
@@ -578,6 +569,24 @@ td.better-stat {
   z-index: 100;
 }
 
+#playerAName,
+#playerBName {
+}
+#photoA,
+#photoB {
+  display: block;
+  margin: 0 auto 10px auto; /* Center horizontally with bottom margin */
+  border-radius: 6px;
+  box-shadow: 0 0 8px #aaa; /* Gray shadow around logo */
+  height: 400px;
+  width: 300px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Prevents logo distortion */
+  background: white; /* White background for transparent logos */
+  padding: 10px; /* Padding around the logo */
+  box-sizing: border-box;
+}
 /* Team name input centering */
 #teamAName,
 #teamBName {
