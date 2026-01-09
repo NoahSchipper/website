@@ -99,8 +99,12 @@ main {
   display: flex;
   gap: 20px;
   list-style-type: none;
+  text-decoration: none;
 }
 
+.nav-links a {
+  text-decoration: none;
+}
 /* adds hover effect to navigation links */
 .nav-links a:hover {
   background-color: #383838;
