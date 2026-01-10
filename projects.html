@@ -4,127 +4,221 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noah Schipper's Projects</title>
-    <link rel="icon" href="assets/website favicon.ico">
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <link rel="stylesheet" href="styles.css"/>
   </head>
   <body>
     <div class="navigationBar">
-        <nav>
-            <div class="nav-container">
-                <a href="index.html" class="logo">NS</a>
-                <ul class="nav-links">
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </div>
-        </nav>
+      <nav>
+        <div class="nav-container">
+          <a href="index.html" class="logo">NS</a>
+          <ul class="nav-links">
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
+
     <main>
       <div class="projectHeader">
         <h1>Projects</h1>
       </div>
-      <div class="FragranceFinder">
-        <img
-        src="assets/Fragrance Finder.png"
-        alt="Fragrance Finder Logo"
-        />
-        <p>
-          Fragrance Finder is an AI powered tool to help users explore different fragrances.
-          It offers three different modes: search by similarity, search by accords, and random. 
-          <br><br>
-          The search by similarity mode uses a hugging-face AI model to assign cosine similarities
-          to each one of the avaliable fragrances. These similarities are then used to suggest 
-          fragrances similar to one that the user entered.
-          <br><br>
-          The search by accord takes in a user entered scent (woody, citrus, fruity, etc.) and shows fragrances featuring that scent as their top accord.
-        </p>
-        <a
-          href="fragrance.html"
-          target="_blank"
-        >
-          <button>Try it out</button>
-        </a>
-      </div>
-      <div class="SchipperStatlines">
-        <img
-          src="assets/Schipper Statlines.png"
-          alt="Schipper Statlines Logo"
-        />
-        <p>
-          Schipper Statlines is a baseball statitics database that allows users
-          to compare player and team stats.<br><br>
-          Due to hosting constraints, some player comparison features had to be cut, but
-          a video demonstration of player comparisons with more detailed features can be viewed by clicking the bottom button to the right.
-        </p>
-        <div class="button-container">
-        <a 
-          href="baseball.html"
-          target="_blank"
-        >
-          <button>Try it out</button>
-        </a>
-        <a href="https://youtu.be/E_BIPieV1hw" target="_blank">
-          <button>Video Demo</button>
-        </a>
-      </div>
-      </div>
-      <div class="SchipperTranslate">
-        <img
-          src="assets/SchipperTranslateLogo2.png"
-          alt="Schipper Translate Logo"
-        />
-        <p>
-          Schipper Translate is a powerful language translation chromium extension offering
-          in-extension, in-text, and tooltip translation options.
-        </p>
-        <a
-          href="https://chromewebstore.google.com/detail/Schipper%20Translate/gemjlfdkplhobkglnecbhjjcfajfenik"
-          target="_blank"
-        >
-          <button>Download</button>
-        </a>
-      </div>
+
+      <div class="carousel-container">
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="carouselTrack">
+            <!-- Schipper Statlines -->
+            <div class="project-slide">
+              <div class="project-slide-content">
+                <img src="assets/Schipper Statlines.png" alt="Schipper Statlines"/>                <div class="project-content">
+                  <p>
+                    <strong>Schipper Statlines</strong> is a full-stack baseball statistics database that allows users
+                    to compare player and team stats.
+                    <br><br>
+                    This tool leverages PostgreSQL and SQLAlchemy to efficiently retrieve and process comprehensive baseball statistics, delivering instant player and team comparisons through an intuitive interface.
+                    <br><br>
+                    Due to hosting constraints, some player comparison features had to be cut, but
+                    a video demonstration of player comparisons with more detailed features can be viewed by clicking the video demo button.
+                  </p>
+                </div>
+              </div>
+              <div class="project-buttons">
+                <button onclick="window.open('#', '_blank')">Try it out</button>
+                <button onclick="window.open('https://youtu.be/E_BIPieV1hw', '_blank')">Video Demo</button>
+              </div>
+            </div>
+
+            <!-- Fragrance Finder -->
+            <div class="project-slide">
+              <div class="project-slide-content">
+                <img src="assets/Fragrance Finder.png" alt="Fragrance Finder"/>
+                <div class="project-content">
+                  <p>
+                    <strong>Fragrance Finder</strong> is an AI powered tool to help users explore different fragrances.
+                    It offers three different modes: search by similarity, search by accords, and random. 
+                    <br><br>
+                    The search by similarity mode uses a hugging-face AI model to assign cosine similarities
+                    to each fragrance, suggesting similar options to what the user entered.
+                    <br><br>
+                    The search by accord takes in a user entered scent (woody, citrus, fruity, etc.) and shows fragrances featuring that scent as their top accord.
+                  </p>
+                </div>
+              </div>
+              <div class="project-buttons">
+                <button onclick="window.open('fragrance.html', '_blank')">Try it out</button>
+              </div>
+            </div>
+
+            <!-- Schipper Translate -->
+            <div class="project-slide">
+              <div class="project-slide-content">
+                <img src="assets/SchipperTranslateLogo2.png" alt="Fragrance Finder"/>                <div class="project-content">
+                  <p>
+                    <strong>Schipper Translate</strong> is a powerful language translation extension offering
+                    in-extension, in-text, and tooltip translation options.
+                    <br><br>
+                    Schipper Translate uses the Deep Translate API to support almost 100 languages and features a minimal, non-invasive design.
+                    <br><br>
+                    Perfect for browsing foreign websites, reading international news, or learning new languages with seamless translation features built right into your browser.
+                  </p>
+                </div>
+              </div>
+              <div class="project-buttons">
+                <button onclick="window.open('https://chromewebstore.google.com/detail/Schipper%20Translate/gemjlfdkplhobkglnecbhjjcfajfenik', '_blank')">Download</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prevBtn">‹</button>
+          <div class="carousel-dots" id="dotsContainer"></div>
+          <button class="carousel-btn" id="nextBtn">›</button>
+        </div>
       </div>
     </main>
+
     <div class="Footer">
       <footer>
         <div class="footer-container">
           <p>Follow my socials!</p>
           <a href="https://www.linkedin.com/in/noah-schipper" target="_blank">
-            <img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='%230077b5'%3E%3Cpath d='M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z'/%3E%3C/svg%3E"
-              alt="LinkedIn"
-            />
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='%230077b5'%3E%3Cpath d='M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z'/%3E%3C/svg%3E" alt="LinkedIn" />
           </a>
           <a href="https://www.instagram.com/_noahschipper/" target="_blank">
-            <img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='%23E4405F'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/%3E%3C/svg%3E"
-              alt="Instagram"
-            />
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='%23E4405F'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/%3E%3C/svg%3E" alt="Instagram" />
           </a>
           <a href="https://www.facebook.com/noah.schipper.750" target="_blank">
-            <img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='%231877f2'%3E%3Cpath d='M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z'/%3E%3C/svg%3E"
-              alt="Facebook"
-            />
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='%231877f2'%3E%3Cpath d='M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z'/%3E%3C/svg%3E" alt="Facebook" />
           </a>
           <a href="https://x.com/Noah__Schipper" target="_blank">
-            <img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E"
-              alt="X"
-            />
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X" />
           </a>
         </div>
       </footer>
     </div>
+
+    <script>
+      const track = document.getElementById('carouselTrack');
+      const slides = document.querySelectorAll('.project-slide');
+      const dotsContainer = document.getElementById('dotsContainer');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      let currentSlide = 0;
+      const totalSlides = slides.length;
+      let autoPlayInterval;
+
+      // Create dots
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+
+      const dots = document.querySelectorAll('.dot');
+
+      function updateCarousel() {
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentSlide);
+        });
+      }
+
+      function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+        resetAutoPlay();
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+        resetAutoPlay();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+        resetAutoPlay();
+      }
+
+      function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 5000);
+      }
+
+      function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+      }
+
+      prevBtn.addEventListener('click', prevSlide);
+      nextBtn.addEventListener('click', nextSlide);
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+      });
+
+      // Touch/swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        if (touchStartX - touchEndX > 50) nextSlide();
+        if (touchEndX - touchStartX > 50) prevSlide();
+      }
+
+      // Start autoplay
+      startAutoPlay();
+
+      // Pause on hover
+      track.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+      track.addEventListener('mouseleave', startAutoPlay);
+    </script>
   </body>
 </html>
