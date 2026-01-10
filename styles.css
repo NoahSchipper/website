@@ -5,13 +5,12 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* enables the footer to stay at the bottom of the page
-   also sets background color */
 body {
-  background-color: #333;
+  background: linear-gradient(135deg, #2b2b3d 0%, #333 50%, #3d2b3d 100%);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* enables the footer to stay at the bottom of the page */
@@ -19,62 +18,67 @@ main {
   flex-grow: 1;
 }
 
-/* custom scrollbar */
-
-::-webkit-scrollbar {
-  width: 15px;
-}
-
-::-webkit-scrollbar-track {
-  background: #2b2b2b;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #4c53cb, #3366ff);
-  border-radius: 10px;
-  border: 3px solid #2b2b2b;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #5c63db, #4da6ff);
-}
-
-/* Navigation Bar */
-
-/* places logo in the top left corner */
-.nav-container .logo {
-  display: flex;
-  padding-left: 5px;
-  align-items: center;
-}
-
-/* sets the logo image size */
-.nav-container .logo img {
-  height: 50px;
-  width: 100px;
-}
-
-/* styles the navigation bar */
-.navigationBar nav a {
-  display: inline-block;
-  color: white;
+/* Animated Background */
+.Header {
   position: relative;
-  padding: 10px 20px;
-  margin-right: 5px;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #f4f4f4;
+  border-radius: 8px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0;
   overflow: hidden;
-  transition: background 0.3s ease;
 }
 
-/* Styles the navigation links */
-.navigationBar nav a:hover {
-  transform: scale(1.05);
-  background-color: #4c53cb;
-  border-radius: 4px;
+@keyframes backgroundShift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-5%, 5%) scale(1.05);
+  }
+  66% {
+    transform: translate(5%, -5%) scale(0.95);
+  }
 }
 
-/* makes the navigation bar sticky */
+/* Fade-in animation for content */
+.Header h1,
+.Header p,
+.button-row {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.Header h1 {
+  animation-delay: 0.2s;
+}
+
+.Header p {
+  animation-delay: 0.5s;
+}
+
+.button-row {
+  animation-delay: 0.8s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .navigationBar {
   position: sticky;
   top: 0;
@@ -84,7 +88,6 @@ main {
   padding: 5px 0;
 }
 
-/* styles the container for the navigation bar */
 .nav-container {
   display: flex;
   align-items: center;
@@ -94,155 +97,131 @@ main {
   margin: 0;
 }
 
-/* Sets spacing between navigation links */
+.nav-container .logo {
+  display: flex;
+  padding-left: 15px;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .nav-links {
   display: flex;
   gap: 20px;
   list-style-type: none;
-  text-decoration: none;
+  padding-right: 20px;
 }
 
 .nav-links a {
+  color: white;
   text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
 }
-/* adds hover effect to navigation links */
+
 .nav-links a:hover {
-  background-color: #383838;
-}
-
-/* Header Section */
-
-/* styles the header section */
-.Header {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: space-between;
-  text-align: center;
-  color: #f4f4f4;
-  border-radius: 8px;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 0px;
+  background-color: #454cc7;
 }
 
 .Header h1 {
   font-size: 36px;
-  margin-top: 20px;
+  margin-top: 80px;
   color: #f4f4f4;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-/* styles the header paragraph */
+
 .Header p {
   margin: 20px;
   font-size: 24px;
   color: #f4f4f4;
+  max-width: 900px;
 }
 
-/* sets the position of the 
-   buttons in the header section */
 .button-row {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 60px;
 }
 
-/* styles the buttons in the header section */
 .button-row button {
-  background-color: #4c53cb;
-  padding: 10px 20px;
-  font-size: 30px;
+  padding: 15px 30px;
+  font-size: 28px;
   color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   min-width: 205px;
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transitions for smooth animation */
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+#aboutButton,
+#contactButton {
+  background-color: rgba(76, 83, 203, 0.6);
 }
 
 #projectsButton {
-  background-color:#4c53cb;
-  font-size: 28px;
-}
-
-#aboutButton {
-  background-color:rgba(0, 0, 0, 0.2);
-  font-size: 28px;
-}
-
-#contactButton {
-  background-color:rgba(0, 0, 0, 0.2);
-  font-size: 28px;
-}
-
-/* adds hover effect to buttons in the header section */
-.button-row button:hover {
-  transform: translateY(-2px); /* Lifts the button slightly */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
-}
-
-/* adds active effect to buttons in the header section */
-.button-row button:active {
-  transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
-}
-
-/* ensures the header buttons don't exceed the
-    width of the header paragraph 
-.Header p, .button-row {
-    max-width: 100%;
-    width: 100%
-}
-*/
-.Header button {
-  margin: 10px;
-  padding: 10px 10px;
-  font-size: 18px;
-  color: white;
   background-color: #4c53cb;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transitions for smooth animation */
+  position: relative;
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.Header button:hover {
-  transform: translateY(-2px); /* Lifts the button slightly */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 83, 203, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(76, 83, 203, 0);
+  }
 }
 
-.Header button:active {
-  transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
+.button-row button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(76, 83, 203, 0.4);
+}
+
+.button-row button:active {
+  transform: scale(0.95) translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .scrollDownContainer {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   text-align: center;
   color: white;
-  margin: 0px;
-  padding: 0px;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.5s forwards;
+  margin-top: 20px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .scrollDownContainer p {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-size: 24px;
   color: white;
 }
-/* Scroll down button */
+
 .scrollDown {
   height: 50px;
   width: 30px;
   border: 2px solid white;
-  position: absolute;
-  transform: translateX(-50%);
-  left: 50%;
-  bottom: 20px;
+  position: relative;
+  margin: 0 auto;
   border-radius: 20px;
   cursor: pointer;
 }
@@ -284,33 +263,16 @@ main {
 }
 
 .sec2Container {
-  position: relative;
   display: flex;
   justify-content: center;
-  align-items: space-between;
+  align-items: stretch;
   text-align: center;
   color: #f4f4f4;
-  border-radius: 8px;
-  margin-bottom: 250px;
-  padding: 20px;
+  padding: 60px 20px;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
-.sec2Container h2 {
-  margin-bottom: 0;
-  padding: 0;
-  margin: 0;
-}
-
-.sec2Container p {
-  min-height: 50px;
-  text-align: center;
-  align-items: center;
-}
-
-.sec2Container button {
-  margin-top: 0;
-}
-/* Resume Section */
 
 .Resume,
 .Github {
@@ -320,114 +282,86 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
+  padding: 40px 30px;
   width: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* styles the resume paragraph */
-.Resume p, .Github p {
-  margin: 10px;
-  padding: 10px 20px;
-  text-align: center;
+.Resume:hover,
+.Github:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(76, 83, 203, 0.2);
+}
+
+.Resume h2,
+.Github h2 {
+  margin-bottom: 15px;
+}
+
+.Resume p,
+.Github p {
+  margin: 15px 0;
   font-size: 17px;
-  color: white;
+  line-height: 1.6;
 }
 
-/* styles the resume button */
 .Resume button,
 .Github button {
   background-color: #4c53cb;
-  padding: 10px 20px;
-  font-size: 24px;
+  padding: 12px 24px;
+  font-size: 20px;
   color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transitions for smooth animation */
+  margin-top: 15px;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
-/* adds hover effect to resume button */
-.Resume button:hover {
-  transform: translateY(-2px); /* Lifts the button slightly */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
-}
-
-/* adds active effect to resume button */
-.Resume button:active {
-  transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
-}
-
-/* adds same hover effect to github button */
+.Resume button:hover,
 .Github button:hover {
-  transform: translateY(-2px); /* Lifts the button slightly */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 83, 203, 0.4);
 }
 
-/* adds same active effect to github button */
+.Resume button:active,
 .Github button:active {
-  transform: scale(0.95) translateY(2px); /* Slightly shrinks and pushes down */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduces shadow for pressed look */
+  transform: scale(0.95) translateY(2px);
 }
 
+.Footer {
+  background: transparent;
+  padding: 30px 0;
+}
 
-
-/* Footer Section - Updated to prevent overlap issues */
-
-/* styles the footer container */
 .footer-container {
-  /* REMOVED: margin-top: auto; - This can cause layout issues */
   text-align: center;
-  background-color: #333;
   color: white;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px; /* ADDED: Prevent super wide footers */
-  margin: 0 auto; /* ADDED: Center the footer */
-  padding: 20px 0; /* INCREASED: More padding for better spacing */
-  box-sizing: border-box; /* ADDED: Proper box model */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* gives spacing below the footer text*/
 .footer-container p {
-  margin-bottom: 15px; /* INCREASED: More space below text */
-  font-size: 16px; /* ADDED: Explicit font size */
+  margin-bottom: 20px;
+  font-size: 18px;
 }
 
-/* sets spacing for the footer link container */
 .footer-container a {
   display: inline-block;
-  width: 50px;
-  height: 50px;
-  margin: 0 10px; /* ADDED: Space between icons */
+  margin: 0 10px;
 }
 
-/* styles the footer icons */
 .footer-container img {
   width: 50px;
   height: 50px;
-  margin: 0px;
-  padding: 0px;
   transition: transform 0.3s ease;
 }
 
-/* adds hover effect to footer icons */
 .footer-container img:hover {
   transform: scale(1.2);
   filter: brightness(1.2);
-}
-
-/* ADDED: Ensure Footer wrapper has proper positioning */
-.Footer {
-  position: relative; /* Not fixed or absolute */
-  bottom: auto;
-  left: auto;
-  right: auto;
-  width: 100%;
-  /*margin-top: 50px; /* Space between main content and footer */
-  z-index: 0; /* Lower than main content */
-  clear: both; /* Clear any floated elements */
-  background-color: #333; /* Match footer background */
 }
 
 /* Projects Page */
@@ -712,7 +646,7 @@ main {
 /* About Page - Base Desktop Styles */
 .about-container {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 40px;
   max-width: 1000px;
   margin: 20px auto;
@@ -721,24 +655,25 @@ main {
 }
 
 .headshot {
+  display: flex;
   flex: 0 0 auto;
   margin: 0;
+  align-items: center;
 }
 
 .headshot img {
   max-width: 400px;
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 8px;
+  object-fit: cover;
 }
 
 .aboutParagraph {
   flex: 1;
   margin: 0;
   text-align: center;
-  background-color: #333;
-  color: white;
-  padding: 20px;
+  color: #f4f4f4;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -746,9 +681,9 @@ main {
 }
 
 .aboutParagraph h2 {
-  margin: 15px 0;
   font-size: 22px;
   color: #f4f4f4;
+  font-weight: normal;
   line-height: 1.6;
 }
 
@@ -865,7 +800,7 @@ main {
   main {
     padding-bottom: 20px; /* Less padding on mobile */
   }
-  
+
   /* General Layout Adjustments */
   body {
     font-size: 14px;
@@ -920,6 +855,10 @@ main {
     font-size: 14px;
   }
 
+  .button-row {
+    flex-direction: column;
+    align-items: center;
+  }
   #projectsButton {
     font-size: 14px;
   }
@@ -927,7 +866,7 @@ main {
   #aboutButton {
     font-size: 14px;
   }
-  
+
   #contactButton {
     font-size: 14px;
   }
@@ -941,12 +880,12 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 400px;
+    margin-bottom: 300px;
   }
 
   .scrollDownContainer p {
     text-align: center;
-    margin-bottom: 70px;
+    margin-bottom: 20px;
     width: 100%;
     font-size: 14px;
   }
@@ -1076,7 +1015,7 @@ main {
     font-size: 14px;
     padding: 10px;
   }
-  
+
   .footer-container a {
     width: 35px;
     height: 35px;
@@ -1096,8 +1035,9 @@ main {
     margin: 15px auto;
   }
 
-  .headshot img {
+  #Headshot {
     max-width: 250px;
+    min-height: 275px;
   }
 
   .aboutParagraph {
@@ -1107,7 +1047,7 @@ main {
   }
 
   .aboutParagraph h2 {
-    font-size: 16px;
+    font-size: 12px;
     margin: 12px 0;
   }
 
@@ -1180,12 +1120,15 @@ main {
 }
 
 @media (min-width: 641px) and (max-width: 1023px) {
-  
-
   .Header h1 {
-    font-size: 36px;
+    font-size: 32px;
   }
+
   .Header p {
+    font-size: 20px;
+  }
+
+  .button-row button {
     font-size: 24px;
   }
 
@@ -1196,28 +1139,25 @@ main {
   #aboutButton {
     font-size: 24px;
   }
-  
+
   #contactButton {
     font-size: 24px;
   }
 
   .scrollDownContainer {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     text-align: center;
     color: white;
-    margin: 0px;
+    margin-top: 20px;
     padding: 0px;
-    margin-bottom:300px;
+    margin-bottom: 100px
   }
 
   .scrollDownContainer p {
-    margin-bottom: 70px;
+    margin-bottom: 20px;
     font-size: 24px;
     color: white;
   }
-
 
   .sec2Container {
     margin-top: 0px;
@@ -1332,7 +1272,7 @@ main {
   }
 }
 
-/* Laptops and Desktop (641px and above) */
+/* Laptops and Desktop (1024px and above) */
 @media (min-width: 1024px) {
   /* Footer and main spacing for desktop */
   main {
@@ -1347,22 +1287,24 @@ main {
     gap: 15px;
   }
 
-  .scrollDownContainer {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: white;
-    bottom: 300px;
-    padding: 0px;
-  }
-
   .scrollDownContainer p {
-    margin-bottom: 70px;
+    margin-bottom: 20px;
     font-size: 24px;
     color: white;
   }
 
+  .scrollDownContainer {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+    padding: 0px;
+  }
+
+  .scrollDownContainer p {
+    font-size: 24px;
+    color: white;
+  }
   
 
   .SchipperTranslate {
@@ -1378,77 +1320,6 @@ main {
   }
 
   .FragranceFinder {
-    flex-direction: row;
-    max-width: 70%;
-    padding: 20px;
-  }
-
-  .Header {
-    font-size: 22px;
-  }
-
-  .Header p {
-    font-size: 24px;
-  }
-
-  .footer-container {
-    font-size: 18px;
-  }
-
-  .Resume,
-  .Github {
-    padding: 10px 20px;
-  }
-
-  .Resume button,
-  .Github button {
-    font-size: 24px;
-    padding: 14px 22px;
-  }
-
-}
-
-@media (min-width: 1024px) {
-  /* Footer and main spacing for desktop */
-  main {
-    padding-bottom: 30px;
-  }
-  /* Navigation */
-  .navigationBar nav a {
-    font-size: 18px;
-  }
-
-  .nav-links {
-    gap: 15px;
-  }
-
-  .scrollDownContainer {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: white;
-    margin: 0px;
-    padding: 0px;
-  }
-
-  .scrollDownContainer p {
-    margin-bottom: 30px;
-    font-size: 24px;
-    color: white;
-  }
-
-  .scrollDown {
-    bottom: -30px;
-  }
-
-  .SchipperTranslate {
-    flex-direction: row;
-    max-width: 70%;
-    padding: 20px;
-  }
-
-  .SchipperStatlines {
     flex-direction: row;
     max-width: 70%;
     padding: 20px;
@@ -1501,7 +1372,7 @@ main {
   }
 
   .aboutParagraph h2 {
-    font-size: 19px;
+    font-size: 16px;
     line-height: 1.6;
   }
   /* Card/Deck Stack Desktop Styles */
@@ -1538,19 +1409,5 @@ main {
 
   .socialMedia i {
     font-size: 24px !important;
-  }
-}
-
-@media (min-width: 1600px) {
-  .scrollDownContainer {
-    position: absolute;
-    left: 50%;
-    bottom: 400px;
-    transform: translateX(-50%);
-    text-align: center;
-    color: white;
-    margin: 0px;
-    padding: 0px;
-    margin-bottom: 0px;
   }
 }
