@@ -14,7 +14,7 @@ const hitterLabelMap = {
   ops_plus: "OPS+",
 };
 
-// maps pitcher stats 
+// maps pitcher stats
 const pitcherLabelMap = {
   war: "WAR",
   wins: "W",
@@ -70,7 +70,7 @@ const pitcherSeasonLabelMap = {
   whip: "WHIP",
 };
 
-const backendBaseUrl = 'https://schipperstatlines.onrender.com';
+const backendBaseUrl = "https://schipperstatlines.onrender.com";
 
 // Common father/son player mappings for quick reference
 const COMMON_FATHER_SON_PLAYERS = {
@@ -208,7 +208,7 @@ function formatAwardsForStructuredDisplay(awards) {
   return result;
 }
 
-// gets other major awards 
+// gets other major awards
 function getOtherMajorAwards(summary) {
   const majorAwardTypes = [
     "ALCS MVP",
@@ -286,42 +286,46 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
   thB.querySelector(".player-name").textContent = capitalizedNameB;
 
   // Set images based on player type instead of photo_url
-const playerAImage = resA?.player_type === 'pitcher' 
-  ? './assets/pitcherShadow.png' 
-  : './assets/batterShadow.png';
-  
-const playerBImage = resB?.player_type === 'pitcher' 
-  ? './assets/pitcherShadow.png' 
-  : './assets/batterShadow.png';
+  const playerAImage =
+    resA?.player_type === "pitcher"
+      ? "./assets/pitcherShadow.png"
+      : "./assets/batterShadow.png";
 
-console.log('photoA element:', photoA);
-console.log('photoB element:', photoB);
+  const playerBImage =
+    resB?.player_type === "pitcher"
+      ? "./assets/pitcherShadow.png"
+      : "./assets/batterShadow.png";
 
-if (photoA) {
-  photoA.src = playerAImage;
-  photoA.style.display = 'block';
-  photoA.onerror = () => {
-    console.error('Failed to load Player A image:', playerAImage);
-    photoA.src = resA?.player_type === 'pitcher' 
-      ? 'https://via.placeholder.com/150/0066cc/ffffff?text=Pitcher'
-      : 'https://via.placeholder.com/150/cc0000/ffffff?text=Batter';
-  };
-} else {
-  console.error('photoA element not found!');
-}
+  console.log("photoA element:", photoA);
+  console.log("photoB element:", photoB);
 
-if (photoB) {
-  photoB.src = playerBImage;
-  photoB.style.display = 'block';
-  photoB.onerror = () => {
-    console.error('Failed to load Player B image:', playerBImage);
-    photoB.src = resB?.player_type === 'pitcher'
-      ? 'https://via.placeholder.com/150/0066cc/ffffff?text=Pitcher'
-      : 'https://via.placeholder.com/150/cc0000/ffffff?text=Batter';
-  };
-} else {
-  console.error('photoB element not found!');
-}
+  if (photoA) {
+    photoA.src = playerAImage;
+    photoA.style.display = "block";
+    photoA.onerror = () => {
+      console.error("Failed to load Player A image:", playerAImage);
+      photoA.src =
+        resA?.player_type === "pitcher"
+          ? "https://via.placeholder.com/150/0066cc/ffffff?text=Pitcher"
+          : "https://via.placeholder.com/150/cc0000/ffffff?text=Batter";
+    };
+  } else {
+    console.error("photoA element not found!");
+  }
+
+  if (photoB) {
+    photoB.src = playerBImage;
+    photoB.style.display = "block";
+    photoB.onerror = () => {
+      console.error("Failed to load Player B image:", playerBImage);
+      photoB.src =
+        resB?.player_type === "pitcher"
+          ? "https://via.placeholder.com/150/0066cc/ffffff?text=Pitcher"
+          : "https://via.placeholder.com/150/cc0000/ffffff?text=Batter";
+    };
+  } else {
+    console.error("photoB element not found!");
+  }
 
   tbody.innerHTML = "";
 
@@ -565,7 +569,7 @@ if (photoB) {
       // console.log("resB.awards:", resB.awards);
     }
   }
-  // SEASON MODE HANDLING 
+  // SEASON MODE HANDLING
   if (mode === "season") {
     const statsA = extractStats(resA);
     const statsB = extractStats(resB);
@@ -690,7 +694,9 @@ async function fetchStats(name, mode, playerType = null) {
 
     // Final fallback to original endpoint
     const originalResponse = await fetch(
-      `${backendBaseUrl}/player?name=${encodeURIComponent(name)}&mode=${backendMode}`
+      `${backendBaseUrl}/player?name=${encodeURIComponent(
+        name
+      )}&mode=${backendMode}`
     );
     return await originalResponse.json();
   } catch (e) {
@@ -750,8 +756,8 @@ const statConfigurations = {
   "**Gold Glove**": { higherIsBetter: true },
   "**Hank Aaron Award**": { higherIsBetter: true },
   "**Comeback Player**": { higherIsBetter: true },
-  "**NLCS MVP**": {higherIsBetter: true },
-  "**ALCS MVP**": {higherIsBetter: true },
+  "**NLCS MVP**": { higherIsBetter: true },
+  "**ALCS MVP**": { higherIsBetter: true },
 
   // Clean versions without asterisks (fallback)
   "All-MLB Team - First Team": { higherIsBetter: true },
@@ -1236,38 +1242,84 @@ async function showTwoWayComparisonModal(nameA, nameB, optionsA, optionsB) {
     modal.innerHTML = html;
     document.body.appendChild(modal);
 
-    // Main comparison buttons functionality
+    // NEW:
     modal.querySelectorAll(".comparison-type-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", async () => {
         const types = btn.dataset.types.split(",");
         modal.remove();
-        resolve({
-          playerAType: types[0],
-          playerBType: types[1],
-        });
+
+        // Actually fetch the stats for both players with the selected types
+        try {
+          const mode = document.getElementById("viewMode").value;
+          const [statsA, statsB] = await Promise.all([
+            fetch(
+              `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
+                nameA
+              )}&mode=${mode}&player_type=${types[0]}`
+            ).then((r) => r.json()),
+            fetch(
+              `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
+                nameB
+              )}&mode=${mode}&player_type=${types[1]}`
+            ).then((r) => r.json()),
+          ]);
+
+          resolve({
+            statsA: statsA,
+            statsB: statsB,
+            playerAType: types[0],
+            playerBType: types[1],
+          });
+        } catch (error) {
+          console.error("Error fetching two-way stats:", error);
+          resolve({ error: "Failed to fetch stats" });
+        }
       });
     });
 
     // Custom comparison functionality
-    modal.querySelector("#compare-custom").addEventListener("click", () => {
-      const playerAType = modal.querySelector(
-        'input[name="playerAType"]:checked'
-      )?.value;
-      const playerBType = modal.querySelector(
-        'input[name="playerBType"]:checked'
-      )?.value;
+    modal
+      .querySelector("#compare-custom")
+      .addEventListener("click", async () => {
+        const playerAType = modal.querySelector(
+          'input[name="playerAType"]:checked'
+        )?.value;
+        const playerBType = modal.querySelector(
+          'input[name="playerBType"]:checked'
+        )?.value;
 
-      if (!playerAType || !playerBType) {
-        alert("Please select stat types for both players");
-        return;
-      }
+        if (!playerAType || !playerBType) {
+          alert("Please select stat types for both players");
+          return;
+        }
 
-      modal.remove();
-      resolve({
-        playerAType: playerAType,
-        playerBType: playerBType,
+        modal.remove();
+        try {
+          const mode = document.getElementById("viewMode").value;
+          const [statsA, statsB] = await Promise.all([
+            fetch(
+              `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
+                nameA
+              )}&mode=${mode}&player_type=${playerAType}`
+            ).then((r) => r.json()),
+            fetch(
+              `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
+                nameB
+              )}&mode=${mode}&player_type=${playerBType}`
+            ).then((r) => r.json()),
+          ]);
+
+          resolve({
+            statsA: statsA,
+            statsB: statsB,
+            playerAType: playerAType,
+            playerBType: playerBType,
+          });
+        } catch (error) {
+          console.error("Error fetching custom stats:", error);
+          resolve({ error: "Failed to fetch stats" });
+        }
       });
-    });
 
     // Cancel functionality
     modal.querySelector(".modal-close").addEventListener("click", () => {
@@ -1529,11 +1581,6 @@ async function comparePlayers() {
   const nameB = document.getElementById("playerB").value.trim();
   const mode = document.getElementById("viewMode").value;
 
-  if (!nameA || !nameB) {
-    alert("Please enter both player names (first and last).");
-    return;
-  }
-
   // Hide any open dropdowns
   hideAllDropdowns();
 
@@ -1574,20 +1621,20 @@ async function comparePlayers() {
   // Handle different two-way scenarios
   if (playerAIsTwoWay && playerBIsTwoWay) {
     // Both are two-way players - show coordinated selection modal
-    const selectedTypes = await showTwoWayComparisonModal(
+    const result = await showTwoWayComparisonModal(
       nameA,
       nameB,
       resA.options,
       resB.options
     );
-    if (selectedTypes.error) {
-      tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>${selectedTypes.error}</td></tr>`;
+    if (result.error) {
+      tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>${result.error}</td></tr>`;
       return;
     }
 
-    // Fetch stats with selected types
-    resA = await fetchStats(nameA, mode, selectedTypes.playerAType);
-    resB = await fetchStats(nameB, mode, selectedTypes.playerBType);
+    // The modal now returns the fetched stats directly
+    resA = result.statsA;
+    resB = result.statsB;
   } else if (playerAIsTwoWay && !playerBIsTwoWay) {
     // Only Player A is two-way
     const selectedType = await handleTwoWayPlayerSelection(
@@ -1653,7 +1700,9 @@ async function fetchStatsInitial(name, mode) {
 
     // Fallback to original endpoint
     const fallbackResponse = await fetch(
-      `${backendBaseUrl}/player?name=${encodeURIComponent(name)}&mode=${backendMode}`
+      `${backendBaseUrl}/player?name=${encodeURIComponent(
+        name
+      )}&mode=${backendMode}`
     );
     return await fallbackResponse.json();
   } catch (e) {
@@ -1671,9 +1720,13 @@ let currentDropdown = null;
 const SEARCH_DELAY = 0;
 
 // Show dropdown with players
+// FIXED: Better dropdown display
 function showDropdown(inputId, players) {
-  console.log('showDropdown called with inputId:', inputId, 'players:', players);
-  
+  console.log("showDropdown called");
+  console.log("  inputId:", inputId);
+  console.log("  players:", players);
+  console.log("  players length:", players ? players.length : 0);
+
   let dropdownId;
 
   // Determine dropdown ID based on input ID
@@ -1682,18 +1735,18 @@ function showDropdown(inputId, players) {
   else if (inputId === "teamA") dropdownId = "dropdownTeamA";
   else if (inputId === "teamB") dropdownId = "dropdownTeamB";
 
-  console.log('Determined dropdownId:', dropdownId);
+  console.log("  determined dropdownId:", dropdownId);
 
   if (!dropdownId) {
-    console.error('No dropdownId determined for inputId:', inputId);
+    console.error("ERROR: No dropdownId determined for inputId:", inputId);
     return;
   }
 
   const dropdown = document.getElementById(dropdownId);
-  console.log('Dropdown element:', dropdown);
-  
+  console.log("  dropdown element:", dropdown);
+
   if (!dropdown) {
-    console.error('Dropdown element not found:', dropdownId);
+    console.error("ERROR: Dropdown element not found:", dropdownId);
     return;
   }
 
@@ -1703,30 +1756,48 @@ function showDropdown(inputId, players) {
   dropdown.innerHTML = "";
 
   if (!players || players.length === 0) {
-    const message = inputId.startsWith('team') ? 'No teams found' : 'No players found';
-    dropdown.innerHTML =
-      `<div class="dropdown-item" style="color: #999; cursor: default;">${message}</div>`;
+    const message = inputId.startsWith("team")
+      ? "No teams found"
+      : "No players found";
+    dropdown.innerHTML = `<div class="dropdown-item" style="color: #999; cursor: default; padding: 12px;">${message}</div>`;
   } else {
-    players.forEach((player) => {
+    console.log("  Creating dropdown items for", players.length, "players");
+
+    players.forEach((player, index) => {
       const item = document.createElement("div");
       item.className = "dropdown-item";
 
       if (typeof player === "string") {
+        console.log(`  Player ${index}: string format - "${player}"`);
         item.textContent = player;
         item.dataset.value = player;
       } else {
+        console.log(`  Player ${index}: object format -`, player);
         const name = player.name || player.display;
         const display = player.display || player.name;
 
-        item.innerHTML = `${name}${
-          display !== name ? `<span class="player-years">${display}</span>` : ""
-        }`;
+        // Create HTML with name and optional extra info
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = name;
+        item.appendChild(nameSpan);
+
+        if (display !== name && display.includes("(")) {
+          const infoSpan = document.createElement("span");
+          infoSpan.className = "player-years";
+          infoSpan.textContent = " " + display.substring(display.indexOf("("));
+          infoSpan.style.color = "#666";
+          infoSpan.style.fontSize = "0.9em";
+          item.appendChild(infoSpan);
+        }
+
         item.dataset.value = name;
       }
 
       item.addEventListener("click", () => {
+        console.log("Dropdown item clicked:", item.dataset.value);
         document.getElementById(inputId).value = item.dataset.value;
         hideDropdown(dropdownId);
+
         // Auto-compare if both fields are filled
         const isTeamInput = inputId.startsWith("team");
         if (isTeamInput) {
@@ -1744,11 +1815,18 @@ function showDropdown(inputId, players) {
 
       dropdown.appendChild(item);
     });
+
+    console.log("  Dropdown now has", dropdown.children.length, "items");
   }
 
   dropdown.classList.add("show");
   currentDropdown = dropdownId;
-  console.log('Dropdown should now be visible with class "show"');
+  console.log("  Dropdown should now be visible");
+  console.log("  Dropdown classList:", dropdown.classList.toString());
+  console.log(
+    "  Dropdown display style:",
+    window.getComputedStyle(dropdown).display
+  );
 }
 
 // Hide specific dropdown
@@ -1820,56 +1898,150 @@ async function loadPopularPlayers(inputId) {
   }
 }
 
-// Search players
-// Search players
+// FIXED: Enhanced search with better debugging and error handling
 async function searchPlayersEnhanced(query, inputId) {
-  console.log('searchPlayersEnhanced called with:', query, inputId);
-  try {
-    const url = `${backendBaseUrl}/search-players?q=${encodeURIComponent(query)}`;
-    console.log('Fetching from:', url);
-    
-    const response = await fetch(url);
-    console.log('Response status:', response.status);
-    
-    if (response.ok) {
-      const players = await response.json();
-      console.log('Players returned:', players);
-      
-      const formattedPlayers = players.map((player) => ({
-        name: player.original_name || player.name,
-        display: player.display,
-      }));
-      console.log('Formatted players:', formattedPlayers);
-      
-      showDropdown(inputId, formattedPlayers);
-    } else {
-      console.error('Search failed with status:', response.status);
-    }
-  } catch (error) {
-    console.error("Enhanced search error:", error);
-    if (popularPlayersCache) {
-      showDropdown(inputId, popularPlayersCache);
-    }
-  }
-}
+  console.log("=== searchPlayersEnhanced START ===");
+  console.log("Query received:", `"${query}"`);
+  console.log("Query length:", query.length);
+  console.log("InputId:", inputId);
 
-// Input event handler
-function handlePlayerInput(e) {
-  const query = e.target.value.trim();
-  const inputId = e.target.id;
-
-  clearTimeout(searchTimeout);
-
-  if (query.length < 2) {
-    searchTimeout = setTimeout(() => {
-      loadPopularPlayers(inputId);
-    }, 100);
+  // Don't search if query is too short
+  if (!query || query.trim().length === 0) {
+    console.log("Query is empty, loading popular players");
+    loadPopularPlayers(inputId);
     return;
   }
 
+  const trimmedQuery = query.trim();
+  lastSearchQuery = trimmedQuery; // Store current search query
+
+  try {
+    // Properly encode the query - this handles spaces and special characters
+    const encodedQuery = encodeURIComponent(trimmedQuery);
+    const url = `${backendBaseUrl}/search-players?q=${encodedQuery}`;
+
+    console.log("Trimmed query:", `"${trimmedQuery}"`);
+    console.log("Encoded query:", encodedQuery);
+    console.log("Full URL:", url);
+
+    const response = await fetch(url);
+    console.log("Response received - status:", response.status);
+    console.log("Response ok:", response.ok);
+
+    // Check if this search is still relevant (user might have typed something else)
+    const currentInputValue = document.getElementById(inputId).value.trim();
+    if (currentInputValue !== trimmedQuery) {
+      console.log(
+        "Search outdated - user typed something else. Ignoring results."
+      );
+      return; // User has typed something else, ignore these results
+    }
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Response not OK. Status:", response.status);
+      console.error("Error text:", errorText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const players = await response.json();
+    console.log("Players data type:", typeof players);
+    console.log("Players is array:", Array.isArray(players));
+    console.log(
+      "Number of players:",
+      Array.isArray(players) ? players.length : "N/A"
+    );
+    console.log("First 3 players:", players.slice(0, 3));
+
+    // Double-check search is still relevant before showing results
+    const finalInputValue = document.getElementById(inputId).value.trim();
+    if (finalInputValue !== trimmedQuery) {
+      console.log("Search outdated after fetch - ignoring results.");
+      return;
+    }
+
+    // Check if we got an error response
+    if (players.error) {
+      console.error("Backend returned error:", players.error);
+      loadPopularPlayers(inputId);
+      return;
+    }
+
+    // Format players for display
+    const formattedPlayers = players.map((player, index) => {
+      console.log(`Formatting player ${index}:`, player);
+
+      // Handle both string format and object format
+      if (typeof player === "string") {
+        return {
+          name: player,
+          display: player,
+        };
+      } else {
+        return {
+          name: player.original_name || player.name,
+          display: player.display || player.name,
+        };
+      }
+    });
+
+    console.log("Formatted players count:", formattedPlayers.length);
+    console.log("First formatted player:", formattedPlayers[0]);
+
+    // Show the results
+    if (formattedPlayers.length > 0) {
+      console.log("Showing dropdown with", formattedPlayers.length, "players");
+      showDropdown(inputId, formattedPlayers);
+    } else {
+      console.log("No players found, showing popular players");
+      loadPopularPlayers(inputId);
+    }
+
+    console.log("=== searchPlayersEnhanced END ===");
+  } catch (error) {
+    console.error("=== Enhanced search error ===");
+    console.error("Error type:", error.constructor.name);
+    console.error("Error message:", error.message);
+    console.error("Error stack:", error.stack);
+
+    // Fallback to popular players on error
+    console.log("Falling back to popular players");
+    loadPopularPlayers(inputId);
+  }
+}
+
+// FIXED: Input handler with better debouncing and immediate feedback
+function handlePlayerInput(e) {
+  const query = e.target.value; // Don't trim here - let user see what they're typing
+  const inputId = e.target.id;
+
+  console.log(
+    "handlePlayerInput - query:",
+    `"${query}"`,
+    "length:",
+    query.length
+  );
+
+  // Clear any existing timeout
+  clearTimeout(searchTimeout);
+
+  // If query is empty or just whitespace, show popular players immediately
+  if (!query || query.trim().length === 0) {
+    loadPopularPlayers(inputId);
+    return;
+  }
+
+  // If query is too short (less than 2 non-whitespace characters), show popular immediately
+  if (query.trim().length < 2) {
+    loadPopularPlayers(inputId);
+    return;
+  }
+
+  // For queries 2+ characters, search after delay
   searchTimeout = setTimeout(() => {
-    searchPlayersEnhanced(query, inputId);
-  }, SEARCH_DELAY);
+    console.log("Timeout triggered, searching for:", `"${query.trim()}"`);
+    searchPlayersEnhanced(query.trim(), inputId);
+  }, 200); // 200ms delay to reduce API calls while typing
 }
 
 // Click event handler
@@ -1900,10 +2072,10 @@ function handlePlayerFocus(e) {
 function handleEnterKey(e) {
   const inputId = e.target.id;
   const query = e.target.value.trim();
-  
+
   if (e.key === "Enter") {
     e.preventDefault();
-    
+
     // Search if there's a query, otherwise just compare
     if (query.length >= 2) {
       searchPlayersEnhanced(query, inputId);
@@ -1985,22 +2157,24 @@ async function fetchHeadToHeadRecord(teamA, teamB, mode) {
       // Extract years from both team names
       const yearMatchA = teamA.match(/\b(19|20)\d{2}\b/);
       const yearMatchB = teamB.match(/\b(19|20)\d{2}\b/);
-      
+
       if (yearMatchA && yearMatchB) {
         const yearA = yearMatchA[0];
         const yearB = yearMatchB[0];
-        
+
         // Only proceed if both teams have the same year
         if (yearA === yearB) {
           url += `&year=${yearA}`;
         } else {
           // Years don't match - return empty H2H data
-          console.log(`Years don't match: Team A (${yearA}) vs Team B (${yearB})`);
+          console.log(
+            `Years don't match: Team A (${yearA}) vs Team B (${yearB})`
+          );
           return {
             head_to_head: {
               regular_season: { team_a_wins: 0, team_b_wins: 0 },
-              playoffs: { game_wins: { team_a: 0, team_b: 0 } }
-            }
+              playoffs: { game_wins: { team_a: 0, team_b: 0 } },
+            },
           };
         }
       } else if (yearMatchA || yearMatchB) {
@@ -2009,8 +2183,8 @@ async function fetchHeadToHeadRecord(teamA, teamB, mode) {
         return {
           head_to_head: {
             regular_season: { team_a_wins: 0, team_b_wins: 0 },
-            playoffs: { game_wins: { team_a: 0, team_b: 0 } }
-          }
+            playoffs: { game_wins: { team_a: 0, team_b: 0 } },
+          },
         };
       } else {
         // Neither team has a year - default to 2024 (matching your single team behavior)
@@ -2024,11 +2198,10 @@ async function fetchHeadToHeadRecord(teamA, teamB, mode) {
     const data = await response.json();
     console.log(`H2H response:`, data); // Debug log
     console.log("Full H2H response structure:", JSON.stringify(data, null, 2));
-    
+
     return {
-      head_to_head: data
+      head_to_head: data,
     };
-    
   } catch (e) {
     console.error("H2H fetch error:", e);
     return { error: "Failed to fetch H2H data" };
@@ -2112,7 +2285,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
     .then((h2hData) => {
       // Clear the table and rebuild everything in order
       tbody.innerHTML = "";
-      
+
       // 1. Add Head-to-Head section FIRST
       addSectionToTable(tbody, "Head-to-Head");
 
@@ -2123,7 +2296,12 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
         const regRecord = h2h.regular_season;
         const teamAReg = regRecord.team_a_wins || 0;
         const teamBReg = regRecord.team_b_wins || 0;
-        addStatRow(tbody, `${teamAReg}-${teamBReg}`, "Reg Season", `${teamBReg}-${teamAReg}`);
+        addStatRow(
+          tbody,
+          `${teamAReg}-${teamBReg}`,
+          "Reg Season",
+          `${teamBReg}-${teamAReg}`
+        );
 
         // Playoff record - use the correct data structure
         const playoffRecord = h2h.playoffs;
@@ -2134,17 +2312,32 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
         if (playoffRecord.game_wins) {
           teamAPlayoff = playoffRecord.game_wins.team_a || 0;
           teamBPlayoff = playoffRecord.game_wins.team_b || 0;
-          addStatRow(tbody, `${teamAPlayoff}-${teamBPlayoff}`, "Playoff Games", `${teamBPlayoff}-${teamAPlayoff}`);
+          addStatRow(
+            tbody,
+            `${teamAPlayoff}-${teamBPlayoff}`,
+            "Playoff Games",
+            `${teamBPlayoff}-${teamAPlayoff}`
+          );
         } else if (playoffRecord.series_wins) {
           // Fallback to series wins if game wins not available
           teamAPlayoff = playoffRecord.series_wins.team_a || 0;
           teamBPlayoff = playoffRecord.series_wins.team_b || 0;
-          addStatRow(tbody, `${teamAPlayoff}-${teamBPlayoff}`, "Playoff Series", `${teamBPlayoff}-${teamAPlayoff}`);
+          addStatRow(
+            tbody,
+            `${teamAPlayoff}-${teamBPlayoff}`,
+            "Playoff Series",
+            `${teamBPlayoff}-${teamAPlayoff}`
+          );
         } else {
           // Legacy format fallback
           teamAPlayoff = playoffRecord.team_a_wins || 0;
           teamBPlayoff = playoffRecord.team_b_wins || 0;
-          addStatRow(tbody, `${teamAPlayoff}-${teamBPlayoff}`, "Playoffs", `${teamBPlayoff}-${teamAPlayoff}`);
+          addStatRow(
+            tbody,
+            `${teamAPlayoff}-${teamBPlayoff}`,
+            "Playoffs",
+            `${teamBPlayoff}-${teamAPlayoff}`
+          );
         }
       } else {
         // Add fallback H2H data if no data available
@@ -2187,14 +2380,14 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
       console.error("H2H fetch error:", error);
       // Clear and rebuild with fallback data
       tbody.innerHTML = "";
-      
+
       // Add Head-to-Head section even if fetch failed
       addSectionToTable(tbody, "Head-to-Head");
       addStatRow(tbody, "0-0", "Reg Season", "0-0");
-      
+
       // Add Overall Stats section
       addSectionToTable(tbody, "Overall Stats");
-      
+
       const statsOrder = [
         "gp",
         "w",
@@ -2218,7 +2411,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
           addStatRow(tbody, valA, statName, valB);
         }
       });
-      
+
       setTimeout(() => highlightBetterStats("teamComparisonTable"), 100);
     });
 }
@@ -2378,19 +2571,52 @@ let popularTeamsCache = null;
 function loadPopularTeams(inputId) {
   const popularTeams = [
     // Current MLB teams
-    "Angels", "Astros", "Athletics", "Blue Jays", "Braves",
-    "Brewers", "Cardinals", "Cubs", "Diamondbacks", "Dodgers",
-    "Giants", "Guardians", "Mariners", "Marlins", "Mets",
-    "Nationals", "Orioles", "Padres", "Phillies", "Pirates",
-    "Rangers", "Rays", "Red Sox", "Reds", "Rockies",
-    "Royals", "Tigers", "Twins", "White Sox", "Yankees",
-    
+    "Angels",
+    "Astros",
+    "Athletics",
+    "Blue Jays",
+    "Braves",
+    "Brewers",
+    "Cardinals",
+    "Cubs",
+    "Diamondbacks",
+    "Dodgers",
+    "Giants",
+    "Guardians",
+    "Mariners",
+    "Marlins",
+    "Mets",
+    "Nationals",
+    "Orioles",
+    "Padres",
+    "Phillies",
+    "Pirates",
+    "Rangers",
+    "Rays",
+    "Red Sox",
+    "Reds",
+    "Rockies",
+    "Royals",
+    "Tigers",
+    "Twins",
+    "White Sox",
+    "Yankees",
+
     // Popular historical teams
-    "2016 Cubs", "2020 Dodgers", "1998 Yankees", "2004 Red Sox",
-    "2019 Nationals", "2017 Astros", "2018 Red Sox", "2001 Mariners",
-    "1995 Braves", "1975 Reds", "2024 Dodgers", "2023 Rangers"
+    "2016 Cubs",
+    "2020 Dodgers",
+    "1998 Yankees",
+    "2004 Red Sox",
+    "2019 Nationals",
+    "2017 Astros",
+    "2018 Red Sox",
+    "2001 Mariners",
+    "1995 Braves",
+    "1975 Reds",
+    "2024 Dodgers",
+    "2023 Rangers",
   ];
-  
+
   showDropdown(inputId, popularTeams);
 }
 
@@ -2398,36 +2624,96 @@ function loadPopularTeams(inputId) {
 function searchTeams(query, inputId) {
   const allTeams = [
     // Current MLB teams
-    "Angels", "Astros", "Athletics", "Blue Jays", "Braves",
-    "Brewers", "Cardinals", "Cubs", "Diamondbacks", "Dodgers",
-    "Giants", "Guardians", "Mariners", "Marlins", "Mets",
-    "Nationals", "Orioles", "Padres", "Phillies", "Pirates",
-    "Rangers", "Rays", "Red Sox", "Reds", "Rockies",
-    "Royals", "Tigers", "Twins", "White Sox", "Yankees",
-    
+    "Angels",
+    "Astros",
+    "Athletics",
+    "Blue Jays",
+    "Braves",
+    "Brewers",
+    "Cardinals",
+    "Cubs",
+    "Diamondbacks",
+    "Dodgers",
+    "Giants",
+    "Guardians",
+    "Mariners",
+    "Marlins",
+    "Mets",
+    "Nationals",
+    "Orioles",
+    "Padres",
+    "Phillies",
+    "Pirates",
+    "Rangers",
+    "Rays",
+    "Red Sox",
+    "Reds",
+    "Rockies",
+    "Royals",
+    "Tigers",
+    "Twins",
+    "White Sox",
+    "Yankees",
+
     // Popular year-specific teams
-    "1998 Yankees", "2001 Mariners", "2016 Cubs", "2020 Dodgers",
-    "2004 Red Sox", "2019 Nationals", "2017 Astros", "2018 Red Sox",
-    "1995 Braves", "1975 Reds", "1986 Mets", "1984 Tigers",
-    "2002 Angels", "2008 Phillies", "2010 Giants", "2011 Cardinals",
-    "2012 Giants", "2013 Red Sox", "2014 Giants", "2015 Royals",
-    "2021 Braves", "2022 Astros", "2023 Rangers", "2024 Dodgers",
-    
+    "1998 Yankees",
+    "2001 Mariners",
+    "2016 Cubs",
+    "2020 Dodgers",
+    "2004 Red Sox",
+    "2019 Nationals",
+    "2017 Astros",
+    "2018 Red Sox",
+    "1995 Braves",
+    "1975 Reds",
+    "1986 Mets",
+    "1984 Tigers",
+    "2002 Angels",
+    "2008 Phillies",
+    "2010 Giants",
+    "2011 Cardinals",
+    "2012 Giants",
+    "2013 Red Sox",
+    "2014 Giants",
+    "2015 Royals",
+    "2021 Braves",
+    "2022 Astros",
+    "2023 Rangers",
+    "2024 Dodgers",
+
     // Classic teams
-    "1927 Yankees", "1955 Dodgers", "1969 Mets", "1976 Reds",
-    "1988 Dodgers", "1989 Athletics", "1990 Reds", "1991 Twins",
-    "1992 Blue Jays", "1993 Blue Jays", "1996 Yankees", "1997 Marlins",
-    "1999 Yankees", "2000 Yankees", "2003 Marlins", "2005 White Sox",
-    "2006 Cardinals", "2007 Red Sox", "2009 Yankees",
-    
+    "1927 Yankees",
+    "1955 Dodgers",
+    "1969 Mets",
+    "1976 Reds",
+    "1988 Dodgers",
+    "1989 Athletics",
+    "1990 Reds",
+    "1991 Twins",
+    "1992 Blue Jays",
+    "1993 Blue Jays",
+    "1996 Yankees",
+    "1997 Marlins",
+    "1999 Yankees",
+    "2000 Yankees",
+    "2003 Marlins",
+    "2005 White Sox",
+    "2006 Cardinals",
+    "2007 Red Sox",
+    "2009 Yankees",
+
     // Historical teams (defunct)
-    "Expos", "Senators", "Browns", "Pilots", "Colt .45s"
+    "Expos",
+    "Senators",
+    "Browns",
+    "Pilots",
+    "Colt .45s",
   ];
 
   const filtered = allTeams.filter((team) =>
     team.toLowerCase().includes(query.toLowerCase())
   );
-  
+
   showDropdown(inputId, filtered);
 }
 
@@ -2512,8 +2798,8 @@ function setupTeamAutofill() {
 // Initialize everything when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   // Set default values
-  document.getElementById("playerA").value = "Kyle Schwarber"
-  document.getElementById("playerB").value = "Kyle Tucker"
+  document.getElementById("playerA").value = "Mike Trout";
+  document.getElementById("playerB").value = "Aaron Judge";
   document.getElementById("teamA").value = "Cubs";
   document.getElementById("teamB").value = "Dodgers";
 

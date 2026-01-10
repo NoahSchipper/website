@@ -114,6 +114,8 @@ select {
   min-width: 150px;
 }
 
+
+
 /* =============================================================================
    DROPDOWN MENU STYLING
    ============================================================================= */
@@ -189,7 +191,7 @@ select:focus {
 
 /* Style the compare teams button */
 #compare-button {
-  padding: 10px 20px;
+  padding: 8px 20px;
   background-color: #4c53cb;
   color: white;
   border: none;
@@ -198,6 +200,7 @@ select:focus {
   font-size: 16px;
   transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
   font-weight: bold;
+  min-height: 27.5px;
 }
 
 #compare-button:hover {
