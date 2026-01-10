@@ -260,7 +260,8 @@ th {
 td {
   font-family: monospace; /* Consistent number alignment */
   font-size: 1rem;
-  white-space: nowrap; /* Prevents text wrapping */
+  white-space: wrap;  /* Prevents text wrapping */
+
 }
 
 /* Special header for statistical categories */
@@ -658,6 +659,10 @@ td.better-stat {
     padding: 8px 4px;
   }
 
+  td {
+    white-space: wrap;
+  }
+
   /* Modal adjustments for tablets */
   .modal-content {
     margin: 10% auto;
@@ -729,6 +734,10 @@ td.better-stat {
 
   th {
     padding: 10px 6px;
+  }
+
+  td {
+    white-space: wrap;
   }
 
   /* Make stat column (middle) slightly wider */
