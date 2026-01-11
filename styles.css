@@ -342,6 +342,8 @@ main {
   color: white;
   max-width: 1200px;
   margin: 0 auto;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 1s forwards;
 }
 
 .footer-container p {
