@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -369,6 +370,8 @@ main {
 .projectHeader {
   margin-top: 20px;
   text-align: center;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.2s forwards;
 }
 
 .projectHeader h1 {
@@ -383,6 +386,8 @@ main {
   max-width: 900px;
   margin: 60px auto;
   padding: 0 20px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.4s forwards;
 }
 
 .carousel-wrapper {
@@ -552,6 +557,8 @@ main {
   color: #ffffff;
   text-align: center;
   margin-top: 20px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.2s forwards;
 }
 
 .contact-header h1 {
@@ -564,6 +571,8 @@ main {
   text-align: center;
   margin: 30px 0 15px 0;
   font-size: 1.8rem;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
 }
 
 .email-address {
@@ -573,6 +582,8 @@ main {
   gap: 15px;
   margin: 20px 0;
   padding: 0 20px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.4s forwards;
 }
 
 .email-address i {
@@ -593,6 +604,8 @@ main {
   text-align: center;
   margin: 30px 0 15px 0;
   font-size: 1.8rem;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.5s forwards;
 }
 
 .phone-number {
@@ -603,6 +616,8 @@ main {
   gap: 15px;
   margin: 20px 0;
   padding: 0 20px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.6s forwards;
 }
 
 .phone-number i {
@@ -639,6 +654,8 @@ main {
   color: #ffffff;
   width: 100%;
   box-sizing: border-box;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.8s forwards;
 }
 
 .socialMedia h1 {
@@ -708,6 +725,8 @@ main {
   margin: 20px auto;
   padding: 20px;
   flex-direction: row;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.2s forwards;
 }
 
 .headshot {
@@ -753,6 +772,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.4s forwards;
 }
 
 .deck-stack:hover {
@@ -816,6 +837,8 @@ main {
   margin-top: 20px;
   padding: 0 100px;
   transform-style: preserve-3d;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.6s forwards;
 }
 
 .card {
@@ -847,7 +870,6 @@ main {
 .card-spacer {
   display: none;
 }
-
 /* Media Query Overrides - Mobile and Desktop with all original styles */
 
 /* Mobile devices (640px and below) - CONSOLIDATED */
