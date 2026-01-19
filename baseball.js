@@ -97,11 +97,8 @@ function extractStats(res) {
 
 // formats player awards
 function formatAwardsForStructuredDisplay(awards) {
-  //console.log("formatAwardsForStructuredDisplay called with:", awards);
-
   // Handle null/undefined awards
   if (!awards) {
-    console.log("No awards data provided");
     return {
       championships: 0,
       tsnAllStar: 0, // Separate TSN All-Star count
@@ -121,7 +118,6 @@ function formatAwardsForStructuredDisplay(awards) {
   let summary = awards.summary;
 
   if (!summary && awards.awards && Array.isArray(awards.awards)) {
-    console.log("No summary found, creating from awards array");
     // Create summary from awards array if summary is missing
     summary = {};
     awards.awards.forEach((award) => {
@@ -136,11 +132,9 @@ function formatAwardsForStructuredDisplay(awards) {
       summary[awardId].count += 1;
       summary[awardId].years.push(award.year);
     });
-    console.log("Created summary from awards array:", summary);
   }
 
   if (!summary) {
-    console.log("No summary or awards array found");
     return {
       championships: 0,
       tsnAllStar: 0,
@@ -155,8 +149,6 @@ function formatAwardsForStructuredDisplay(awards) {
       otherMajor: [],
     };
   }
-
-  //console.log("Processing summary:", summary);
 
   // Enhanced mapping to properly distinguish TSN All-Stars from MLB All-Star Games
   const result = {
@@ -204,7 +196,6 @@ function formatAwardsForStructuredDisplay(awards) {
     otherMajor: getOtherMajorAwards(summary),
   };
 
-  // console.log("formatAwardsForStructuredDisplay result:", result);
   return result;
 }
 
@@ -296,9 +287,6 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
       ? "./assets/pitcherShadow.png"
       : "./assets/batterShadow.png";
 
-  console.log("photoA element:", photoA);
-  console.log("photoB element:", photoB);
-
   if (photoA) {
     photoA.src = playerAImage;
     photoA.style.display = "block";
@@ -347,11 +335,6 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
 
   const mode = resA.mode;
   const playerType = resA.player_type || "hitter";
-
-  // Debug logging for awards
-  // console.log("=== AWARDS DEBUG ===");
-  // console.log("Player A awards:", resA.awards);
-  // console.log("Player B awards:", resB.awards);
 
   if (["career", "combined", "live"].includes(mode)) {
     const statsA = extractStats(resA);
@@ -412,24 +395,14 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
   }
 
   // AWARDS SECTION - Fixed to properly check for awards
-  //console.log("Checking awards existence...");
   const hasAwardsA = resA.awards && (resA.awards.summary || resA.awards.awards);
   const hasAwardsB = resB.awards && (resB.awards.summary || resB.awards.awards);
 
   if (mode === "live" || mode === "season") {
-    console.log("Live or season mode detected, skipping awards section");
   } else if (hasAwardsA || hasAwardsB) {
-    // console.log("Has awards A:", hasAwardsA);
-    // console.log("Has awards B:", hasAwardsB);
-
     if (hasAwardsA || hasAwardsB) {
-      // console.log("Processing awards data...");
-
       const awardsA = formatAwardsForStructuredDisplay(resA.awards);
       const awardsB = formatAwardsForStructuredDisplay(resB.awards);
-
-      // console.log("Formatted awards A:", awardsA);
-      // console.log("Formatted awards B:", awardsB);
 
       // Define award rows to display (only show if at least one player has the award)
       const awardRows = [
@@ -489,7 +462,7 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
 
       // Add Awards & Honors header before the first award (only if we have awards to show)
       let hasAnyAwards = awardRows.some(
-        (row) => row.valueA > 0 || row.valueB > 0
+        (row) => row.valueA > 0 || row.valueB > 0,
       );
       if (hasAnyAwards && awardsAdded === 0) {
         const headerRow = document.createElement("tr");
@@ -513,10 +486,6 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
         `;
           tbody.appendChild(row);
           awardsAdded++;
-
-          //console.log(
-          //  `Added award row: ${awardRow.label} - A: ${displayA}, B: ${displayB}`
-          //);
         }
       });
 
@@ -530,11 +499,11 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
       uniqueOtherAwards.forEach((awardName) => {
         const countA =
           (awardsA.otherMajor || awardsA.awards || []).find(
-            (a) => a.name === awardName
+            (a) => a.name === awardName,
           )?.count || 0;
         const countB =
           (awardsB.otherMajor || awardsB.awards || []).find(
-            (a) => a.name === awardName
+            (a) => a.name === awardName,
           )?.count || 0;
 
         if (countA > 0 || countB > 0) {
@@ -556,17 +525,12 @@ function updateComparisonTable(resA, resB, nameA, nameB) {
 
       // If no awards were added, show a debug message
       if (awardsAdded === 0) {
-        console.log("No awards found to display");
         const row = document.createElement("tr");
         row.innerHTML = `<td colspan="3" style="text-align: center; padding: 12px; color: #666; font-style: italic;">No major awards found for either player</td>`;
         tbody.appendChild(row);
       } else {
-        // console.log(`Successfully added ${awardsAdded} award rows`);
       }
     } else {
-      console.log("No awards data found for either player");
-      // console.log("resA.awards:", resA.awards);
-      // console.log("resB.awards:", resB.awards);
     }
   }
   // SEASON MODE HANDLING
@@ -652,7 +616,7 @@ async function fetchStats(name, mode, playerType = null) {
 
     // Build URL with player_type parameter if specified
     let url = `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
-      name
+      name,
     )}&mode=${backendMode}`;
     if (playerType) {
       url += `&player_type=${playerType}`;
@@ -679,7 +643,7 @@ async function fetchStats(name, mode, playerType = null) {
 
     // If 404 or other error, try the disambiguate endpoint
     const fallbackUrl = `${backendBaseUrl}/player-disambiguate?name=${encodeURIComponent(
-      name
+      name,
     )}&mode=${backendMode}`;
     const fallbackResponse = await fetch(fallbackUrl);
 
@@ -695,8 +659,8 @@ async function fetchStats(name, mode, playerType = null) {
     // Final fallback to original endpoint
     const originalResponse = await fetch(
       `${backendBaseUrl}/player?name=${encodeURIComponent(
-        name
-      )}&mode=${backendMode}`
+        name,
+      )}&mode=${backendMode}`,
     );
     return await originalResponse.json();
   } catch (e) {
@@ -847,9 +811,6 @@ function highlightBetterStats(tableId = "comparisonTable") {
     }
 
     if (!statConfig) {
-      console.log(
-        `No configuration found for stat: "${statLabel}" (cleaned: "${cleanStatLabel}")`
-      );
       return; // Skip unknown stats
     }
 
@@ -1011,7 +972,7 @@ function showTwoWaySelectionModal(options, originalName, callback, mode) {
               </div>
             </div>
           </div>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -1043,8 +1004,8 @@ function showTwoWaySelectionModal(options, originalName, callback, mode) {
       try {
         const response = await fetch(
           `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
-            originalName
-          )}&mode=${mode}&player_type=${selectedType}`
+            originalName,
+          )}&mode=${mode}&player_type=${selectedType}`,
         );
         const result = await response.json();
         callback(result);
@@ -1154,76 +1115,6 @@ async function showTwoWayComparisonModal(nameA, nameB, optionsA, optionsB) {
           </button>
         </div>
 
-        <!-- Advanced options (collapsible) -->
-        <details style="margin-bottom: 24px; text-align: left;">
-          <summary style="
-            cursor: pointer; 
-            color: #666; 
-            font-size: 14px; 
-            text-align: center;
-            padding: 8px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-          " onmouseover="this.style.backgroundColor='#f8f9fa'" 
-             onmouseout="this.style.backgroundColor='transparent'">
-            Advanced: Mix & Match Stats
-          </summary>
-          
-          <div style="padding: 16px; background-color: #f8f9fa; border-radius: 8px; margin-top: 8px;">
-            <div style="display: flex; gap: 16px; justify-content: space-between;">
-              <!-- Player A Selection -->
-              <div style="flex: 1; padding: 12px; border: 1px solid #dee2e6; border-radius: 6px; background: white;">
-                <h5 style="margin: 0 0 8px 0; color: #333; text-align: center; font-size: 14px;">${nameA}</h5>
-                <div class="player-type-selection" data-player="A">
-                  ${optionsA
-                    .map(
-                      (option) => `
-                    <label style="display: block; margin-bottom: 4px; cursor: pointer; font-size: 13px;">
-                      <input type="radio" name="playerAType" value="${
-                        option.type
-                      }" style="margin-right: 6px;">
-                      ${option.type === "pitcher" ? "Pitching" : "Hitting"}
-                    </label>
-                  `
-                    )
-                    .join("")}
-                </div>
-              </div>
-
-              <!-- Player B Selection -->
-              <div style="flex: 1; padding: 12px; border: 1px solid #dee2e6; border-radius: 6px; background: white;">
-                <h5 style="margin: 0 0 8px 0; color: #333; text-align: center; font-size: 14px;">${nameB}</h5>
-                <div class="player-type-selection" data-player="B">
-                  ${optionsB
-                    .map(
-                      (option) => `
-                    <label style="display: block; margin-bottom: 4px; cursor: pointer; font-size: 13px;">
-                      <input type="radio" name="playerBType" value="${
-                        option.type
-                      }" style="margin-right: 6px;">
-                      ${option.type === "pitcher" ? "Pitching" : "Hitting"}
-                    </label>
-                  `
-                    )
-                    .join("")}
-                </div>
-              </div>
-            </div>
-            
-            <button id="compare-custom" style="
-              background-color: #fd7e14;
-              color: white;
-              border: none;
-              padding: 8px 16px;
-              border-radius: 4px;
-              cursor: pointer;
-              font-size: 14px;
-              margin-top: 12px;
-              width: 100%;
-            ">Compare Custom Selection</button>
-          </div>
-        </details>
-
         <button class="modal-close" style="
           background-color: #6c757d;
           color: white;
@@ -1254,13 +1145,13 @@ async function showTwoWayComparisonModal(nameA, nameB, optionsA, optionsB) {
           const [statsA, statsB] = await Promise.all([
             fetch(
               `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
-                nameA
-              )}&mode=${mode}&player_type=${types[0]}`
+                nameA,
+              )}&mode=${mode}&player_type=${types[0]}`,
             ).then((r) => r.json()),
             fetch(
               `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
-                nameB
-              )}&mode=${mode}&player_type=${types[1]}`
+                nameB,
+              )}&mode=${mode}&player_type=${types[1]}`,
             ).then((r) => r.json()),
           ]);
 
@@ -1276,50 +1167,6 @@ async function showTwoWayComparisonModal(nameA, nameB, optionsA, optionsB) {
         }
       });
     });
-
-    // Custom comparison functionality
-    modal
-      .querySelector("#compare-custom")
-      .addEventListener("click", async () => {
-        const playerAType = modal.querySelector(
-          'input[name="playerAType"]:checked'
-        )?.value;
-        const playerBType = modal.querySelector(
-          'input[name="playerBType"]:checked'
-        )?.value;
-
-        if (!playerAType || !playerBType) {
-          alert("Please select stat types for both players");
-          return;
-        }
-
-        modal.remove();
-        try {
-          const mode = document.getElementById("viewMode").value;
-          const [statsA, statsB] = await Promise.all([
-            fetch(
-              `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
-                nameA
-              )}&mode=${mode}&player_type=${playerAType}`
-            ).then((r) => r.json()),
-            fetch(
-              `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
-                nameB
-              )}&mode=${mode}&player_type=${playerBType}`
-            ).then((r) => r.json()),
-          ]);
-
-          resolve({
-            statsA: statsA,
-            statsB: statsB,
-            playerAType: playerAType,
-            playerBType: playerBType,
-          });
-        } catch (error) {
-          console.error("Error fetching custom stats:", error);
-          resolve({ error: "Failed to fetch stats" });
-        }
-      });
 
     // Cancel functionality
     modal.querySelector(".modal-close").addEventListener("click", () => {
@@ -1411,7 +1258,7 @@ function showDisambiguationModal(suggestions, originalName, callback, mode) {
               </div>
             </div>
           </div>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -1438,7 +1285,6 @@ function showDisambiguationModal(suggestions, originalName, callback, mode) {
     option.addEventListener("click", async function () {
       const selectedName = this.dataset.name;
       const selectedPlayerId = this.dataset.playerid;
-      //console.log(`User selected: ${selectedName} (ID: ${selectedPlayerId})`);
       modal.remove();
 
       // Hide any open dropdowns to prevent interference
@@ -1446,17 +1292,13 @@ function showDisambiguationModal(suggestions, originalName, callback, mode) {
 
       // Fetch stats for selected player using the exact name from suggestions
       try {
-        // console.log(`Fetching stats for selected player: ${selectedName}`);
         const response = await fetch(
           `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
-            selectedName
-          )}&mode=${mode}`
+            selectedName,
+          )}&mode=${mode}`,
         );
-        // console.log(`Response status for selected player: ${response.status}`);
-
         if (response.ok) {
           const result = await response.json();
-          // console.log("Successfully fetched selected player data:", result);
           // Add the selected name to the result so we can use it in the display
           result.selected_name = selectedName;
           result.original_search_name = originalName;
@@ -1586,12 +1428,7 @@ async function comparePlayers() {
 
   // Show loading indicator
   const tbody = document.getElementById("comparisonBody");
-  tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>Loading player data...</td></tr>`;
-
-  console.log(`=== COMPARING PLAYERS ===`);
-  console.log(`Player A: ${nameA}`);
-  console.log(`Player B: ${nameB}`);
-  console.log(`Mode: ${mode}`);
+  tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>Loading player data. This may take a moment...</td></tr>`;
 
   // First, try to fetch both players without player_type to detect if they're two-way
   const [initialResA, initialResB] = await Promise.all([
@@ -1615,9 +1452,6 @@ async function comparePlayers() {
   const playerAIsTwoWay = resA && resA.player_type === "two-way";
   const playerBIsTwoWay = resB && resB.player_type === "two-way";
 
-  console.log(`Player A is two-way: ${playerAIsTwoWay}`);
-  console.log(`Player B is two-way: ${playerBIsTwoWay}`);
-
   // Handle different two-way scenarios
   if (playerAIsTwoWay && playerBIsTwoWay) {
     // Both are two-way players - show coordinated selection modal
@@ -1625,7 +1459,7 @@ async function comparePlayers() {
       nameA,
       nameB,
       resA.options,
-      resB.options
+      resB.options,
     );
     if (result.error) {
       tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>${result.error}</td></tr>`;
@@ -1640,7 +1474,7 @@ async function comparePlayers() {
     const selectedType = await handleTwoWayPlayerSelection(
       nameA,
       resA.options,
-      mode
+      mode,
     );
     if (selectedType.error) {
       tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>${selectedType.error}</td></tr>`;
@@ -1652,7 +1486,7 @@ async function comparePlayers() {
     const selectedType = await handleTwoWayPlayerSelection(
       nameB,
       resB.options,
-      mode
+      mode,
     );
     if (selectedType.error) {
       tbody.innerHTML = `<tr><td colspan='3' style='text-align: center; padding: 20px;'>${selectedType.error}</td></tr>`;
@@ -1678,7 +1512,7 @@ async function fetchStatsInitial(name, mode) {
     }
 
     const url = `${backendBaseUrl}/player-two-way?name=${encodeURIComponent(
-      name
+      name,
     )}&mode=${backendMode}`;
     const response = await fetch(url);
 
@@ -1701,8 +1535,8 @@ async function fetchStatsInitial(name, mode) {
     // Fallback to original endpoint
     const fallbackResponse = await fetch(
       `${backendBaseUrl}/player?name=${encodeURIComponent(
-        name
-      )}&mode=${backendMode}`
+        name,
+      )}&mode=${backendMode}`,
     );
     return await fallbackResponse.json();
   } catch (e) {
@@ -1722,11 +1556,6 @@ const SEARCH_DELAY = 0;
 // Show dropdown with players
 // FIXED: Better dropdown display
 function showDropdown(inputId, players) {
-  console.log("showDropdown called");
-  console.log("  inputId:", inputId);
-  console.log("  players:", players);
-  console.log("  players length:", players ? players.length : 0);
-
   let dropdownId;
 
   // Determine dropdown ID based on input ID
@@ -1735,15 +1564,12 @@ function showDropdown(inputId, players) {
   else if (inputId === "teamA") dropdownId = "dropdownTeamA";
   else if (inputId === "teamB") dropdownId = "dropdownTeamB";
 
-  console.log("  determined dropdownId:", dropdownId);
-
   if (!dropdownId) {
     console.error("ERROR: No dropdownId determined for inputId:", inputId);
     return;
   }
 
   const dropdown = document.getElementById(dropdownId);
-  console.log("  dropdown element:", dropdown);
 
   if (!dropdown) {
     console.error("ERROR: Dropdown element not found:", dropdownId);
@@ -1761,18 +1587,14 @@ function showDropdown(inputId, players) {
       : "No players found";
     dropdown.innerHTML = `<div class="dropdown-item" style="color: #999; cursor: default; padding: 12px;">${message}</div>`;
   } else {
-    console.log("  Creating dropdown items for", players.length, "players");
-
     players.forEach((player, index) => {
       const item = document.createElement("div");
       item.className = "dropdown-item";
 
       if (typeof player === "string") {
-        console.log(`  Player ${index}: string format - "${player}"`);
         item.textContent = player;
         item.dataset.value = player;
       } else {
-        console.log(`  Player ${index}: object format -`, player);
         const name = player.name || player.display;
         const display = player.display || player.name;
 
@@ -1794,7 +1616,6 @@ function showDropdown(inputId, players) {
       }
 
       item.addEventListener("click", () => {
-        console.log("Dropdown item clicked:", item.dataset.value);
         document.getElementById(inputId).value = item.dataset.value;
         hideDropdown(dropdownId);
 
@@ -1815,18 +1636,10 @@ function showDropdown(inputId, players) {
 
       dropdown.appendChild(item);
     });
-
-    console.log("  Dropdown now has", dropdown.children.length, "items");
   }
 
   dropdown.classList.add("show");
   currentDropdown = dropdownId;
-  console.log("  Dropdown should now be visible");
-  console.log("  Dropdown classList:", dropdown.classList.toString());
-  console.log(
-    "  Dropdown display style:",
-    window.getComputedStyle(dropdown).display
-  );
 }
 
 // Hide specific dropdown
@@ -1898,16 +1711,10 @@ async function loadPopularPlayers(inputId) {
   }
 }
 
-// FIXED: Enhanced search with better debugging and error handling
+// Enhanced search for players
 async function searchPlayersEnhanced(query, inputId) {
-  console.log("=== searchPlayersEnhanced START ===");
-  console.log("Query received:", `"${query}"`);
-  console.log("Query length:", query.length);
-  console.log("InputId:", inputId);
-
   // Don't search if query is too short
   if (!query || query.trim().length === 0) {
-    console.log("Query is empty, loading popular players");
     loadPopularPlayers(inputId);
     return;
   }
@@ -1920,20 +1727,11 @@ async function searchPlayersEnhanced(query, inputId) {
     const encodedQuery = encodeURIComponent(trimmedQuery);
     const url = `${backendBaseUrl}/search-players?q=${encodedQuery}`;
 
-    console.log("Trimmed query:", `"${trimmedQuery}"`);
-    console.log("Encoded query:", encodedQuery);
-    console.log("Full URL:", url);
-
     const response = await fetch(url);
-    console.log("Response received - status:", response.status);
-    console.log("Response ok:", response.ok);
 
     // Check if this search is still relevant (user might have typed something else)
     const currentInputValue = document.getElementById(inputId).value.trim();
     if (currentInputValue !== trimmedQuery) {
-      console.log(
-        "Search outdated - user typed something else. Ignoring results."
-      );
       return; // User has typed something else, ignore these results
     }
 
@@ -1945,18 +1743,10 @@ async function searchPlayersEnhanced(query, inputId) {
     }
 
     const players = await response.json();
-    console.log("Players data type:", typeof players);
-    console.log("Players is array:", Array.isArray(players));
-    console.log(
-      "Number of players:",
-      Array.isArray(players) ? players.length : "N/A"
-    );
-    console.log("First 3 players:", players.slice(0, 3));
 
     // Double-check search is still relevant before showing results
     const finalInputValue = document.getElementById(inputId).value.trim();
     if (finalInputValue !== trimmedQuery) {
-      console.log("Search outdated after fetch - ignoring results.");
       return;
     }
 
@@ -1969,8 +1759,6 @@ async function searchPlayersEnhanced(query, inputId) {
 
     // Format players for display
     const formattedPlayers = players.map((player, index) => {
-      console.log(`Formatting player ${index}:`, player);
-
       // Handle both string format and object format
       if (typeof player === "string") {
         return {
@@ -1985,19 +1773,12 @@ async function searchPlayersEnhanced(query, inputId) {
       }
     });
 
-    console.log("Formatted players count:", formattedPlayers.length);
-    console.log("First formatted player:", formattedPlayers[0]);
-
     // Show the results
     if (formattedPlayers.length > 0) {
-      console.log("Showing dropdown with", formattedPlayers.length, "players");
       showDropdown(inputId, formattedPlayers);
     } else {
-      console.log("No players found, showing popular players");
       loadPopularPlayers(inputId);
     }
-
-    console.log("=== searchPlayersEnhanced END ===");
   } catch (error) {
     console.error("=== Enhanced search error ===");
     console.error("Error type:", error.constructor.name);
@@ -2005,7 +1786,6 @@ async function searchPlayersEnhanced(query, inputId) {
     console.error("Error stack:", error.stack);
 
     // Fallback to popular players on error
-    console.log("Falling back to popular players");
     loadPopularPlayers(inputId);
   }
 }
@@ -2014,13 +1794,6 @@ async function searchPlayersEnhanced(query, inputId) {
 function handlePlayerInput(e) {
   const query = e.target.value; // Don't trim here - let user see what they're typing
   const inputId = e.target.id;
-
-  console.log(
-    "handlePlayerInput - query:",
-    `"${query}"`,
-    "length:",
-    query.length
-  );
 
   // Clear any existing timeout
   clearTimeout(searchTimeout);
@@ -2039,7 +1812,6 @@ function handlePlayerInput(e) {
 
   // For queries 2+ characters, search after delay
   searchTimeout = setTimeout(() => {
-    console.log("Timeout triggered, searching for:", `"${query.trim()}"`);
     searchPlayersEnhanced(query.trim(), inputId);
   }, 200); // 200ms delay to reduce API calls while typing
 }
@@ -2136,7 +1908,7 @@ const teamStatsLabelMap = {
 async function fetchTeamStats(team, mode) {
   try {
     const response = await fetch(
-      `${backendBaseUrl}/team?team=${encodeURIComponent(team)}&mode=${mode}`
+      `${backendBaseUrl}/team?team=${encodeURIComponent(team)}&mode=${mode}`,
     );
     return await response.json();
   } catch (e) {
@@ -2149,7 +1921,7 @@ async function fetchTeamStats(team, mode) {
 async function fetchHeadToHeadRecord(teamA, teamB, mode) {
   try {
     let url = `${backendBaseUrl}/team/h2h?team_a=${encodeURIComponent(
-      teamA
+      teamA,
     )}&team_b=${encodeURIComponent(teamB)}`;
 
     // Handle year logic based on mode
@@ -2167,9 +1939,6 @@ async function fetchHeadToHeadRecord(teamA, teamB, mode) {
           url += `&year=${yearA}`;
         } else {
           // Years don't match - return empty H2H data
-          console.log(
-            `Years don't match: Team A (${yearA}) vs Team B (${yearB})`
-          );
           return {
             head_to_head: {
               regular_season: { team_a_wins: 0, team_b_wins: 0 },
@@ -2179,7 +1948,6 @@ async function fetchHeadToHeadRecord(teamA, teamB, mode) {
         }
       } else if (yearMatchA || yearMatchB) {
         // One team has a year, the other doesn't - return empty H2H data
-        console.log(`Only one team has a year specified: ${teamA} vs ${teamB}`);
         return {
           head_to_head: {
             regular_season: { team_a_wins: 0, team_b_wins: 0 },
@@ -2193,11 +1961,8 @@ async function fetchHeadToHeadRecord(teamA, teamB, mode) {
     }
     // For career/combined mode, don't add year parameter to get all-time H2H
 
-    console.log(`Fetching H2H data from: ${url}`); // Debug log
     const response = await fetch(url);
     const data = await response.json();
-    console.log(`H2H response:`, data); // Debug log
-    console.log("Full H2H response structure:", JSON.stringify(data, null, 2));
 
     return {
       head_to_head: data,
@@ -2300,7 +2065,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
           tbody,
           `${teamAReg}-${teamBReg}`,
           "Reg Season",
-          `${teamBReg}-${teamAReg}`
+          `${teamBReg}-${teamAReg}`,
         );
 
         // Playoff record - use the correct data structure
@@ -2316,7 +2081,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
             tbody,
             `${teamAPlayoff}-${teamBPlayoff}`,
             "Playoff Games",
-            `${teamBPlayoff}-${teamAPlayoff}`
+            `${teamBPlayoff}-${teamAPlayoff}`,
           );
         } else if (playoffRecord.series_wins) {
           // Fallback to series wins if game wins not available
@@ -2326,7 +2091,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
             tbody,
             `${teamAPlayoff}-${teamBPlayoff}`,
             "Playoff Series",
-            `${teamBPlayoff}-${teamAPlayoff}`
+            `${teamBPlayoff}-${teamAPlayoff}`,
           );
         } else {
           // Legacy format fallback
@@ -2336,7 +2101,7 @@ function updateTeamComparisonTable(resA, resB, teamA, teamB, mode) {
             tbody,
             `${teamAPlayoff}-${teamBPlayoff}`,
             "Playoffs",
-            `${teamBPlayoff}-${teamAPlayoff}`
+            `${teamBPlayoff}-${teamAPlayoff}`,
           );
         }
       } else {
@@ -2523,7 +2288,6 @@ function tryNextLogoUrl(urls, index, imgElement, teamName) {
   };
 
   img.onerror = function () {
-    console.log(`Logo URL failed: ${urls[index]}`);
     tryNextLogoUrl(urls, index + 1, imgElement, teamName);
   };
 
@@ -2711,7 +2475,7 @@ function searchTeams(query, inputId) {
   ];
 
   const filtered = allTeams.filter((team) =>
-    team.toLowerCase().includes(query.toLowerCase())
+    team.toLowerCase().includes(query.toLowerCase()),
   );
 
   showDropdown(inputId, filtered);
