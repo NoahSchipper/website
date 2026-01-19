@@ -54,7 +54,7 @@ website/
 
 I wrote everything using HTML, CSS, and JavaScript. The styling is kept consistent throughout, and everything is mobile-friendly. Some pages use animations, hover effects, and interactivity handled by custom scripts.
 
-## Making Changes
+## For Developers
 
 If you’re looking through this as a developer or collaborator:
 
