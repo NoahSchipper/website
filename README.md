@@ -54,7 +54,7 @@ website/
 
 I wrote everything using HTML, CSS, and JavaScript. The styling is kept consistent throughout, and everything is mobile-friendly. Some pages use animations, hover effects, and interactivity handled by custom scripts.
 
-## Making Changes
+## For Developers
 
 If you’re looking through this as a developer or collaborator:
 
@@ -64,14 +64,12 @@ JavaScript for the About page is in aboutScript.js.
 JavaScript for the Contact page is in toast.js.
 JavaScript for the baseball interface is in baseball.js
 Visual styling for the baseball interface is in baseball.css
-Assets like logos and documents (e.g. resume) are in the assets/ folder.
+JavaScript for Fragrance Finder is in fragrance.js
+Visual styling for Fragrance Finder is in fragrance.css
+Assets like logos and documents (e.g. resume, headshot) are in the assets/ folder.
 
 ## Notes
-I’ve included a copy of my resume in the assets folder. The site is still evolving, and I regularly update it as I learn new things or build new projects.
-
-The code for the player version of Schipper Statlines is still present in all baseball files despite it not being interactable so that viewers here can still look at that code.
-
-The code in the baseball files isn't the cleanest due to a time crunch before the fall 2025 semester starts. I will organize it if/when I find the time.
+I’ve included a copy of my resume in the assets folder. It is also accessible from the homepage of the website. The site is still evolving, and I regularly update it as I learn new things or build new projects.
 
 Thanks for taking a look!
 
