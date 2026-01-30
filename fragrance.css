@@ -19,16 +19,6 @@ input:focus::placeholder {
   color: transparent;
 }
 
-h1 {
-  color: #ffd700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
 h2 {
   text-align: center;
   color: #ffd700; /* Gold color for headings */
@@ -62,6 +52,15 @@ select option {
   text-align: left;
 }
 
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 .similar {
   display: flex;
   flex-direction: column;
@@ -76,6 +75,8 @@ select option {
   border: 2px solid #ffd700;
   opacity: 1;
   transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease-out forwards;
+
 }
 
 .similar p {
@@ -131,6 +132,7 @@ select option {
   border: 2px solid #ffd700;
   opacity: 1;
   transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
 .byNotes p {
@@ -185,6 +187,7 @@ select option {
   border: 2px solid #ffd700;
   opacity: 1;
   transition-duration: 0s;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
 .surpriseMe p {

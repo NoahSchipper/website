@@ -130,7 +130,7 @@ async function findSimilarFragrances() {
         body: JSON.stringify({
           perfume_name: perfumeName,
           limit: 50,
-          gender: selectedGender || null, // Add gender filter
+          gender: selectedGender || null,
         }),
       }
     );
@@ -155,9 +155,8 @@ async function findSimilarFragrances() {
   }
 }
 
-// ============================================
+
 // MODE 2: FIND BY NOTES
-// ============================================
 async function loadAllNotes() {
   try {
     const response = await fetch("https://fragrance-selector-backend.onrender.com/api/accords/list");
@@ -285,9 +284,8 @@ async function findByNotes() {
   }
 }
 
-// ============================================
+
 // MODE 3: SURPRISE ME
-// ============================================
 async function surpriseMe() {
   const genderSelect = document.getElementById("genderFilterRan");
   const selectedGender = genderSelect.value;
@@ -337,9 +335,7 @@ async function surpriseMe() {
   }
 }
 
-// ============================================
-// DISPLAY RESULTS
-// ============================================
+// Display Results
 function displayResults(fragrances, mode, container) {
   if (!fragrances || fragrances.length === 0) {
     container.innerHTML = '<p class="no-results">No fragrances found.</p>';
